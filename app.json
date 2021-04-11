@@ -1,0 +1,34 @@
+{
+  "expo": {
+    "name": "Capstone",
+    "slug": "capstone",
+    "privacy": "hidden",
+    "version": "0.0.1",
+    "description": "Grupo 8's mobile application",
+    "orientation": "portrait",
+    "icon": "./src/assets/icon.png",
+    "primaryColor": "#f0f0f0",
+    "splash": {
+      "image": "./src/assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#f0f0f0"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "versionCode": 1,
+      "permissions": [],
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/adaptive-icon.png",
+        "backgroundColor": "#f0f0f0"
+      }
+    },
+    "web": {
+      "favicon": "./src/assets/favicon.png"
+    }
+  }
+}
