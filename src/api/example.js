@@ -1,7 +1,7 @@
 import CLIENT from './client';
 
 const example = {
-  retrieve: () => CLIENT.get('//nice'),
+  retrieve: () => CLIENT.get('/v1/examples/nice'),
 };
 
 export default example;
