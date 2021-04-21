@@ -2,7 +2,9 @@
   "expo": {
     "name": "Capstone",
     "slug": "capstone",
+    "scheme": "capstoneredirect",
     "privacy": "hidden",
+    "owner": "proyectoespecialidad",
     "version": "0.0.1",
     "description": "Grupo 8's mobile application",
     "orientation": "portrait",
