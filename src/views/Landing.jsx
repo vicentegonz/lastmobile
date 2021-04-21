@@ -15,6 +15,8 @@ export default function Landing() {
 
   useEffect(() => { // this runs after the DOM re-renders (initialization/updates)
     if (authentication && request) {
+      /* eslint-disable no-console */
+
       // Show authentication object
       console.log('\nAUTHENTICATION');
       console.log(authentication);
@@ -22,6 +24,8 @@ export default function Landing() {
       // Show request object
       console.log('\nREQUEST');
       console.log(request);
+
+      /* eslint-enable no-console */
     }
   }, [authentication, request]);
 

@@ -51,7 +51,7 @@ jobs:
       - name: Add comment with QR to the Pull Request
         uses: marocchino/sticky-pull-request-comment@v2
         env:
-          EXPO_PROJECT: "@capstone/capstone"
+          EXPO_PROJECT: "@proyectoespecialidad/capstone"
         with:
           message: |
             # Branch preview:
