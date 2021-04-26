@@ -12,6 +12,7 @@ module.exports = function (api) {
           },
         },
       ],
+      ['import', { libraryName: '@ant-design/react-native' }],
     ],
   };
 };

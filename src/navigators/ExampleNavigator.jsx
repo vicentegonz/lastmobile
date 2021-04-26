@@ -9,18 +9,13 @@ import { COLORS } from '@/utils/colors';
 
 import Landing from '@/views/Landing.jsx';
 import Example from '@/views/Example.jsx';
+import ExampleAntDesign from '@/views/ExampleAntDesign.jsx';
 
 const Tab = createBottomTabNavigator();
 
 function getTabBarIconFunction(IconComponent, name) {
   function tabBarIcon({ color }) {
-    return (
-      <IconComponent
-        name={name}
-        color={color}
-        size={24}
-      />
-    );
+    return <IconComponent name={name} color={color} size={24} />;
   }
 
   return tabBarIcon;
@@ -47,6 +42,13 @@ export default function ExampleNavigator() {
         <Tab.Screen
           name="Example"
           component={Example}
+          options={{
+            tabBarIcon: getTabBarIconFunction(FontAwesome5, 'vial'),
+          }}
+        />
+        <Tab.Screen
+          name="ExampleAntDesign"
+          component={ExampleAntDesign}
           options={{
             tabBarIcon: getTabBarIconFunction(FontAwesome5, 'vial'),
           }}
