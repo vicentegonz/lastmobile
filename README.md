@@ -11,21 +11,18 @@ The requirements are simple! You just need:
 
 ## Run application for local development
 
-First, install the dependencies:
+To start the server, first create a `.env` file with all the environmental variables:
+
+```sh
+cp .env.example .env
+nano .env  # Or use your favorite text editor
+```
+
+Then, install the dependencies:
 
 ```sh
 yarn install
 ```
-
-**Optional**: If you want to modify an environmental variable, you can create an `.env` file and fill the desired attributes:
-
-```sh
-nano .env  # or your editor of choice
-```
-
-Please note that there is only 1 possible environmental variable that you can modify:
-
-- `DEVELOPMENT_URL`: Defines the development URL of the app. This URL gets used when the app is running on development mode. Defaults to `http://{local-machine-ip}:8000`, where `{local-machine-ip}` corresponds to the IP on the local network of the machine that started the `expo` server. **Warning**: this may be useless to `wsl` users, given that the subsystem runs on a completely different network than the physical machines.
 
 Finally, run project:
 
@@ -40,6 +37,13 @@ expo start --tunnel
 ```
 
 Now, there are a couple ways you can use the app after starting the expo server. You can either install the [Expo Go](https://expo.io/client) app in your phone and scan the QR code displayed after starting the `expo` server (notice that your phone and your computer **must be connected to the same network** for this to work) or you can use an [iOS](https://docs.expo.io/workflow/ios-simulator/) or [Android](https://docs.expo.io/workflow/android-studio-emulator/) emulator.
+
+## Environmental variables
+
+There are some environmental variables that need to be added to the repository:
+
+- `DEVELOPMENT_URL`: Defines the development URL of the app. This URL gets used when the app is running on development mode. Defaults to `http://{local-machine-ip}:8000`, where `{local-machine-ip}` corresponds to the IP on the local network of the machine that started the `expo` server. **Warning**: this may be useless to `wsl` users, given that the subsystem runs on a completely different network than the physical machines.
+- `GOOGLE_CLIENT_ID`: **Required on production**. This is the client ID of the Google project that allows logins of the users through Google.
 
 ## Aliases
 
