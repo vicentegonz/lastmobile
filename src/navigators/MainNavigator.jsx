@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
-
+import Login from '@/views/Login.jsx';
 import ExampleNavigator from './ExampleNavigator.jsx';
 
 export default function MainNavigator() {
@@ -22,6 +22,7 @@ export default function MainNavigator() {
 
     hideSplashScreen();
   }, [applicationReady]);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   // Return nothing if application is not ready
   if (!applicationReady) {
@@ -31,12 +32,10 @@ export default function MainNavigator() {
   // Use this navigator to render different navigators
   // based on the user being logged in or not
 
-  const loggedIn = true;
-
   if (loggedIn) {
     return <ExampleNavigator />;
   }
 
   // Using the same navigator, just as a placeholder
-  return <ExampleNavigator />;
+  return <Login setLoggedIn={setLoggedIn} />;
 }

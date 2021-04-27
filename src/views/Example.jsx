@@ -9,7 +9,8 @@ export default function Example() {
   const [example, setExample] = useState({});
 
   function fetchExample() {
-    api.example.retrieve()
+    api.example
+      .retrieve()
       .then(({ data }) => {
         setExample(data);
       })
