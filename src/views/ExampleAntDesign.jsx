@@ -1,4 +1,7 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { decrement, increment } from '@/store/counterSlice';
+
 import { Text } from 'react-native';
 import {
   Button,
@@ -10,6 +13,8 @@ import {
 import ScreenContainer from '@/components/containers/VerticallyCenteredScreenContainer.jsx';
 
 export default function ExampleAntDesign() {
+  const count = useSelector((state) => state.counter.value);
+  const dispatch = useDispatch();
   return (
     <ScreenContainer>
       <WingBlank>
@@ -25,7 +30,16 @@ export default function ExampleAntDesign() {
         <WhiteSpace />
 
         <SearchBar placeholder="Input Search" />
+        <Button onPress={() => dispatch(increment())}>Increment store Value</Button>
+        <WhiteSpace />
 
+        <Text>
+          My store value:
+          {count}
+        </Text>
+
+        <WhiteSpace />
+        <Button onPress={() => dispatch(decrement())}>Decrement store Value</Button>
         <WhiteSpace />
       </WingBlank>
     </ScreenContainer>

@@ -11,6 +11,9 @@ import Landing from '@/views/Landing.jsx';
 import Example from '@/views/Example.jsx';
 import ExampleAntDesign from '@/views/ExampleAntDesign.jsx';
 
+import { Provider } from 'react-redux';
+import store from '@/store';
+
 const Tab = createBottomTabNavigator();
 
 function getTabBarIconFunction(IconComponent, name) {
@@ -23,37 +26,39 @@ function getTabBarIconFunction(IconComponent, name) {
 
 export default function ExampleNavigator() {
   return (
-    <NavigationContainer>
-      <StatusBar style="dark" />
-      <Tab.Navigator
-        tabBarOptions={{
-          showLabel: false,
-          activeTintColor: COLORS['accent-1'],
-          inactiveTintColor: COLORS['light-grey'],
-        }}
-      >
-        <Tab.Screen
-          name="Landing"
-          component={Landing}
-          options={{
-            tabBarIcon: getTabBarIconFunction(FontAwesome5, 'rocket'),
+    <Provider store={store}>
+      <NavigationContainer>
+        <StatusBar style="dark" />
+        <Tab.Navigator
+          tabBarOptions={{
+            showLabel: false,
+            activeTintColor: COLORS['accent-1'],
+            inactiveTintColor: COLORS['light-grey'],
           }}
-        />
-        <Tab.Screen
-          name="Example"
-          component={Example}
-          options={{
-            tabBarIcon: getTabBarIconFunction(FontAwesome5, 'vial'),
-          }}
-        />
-        <Tab.Screen
-          name="ExampleAntDesign"
-          component={ExampleAntDesign}
-          options={{
-            tabBarIcon: getTabBarIconFunction(FontAwesome5, 'vial'),
-          }}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
+        >
+          <Tab.Screen
+            name="Landing"
+            component={Landing}
+            options={{
+              tabBarIcon: getTabBarIconFunction(FontAwesome5, 'rocket'),
+            }}
+          />
+          <Tab.Screen
+            name="Example"
+            component={Example}
+            options={{
+              tabBarIcon: getTabBarIconFunction(FontAwesome5, 'vial'),
+            }}
+          />
+          <Tab.Screen
+            name="ExampleAntDesign"
+            component={ExampleAntDesign}
+            options={{
+              tabBarIcon: getTabBarIconFunction(FontAwesome5, 'vial'),
+            }}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
