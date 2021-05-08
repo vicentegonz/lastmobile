@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import Login from '@/views/Login.jsx';
-import ExampleNavigator from './ExampleNavigator.jsx';
+import AdministratorNavigator from './AdministratorNavigator.jsx';
 
 export default function MainNavigator() {
   // Use this navigator to hide the splash screen
@@ -31,9 +31,8 @@ export default function MainNavigator() {
 
   // Use this navigator to render different navigators
   // based on the user being logged in or not
-
   if (loggedIn) {
-    return <ExampleNavigator />;
+    return <AdministratorNavigator />;
   }
 
   // Using the same navigator, just as a placeholder

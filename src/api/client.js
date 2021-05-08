@@ -6,10 +6,13 @@ import { STAGING_BASE_URL, PRODUCTION_BASE_URL } from '@/utils/constants';
 
 // Get base URL for development
 let baseURL;
-const defaultHost = Constants.manifest.debuggerHost ? Constants.manifest.debuggerHost.split(':').shift() : 'localhost';
+const defaultHost = Constants.manifest.debuggerHost
+  ? Constants.manifest.debuggerHost.split(':').shift()
+  : 'localhost';
 const developmentURL = Constants.manifest.extra.DEVELOPMENT_URL || `http://${defaultHost}:8000`;
 
-if (__DEV__) { // eslint-disable-line no-undef
+// eslint-disable-next-line no-undef
+if (__DEV__) {
   baseURL = developmentURL;
 } else if (Constants.manifest.releaseChannel === 'production') {
   baseURL = PRODUCTION_BASE_URL;
