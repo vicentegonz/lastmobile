@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import Login from '@/views/Login.jsx';
+import Loading from '@/views/Loading.jsx';
+import api from '@/api';
+import { useDispatch, useSelector } from 'react-redux';
+import { success } from '@/store/userSlice';
 import AdministratorNavigator from './AdministratorNavigator.jsx';
 
 export default function MainNavigator() {
@@ -22,7 +26,20 @@ export default function MainNavigator() {
 
     hideSplashScreen();
   }, [applicationReady]);
-  const [loggedIn, setLoggedIn] = useState(false);
+
+  const [loading, setLoading] = useState(true);
+
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.status);
+
+  async function verifyRefreshToken() {
+    const response = await api.account.refreshAuthenticate();
+    setLoading(false);
+    if (response.access && response.refresh) {
+      dispatch(success());
+    }
+  }
+  verifyRefreshToken();
 
   // Return nothing if application is not ready
   if (!applicationReady) {
@@ -31,10 +48,14 @@ export default function MainNavigator() {
 
   // Use this navigator to render different navigators
   // based on the user being logged in or not
-  if (loggedIn) {
+
+  if (user && !loading) {
     return <AdministratorNavigator />;
   }
 
   // Using the same navigator, just as a placeholder
-  return <Login setLoggedIn={setLoggedIn} />;
+  if (!loading && !user) {
+    return <Login />;
+  }
+  return <Loading />;
 }

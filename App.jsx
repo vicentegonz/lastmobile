@@ -3,6 +3,8 @@ import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import antOutlineFont from '@ant-design/icons-react-native/fonts/antoutline.ttf';
 import antFillFont from '@ant-design/icons-react-native/fonts/antfill.ttf';
+import { Provider } from 'react-redux';
+import store from '@/store';
 import setupLocalization from './src/locales';
 import MainNavigator from './src/navigators/MainNavigator.jsx';
 
@@ -17,5 +19,5 @@ export default function App() {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
-  return <MainNavigator />;
+  return <Provider store={store}><MainNavigator /></Provider>;
 }
