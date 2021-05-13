@@ -32,14 +32,16 @@ export default function MainNavigator() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.status);
 
-  async function verifyRefreshToken() {
-    const response = await api.account.refreshAuthenticate();
-    setLoading(false);
-    if (response.access && response.refresh) {
-      dispatch(success());
+  useEffect(() => {
+    async function verifyRefreshToken() {
+      const response = await api.account.refreshAuthenticate();
+      setLoading(false);
+      if (response.access && response.refresh) {
+        dispatch(success());
+      }
     }
-  }
-  verifyRefreshToken();
+    verifyRefreshToken();
+  }, [dispatch]);
 
   // Return nothing if application is not ready
   if (!applicationReady) {
