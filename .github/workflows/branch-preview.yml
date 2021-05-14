@@ -13,7 +13,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
 
@@ -44,6 +43,9 @@ jobs:
       - name: Install dependencies
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
+
+      - name: Recreate staging .env file
+        run: echo "GOOGLE_CLIENT_ID=${{ secrets.STAGING_GOOGLE_CLIENT_ID }}" > .env
 
       - name: Publish preview with Expo
         run: expo publish --non-interactive --release-channel pr-${{ github.event.number }}-preview
