@@ -1,4 +1,5 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Icon } from '@ant-design/react-native';
 import CardContainer from '@/components/CardContainer.jsx';
@@ -11,6 +12,7 @@ export default function Landing() {
 
   return (
     <ScreenContainer>
+      <StatusBar backgroundColor="#052D4C" />
       <CardContainer
         icon={eventIcon}
         title="Last Events"

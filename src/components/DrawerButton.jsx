@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 export default function DrawerButton(props) {
   return (
-    <View style={styles.header}>
+    <View>
       <Button
         onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}
         style={styles.menuButtom}

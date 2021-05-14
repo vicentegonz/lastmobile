@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
+import styles from '@/assets/styles/index.jsx';
 import Landing from '@/views/Landing.jsx';
 import Shops from '@/views/Shops.jsx';
 import Events from '@/views/Events.jsx';
@@ -31,23 +32,31 @@ function AdministratorDrawerNavigator() {
 
 export default function AdministratorNavigator() {
   const options = ({ navigation }) => ({
-    headerTitle: 'ArcoPrime App',
     headerTitleAlign: 'center',
-    headerStyle: { height: 100 },
+    headerStyle: styles.headerApp,
+    headerTintColor: '#FFFFFF',
+    headerTitleStyle: styles.title,
     headerRight: () => <DrawerButton navigation={navigation} />,
+  });
+
+  const options2 = () => ({
+    headerTitleAlign: 'center',
+    headerStyle: styles.headerApp,
+    headerTintColor: '#FFFFFF',
+    headerTitleStyle: styles.titleBG,
   });
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="ArcoPrime App">
+      <Stack.Navigator initialRouteName="ArcoPrime">
         <Stack.Screen
-          name="ArcoPrime App"
+          name="ArcoPrime"
           component={AdministratorDrawerNavigator}
           options={options}
         />
-        <Stack.Screen name="Event" component={OneEvent} />
-        <Stack.Screen name="Contact" component={OneContact} />
-        <Stack.Screen name="Shop" component={OneShop} />
+        <Stack.Screen name="Event" component={OneEvent} options={options2} />
+        <Stack.Screen name="Contact" component={OneContact} options={options2} />
+        <Stack.Screen name="Shop" component={OneShop} options={options2} />
       </Stack.Navigator>
     </NavigationContainer>
   );
