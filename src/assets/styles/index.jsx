@@ -4,19 +4,19 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: 'bold',
     fontSize: 35,
-    fontFamily: 'Roboto',
+    fontFamily: 'roboto',
   },
   titleBG: {
     fontWeight: 'bold',
     fontSize: 45,
-    fontFamily: 'Roboto',
+    fontFamily: 'roboto',
   },
   menuButtom: {
     width: 50,
     height: 50,
     marginRight: 10,
     backgroundColor: '#FFFFFF',
-    fontFamily: 'Roboto',
+    fontFamily: 'roboto',
   },
   headerApp: {
     height: 80,
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
   cardText: {
     marginLeft: 16,
-    fontFamily: 'Roboto',
+    fontFamily: 'roboto',
   },
 });
 
