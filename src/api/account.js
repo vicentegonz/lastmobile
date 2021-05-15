@@ -33,9 +33,19 @@ const account = {
       return error;
     }
   },
-  request: async () => {
+  // We're not using this request right now, but it will be useful in a couple of
+  // days when the backend is updated
+  profile: async () => {
     try {
-      const response = await CLIENT.get('/v1/accounts/');
+      const access = await secureStore.getValue('accessToken');
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${access}`,
+        },
+      };
+      const response = await CLIENT.get('/v1/account/', config);
+
       return response;
     } catch (error) {
       return error;

@@ -8,24 +8,34 @@ import Landing from '@/views/Landing.jsx';
 import Shops from '@/views/Shops.jsx';
 import Events from '@/views/Events.jsx';
 import Contacts from '@/views/Contacts.jsx';
-import Profile from '@/views/Profile.jsx';
 import OneEvent from '@/views/OneEvent.jsx';
 import OneShop from '@/views/OneShop.jsx';
 import OneContact from '@/views/OneContact.jsx';
 
 import DrawerButton from '@/components/DrawerButton.jsx';
 
+import LogoutButton from '@/components/LogoutButton.jsx';
+
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 function AdministratorDrawerNavigator() {
   return (
-    <Drawer.Navigator initialRouteName="Home" drawerPosition="right">
+    <Drawer.Navigator
+      initialRouteName="Home"
+      drawerPosition="right"
+      drawerContent={({ state, navigation, descriptors }) => (
+        <LogoutButton
+          state={state}
+          navigation={navigation}
+          descriptors={descriptors}
+        />
+      )}
+    >
       <Drawer.Screen name="Home" component={Landing} />
       <Drawer.Screen name="Shops" component={Shops} />
       <Drawer.Screen name="Events" component={Events} />
       <Drawer.Screen name="Contacts" component={Contacts} />
-      <Drawer.Screen name="Profile" component={Profile} />
     </Drawer.Navigator>
   );
 }
