@@ -3,6 +3,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
+import useDeviceRegistration from '@/hooks/useDeviceRegistration';
+
 import styles from '@/assets/styles/index.jsx';
 import Landing from '@/views/Landing.jsx';
 import Shops from '@/views/Shops.jsx';
@@ -40,21 +42,23 @@ function AdministratorDrawerNavigator() {
   );
 }
 
-export default function AdministratorNavigator() {
-  const options = ({ navigation }) => ({
-    headerTitleAlign: 'center',
-    headerStyle: styles.headerApp,
-    headerTintColor: '#FFFFFF',
-    headerTitleStyle: styles.title,
-    headerRight: () => <DrawerButton navigation={navigation} />,
-  });
+const options = ({ navigation }) => ({
+  headerTitleAlign: 'center',
+  headerStyle: styles.headerApp,
+  headerTintColor: '#FFFFFF',
+  headerTitleStyle: styles.title,
+  headerRight: () => <DrawerButton navigation={navigation} />,
+});
 
-  const options2 = () => ({
-    headerTitleAlign: 'center',
-    headerStyle: styles.headerApp,
-    headerTintColor: '#FFFFFF',
-    headerTitleStyle: styles.titleBG,
-  });
+const options2 = () => ({
+  headerTitleAlign: 'center',
+  headerStyle: styles.headerApp,
+  headerTintColor: '#FFFFFF',
+  headerTitleStyle: styles.titleBG,
+});
+
+export default function AdministratorNavigator() {
+  useDeviceRegistration();
 
   return (
     <NavigationContainer>

@@ -51,6 +51,14 @@ const account = {
       return error;
     }
   },
+  registerDevice: async (deviceData) => {
+    try {
+      const response = await CLIENT.put('/v1/account/devices/', deviceData);
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  },
 };
 
 export default account;
