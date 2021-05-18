@@ -4,7 +4,7 @@ import * as Google from 'expo-auth-session/providers/google';
 import Constants from 'expo-constants';
 import api from '@/api';
 import { useDispatch } from 'react-redux';
-import { error, success } from '@/store/userSlice';
+import { setValidSession } from '@/store/session';
 
 export default function useGoogleAuthentication() {
   WebBrowser.maybeCompleteAuthSession();
@@ -20,10 +20,10 @@ export default function useGoogleAuthentication() {
     api.account
       .authenticate(idToken)
       .then(() => {
-        dispatch(success());
+        dispatch(setValidSession(true));
       })
       .catch(() => {
-        dispatch(error());
+        dispatch(setValidSession(false));
       });
   }
 

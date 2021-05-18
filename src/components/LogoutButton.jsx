@@ -6,18 +6,16 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
-
-import secureStore from '@/utils/secureStore';
+import { removeCredentials } from '@/utils/credentials';
 import { useDispatch } from 'react-redux';
-import { logout } from '@/store/userSlice';
+import { setValidSession } from '@/store/session';
 
 export default function LogoutButton({ state, navigation, descriptors }) {
   const dispatch = useDispatch();
 
   const handler = async () => {
-    await secureStore.delete('accessToken');
-    await secureStore.delete('refreshToken');
-    dispatch(logout());
+    await removeCredentials();
+    dispatch(setValidSession(false));
   };
   return (
     <DrawerContentScrollView

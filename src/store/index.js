@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import counterReducer from '@/store/counterSlice';
-import userReducer from '@/store/userSlice';
+import sessionReducer from '@/store/session';
 
 export default configureStore({
   reducer: {
     counter: counterReducer,
-    user: userReducer,
+    session: sessionReducer,
   },
 });

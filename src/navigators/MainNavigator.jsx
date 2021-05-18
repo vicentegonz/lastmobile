@@ -4,7 +4,7 @@ import Login from '@/views/Login.jsx';
 import Loading from '@/views/Loading.jsx';
 import api from '@/api';
 import { useDispatch, useSelector } from 'react-redux';
-import { success } from '@/store/userSlice';
+import { setValidSession } from '@/store/session';
 import AdministratorNavigator from './AdministratorNavigator.jsx';
 
 export default function MainNavigator() {
@@ -30,17 +30,17 @@ export default function MainNavigator() {
   const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.status);
+  const session = useSelector((state) => state.session.status);
 
   useEffect(() => {
-    async function verifyRefreshToken() {
-      const response = await api.account.refreshAuthenticate();
+    async function validateSession() {
+      const response = await api.account.validate();
       setLoading(false);
-      if (response.access && response.refresh) {
-        dispatch(success());
+      if (response.status === 200) {
+        dispatch(setValidSession(true));
       }
     }
-    verifyRefreshToken();
+    validateSession();
   }, [dispatch]);
 
   // Return nothing if application is not ready
@@ -51,12 +51,12 @@ export default function MainNavigator() {
   // Use this navigator to render different navigators
   // based on the user being logged in or not
 
-  if (user && !loading) {
+  if (session && !loading) {
     return <AdministratorNavigator />;
   }
 
   // Using the same navigator, just as a placeholder
-  if (!loading && !user) {
+  if (!loading && !session) {
     return <Login />;
   }
   return <Loading />;
