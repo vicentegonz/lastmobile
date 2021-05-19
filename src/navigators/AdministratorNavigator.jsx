@@ -7,11 +7,11 @@ import useDeviceRegistration from '@/hooks/useDeviceRegistration';
 
 import styles from '@/assets/styles/index.jsx';
 import Landing from '@/views/Landing.jsx';
-import Shops from '@/views/Shops.jsx';
+import Stores from '@/views/Stores.jsx';
 import Events from '@/views/Events.jsx';
 import Contacts from '@/views/Contacts.jsx';
 import OneEvent from '@/views/OneEvent.jsx';
-import OneShop from '@/views/OneShop.jsx';
+import OneStore from '@/views/OneStore.jsx';
 import OneContact from '@/views/OneContact.jsx';
 
 import DrawerButton from '@/components/DrawerButton.jsx';
@@ -35,7 +35,7 @@ function AdministratorDrawerNavigator() {
       )}
     >
       <Drawer.Screen name="Home" component={Landing} />
-      <Drawer.Screen name="Shops" component={Shops} />
+      <Drawer.Screen name="Stores" component={Stores} />
       <Drawer.Screen name="Events" component={Events} />
       <Drawer.Screen name="Contacts" component={Contacts} />
     </Drawer.Navigator>
@@ -69,8 +69,12 @@ export default function AdministratorNavigator() {
           options={options}
         />
         <Stack.Screen name="Event" component={OneEvent} options={options2} />
-        <Stack.Screen name="Contact" component={OneContact} options={options2} />
-        <Stack.Screen name="Shop" component={OneShop} options={options2} />
+        <Stack.Screen
+          name="Contact"
+          component={OneContact}
+          options={options2}
+        />
+        <Stack.Screen name="Store" component={OneStore} options={options2} />
       </Stack.Navigator>
     </NavigationContainer>
   );

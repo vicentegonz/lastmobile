@@ -33,8 +33,6 @@ export default function LogoutButton({ state, navigation, descriptors }) {
   );
 }
 
-// ESLint no permite props de tipo object
-// No supe arreglarlo, así que por ahora desactivé esa regla para el archivo
 LogoutButton.propTypes = {
   state: PropTypes.object.isRequired,
   navigation: PropTypes.object.isRequired,

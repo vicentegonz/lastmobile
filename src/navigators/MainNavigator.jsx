@@ -4,6 +4,8 @@ import Login from '@/views/Login.jsx';
 import Loading from '@/views/Loading.jsx';
 import api from '@/api';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchUser } from '@/store/profileSlice';
+import { fetchEvents } from '@/store/eventSlice';
 import { setValidSession } from '@/store/session';
 import AdministratorNavigator from './AdministratorNavigator.jsx';
 
@@ -31,6 +33,7 @@ export default function MainNavigator() {
 
   const dispatch = useDispatch();
   const session = useSelector((state) => state.session.status);
+  const stores = useSelector((state) => state.profile.stores);
 
   useEffect(() => {
     async function validateSession() {
@@ -38,6 +41,7 @@ export default function MainNavigator() {
       setLoading(false);
       if (response.status === 200) {
         dispatch(setValidSession(true));
+        dispatch(fetchUser());
       }
     }
     validateSession();
@@ -50,8 +54,8 @@ export default function MainNavigator() {
 
   // Use this navigator to render different navigators
   // based on the user being logged in or not
-
   if (session && !loading) {
+    stores.map((id) => dispatch(fetchEvents(id)));
     return <AdministratorNavigator />;
   }
 

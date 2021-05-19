@@ -1,8 +1,9 @@
+/* eslint-disable operator-linebreak */
 import axios from 'axios';
 import { camelizeKeys, decamelizeKeys } from 'humps';
 import Constants from 'expo-constants';
 import * as SecureStore from 'expo-secure-store';
-import $store from '@/store';
+import { useDispatch } from 'react-redux';
 import { getAuthHeaders } from '@/utils/auth';
 import { setCredentials, removeCredentials } from '@/utils/credentials';
 import { setValidSession } from '@/store/session';
@@ -18,7 +19,9 @@ let baseURL;
 const defaultHost = Constants.manifest.debuggerHost
   ? Constants.manifest.debuggerHost.split(':').shift()
   : 'localhost';
-const developmentURL = Constants.manifest.extra.DEVELOPMENT_URL || `http://${defaultHost}:8000`;
+
+const developmentURL =
+  Constants.manifest.extra.DEVELOPMENT_URL || `http://${defaultHost}:8000`;
 
 // eslint-disable-next-line no-undef
 if (__DEV__) {
@@ -57,10 +60,10 @@ CLIENT.interceptors.request.use(async (config) => {
 
 CLIENT.interceptors.response.use(null, async (error) => {
   if (
-    error.config
-    && !error.config.url.includes('refresh')
-    && error.response
-    && error.response.status === 401
+    error.config &&
+    !error.config.url.includes('refresh') &&
+    error.response &&
+    error.response.status === 401
   ) {
     try {
       const refreshToken = await SecureStore.getItemAsync(
@@ -79,7 +82,8 @@ CLIENT.interceptors.response.use(null, async (error) => {
       });
     } catch (err) {
       await removeCredentials();
-      $store.dispatch(setValidSession(false));
+      const dispatch = useDispatch();
+      dispatch(setValidSession(false));
     }
   }
 
