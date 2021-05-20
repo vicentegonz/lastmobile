@@ -21,17 +21,17 @@ export default function StoreCard({ navigation, idStore }) {
 
   return (
     <View>
-      <TouchableOpacity onPress={() => navigation.navigate('Store')}>
+      <TouchableOpacity onPress={() => navigation.navigate('Tienda')}>
         <Card style={styles.cardContainer}>
           <Card.Header
-            title={`Store ${idStore}`}
+            title={`Tienda ${idStore}`}
             thumbStyle={styles.thumbIcon}
             thumb={storeIcon}
           />
           <Card.Body>
             <View style={styles.cardContent}>
-              <Text style={styles.cardText}>{`Store Address: ${address}`}</Text>
-              <Text style={styles.cardText}>{`Store Zone: ${zone}`}</Text>
+              <Text style={styles.cardText}>{`Dirección: ${address}`}</Text>
+              <Text style={styles.cardText}>{`Zona: ${zone}`}</Text>
             </View>
           </Card.Body>
         </Card>

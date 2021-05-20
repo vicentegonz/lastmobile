@@ -8,7 +8,7 @@ export default function Loading() {
   return (
     <ScreenContainer>
       <Image source={Logo} style={{ width: 300, height: 100 }} />
-      <Text> Loading ...</Text>
+      <Text> Cargando ...</Text>
     </ScreenContainer>
   );
 }

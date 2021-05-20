@@ -28,7 +28,7 @@ export default function LogoutButton({ state, navigation, descriptors }) {
         navigation={navigation}
         descriptors={descriptors}
       />
-      <DrawerItem label="Logout" onPress={handler} />
+      <DrawerItem label="Cerrar sesión" onPress={handler} />
     </DrawerContentScrollView>
   );
 }

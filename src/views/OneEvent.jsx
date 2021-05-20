@@ -9,7 +9,7 @@ export default function OneEvent() {
   return (
     <ScreenContainer>
       <StatusBar backgroundColor="#052D4C" />
-      <Text>{`This is the Event view for ${given}`}</Text>
+      <Text>{`Esta es una vista de evento de ${given}`}</Text>
     </ScreenContainer>
   );
 }

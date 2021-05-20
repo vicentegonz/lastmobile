@@ -10,8 +10,8 @@ export default function Contacts() {
   return (
     <ScreenContainer>
       <StatusBar backgroundColor="#052D4C" />
-      <ContactCard title="Contact 1" navigation={navigation} />
-      <ContactCard title="Contact 2" navigation={navigation} />
+      <ContactCard title="Contacto 1" navigation={navigation} />
+      <ContactCard title="Contacto 2" navigation={navigation} />
     </ScreenContainer>
   );
 }

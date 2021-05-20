@@ -8,7 +8,7 @@ export default function ContactCard({ title, navigation }) {
   const contactIcon = <Icon name="team" size="md" color="black" />;
   return (
     <View>
-      <TouchableOpacity onPress={() => navigation.navigate('Contact')}>
+      <TouchableOpacity onPress={() => navigation.navigate('Contacto')}>
         <Card style={styles.cardContainer}>
           <Card.Header
             title={title}
@@ -17,7 +17,7 @@ export default function ContactCard({ title, navigation }) {
           />
           <Card.Body>
             <View style={styles.cardContent}>
-              <Text style={styles.cardText}>Contact information</Text>
+              <Text style={styles.cardText}>Información del contacto</Text>
             </View>
           </Card.Body>
         </Card>

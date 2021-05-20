@@ -19,7 +19,7 @@ export default function Login() {
           asyncPromptLogin();
         }}
       >
-        <Text>Log In With Google</Text>
+        <Text>Iniciar sesión con Google</Text>
       </Button>
     </ScreenContainer>
   );

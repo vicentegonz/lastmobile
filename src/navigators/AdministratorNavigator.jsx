@@ -34,10 +34,10 @@ function AdministratorDrawerNavigator() {
         />
       )}
     >
-      <Drawer.Screen name="Home" component={Landing} />
-      <Drawer.Screen name="Stores" component={Stores} />
-      <Drawer.Screen name="Events" component={Events} />
-      <Drawer.Screen name="Contacts" component={Contacts} />
+      <Drawer.Screen name="Menu" component={Landing} />
+      <Drawer.Screen name="Tiendas" component={Stores} />
+      <Drawer.Screen name="Eventos" component={Events} />
+      <Drawer.Screen name="Contactos" component={Contacts} />
     </Drawer.Navigator>
   );
 }
@@ -68,13 +68,13 @@ export default function AdministratorNavigator() {
           component={AdministratorDrawerNavigator}
           options={options}
         />
-        <Stack.Screen name="Event" component={OneEvent} options={options2} />
+        <Stack.Screen name="Evento" component={OneEvent} options={options2} />
         <Stack.Screen
-          name="Contact"
+          name="Contacto"
           component={OneContact}
           options={options2}
         />
-        <Stack.Screen name="Store" component={OneStore} options={options2} />
+        <Stack.Screen name="Tienda" component={OneStore} options={options2} />
       </Stack.Navigator>
     </NavigationContainer>
   );
