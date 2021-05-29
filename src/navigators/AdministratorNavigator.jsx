@@ -2,6 +2,7 @@ import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { Image } from 'react-native';
 
 import useDeviceRegistration from '@/hooks/useDeviceRegistration';
 
@@ -17,6 +18,8 @@ import OneContact from '@/views/OneContact.jsx';
 import DrawerButton from '@/components/DrawerButton.jsx';
 
 import LogoutButton from '@/components/LogoutButton.jsx';
+
+import Logo from '@/assets/ArcoprimeLogo.png';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -48,6 +51,7 @@ const options = ({ navigation }) => ({
   headerTintColor: '#FFFFFF',
   headerTitleStyle: styles.title,
   headerRight: () => <DrawerButton navigation={navigation} />,
+  headerTitle: () => <Image source={Logo} style={styles.headerLogo} />,
 });
 
 const options2 = () => ({

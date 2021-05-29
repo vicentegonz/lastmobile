@@ -41,6 +41,16 @@ const styles = StyleSheet.create({
     marginLeft: 16,
     fontFamily: 'roboto',
   },
+  loginLogo: {
+    width: 300,
+    height: 100,
+    marginBottom: 50,
+  },
+  headerLogo: {
+    width: 180,
+    height: 100,
+    marginRight: 170,
+  },
 });
 
 export default styles;
