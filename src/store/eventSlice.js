@@ -27,7 +27,6 @@ export const eventSlice = createSlice({
     [fetchEvents.fulfilled]: (state, action) => {
       const data = action.payload;
       state.storeEvents[action.meta.arg] = data;
-
       data.map((event) => {
         state.lastEvent = event;
         return null;

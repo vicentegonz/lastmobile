@@ -6,6 +6,7 @@ import api from '@/api';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser } from '@/store/profileSlice';
 import { fetchEvents } from '@/store/eventSlice';
+import { fetchStores } from '@/store/storeSlice';
 import { setValidSession } from '@/store/session';
 import AdministratorNavigator from './AdministratorNavigator.jsx';
 
@@ -56,6 +57,7 @@ export default function MainNavigator() {
   // based on the user being logged in or not
   if (session && !loading) {
     stores.map((id) => dispatch(fetchEvents(id)));
+    stores.map((id) => dispatch(fetchStores(id)));
     return <AdministratorNavigator />;
   }
 

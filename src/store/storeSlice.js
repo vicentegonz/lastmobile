@@ -17,15 +17,13 @@ export const fetchStores = createAsyncThunk(
 export const storeSlice = createSlice({
   name: 'store',
   initialState: {
-    address: null,
-    zone: null,
+    storeObjects: {},
   },
   reducers: {},
   extraReducers: {
     [fetchStores.fulfilled]: (state, action) => {
       const data = action.payload;
-      state.address = data.address;
-      state.zone = data.zone;
+      state.storeObjects[action.meta.arg] = data;
     },
   },
 });
