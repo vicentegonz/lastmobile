@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { TouchableOpacity, View, Text } from 'react-native';
-import { Card, Icon } from '@ant-design/react-native';
+import { Card, Icon, WhiteSpace } from '@ant-design/react-native';
 import styles from '@/assets/styles/index.jsx';
 
 export default function EventCard({ navigation, event }) {
@@ -9,6 +9,7 @@ export default function EventCard({ navigation, event }) {
 
   return (
     <TouchableOpacity onPress={() => navigation.navigate('Evento')}>
+      <WhiteSpace size="md" />
       <Card style={styles.cardContainer}>
         <Card.Header
           title={`Evento ${event.id}`}

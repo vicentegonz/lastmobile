@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { TouchableOpacity, View, Text } from 'react-native';
-import { Card, Icon } from '@ant-design/react-native';
+import { Card, Icon, WhiteSpace } from '@ant-design/react-native';
 import styles from '@/assets/styles/index.jsx';
 
 export default function ContactCard({ title, navigation }) {
@@ -9,6 +9,7 @@ export default function ContactCard({ title, navigation }) {
   return (
     <View>
       <TouchableOpacity onPress={() => navigation.navigate('Contacto')}>
+        <WhiteSpace size="md" />
         <Card style={styles.cardContainer}>
           <Card.Header
             title={title}

@@ -27,7 +27,7 @@ const Drawer = createDrawerNavigator();
 function AdministratorDrawerNavigator() {
   return (
     <Drawer.Navigator
-      initialRouteName="Home"
+      initialRouteName="Inicio"
       drawerPosition="right"
       drawerContent={({ state, navigation, descriptors }) => (
         <LogoutButton
@@ -37,7 +37,7 @@ function AdministratorDrawerNavigator() {
         />
       )}
     >
-      <Drawer.Screen name="Menu" component={Landing} />
+      <Drawer.Screen name="Inicio" component={Landing} />
       <Drawer.Screen name="Tiendas" component={Stores} />
       <Drawer.Screen name="Eventos" component={Events} />
       <Drawer.Screen name="Contactos" component={Contacts} />

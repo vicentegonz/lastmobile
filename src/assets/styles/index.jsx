@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 const styles = StyleSheet.create({
   title: {
@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     marginHorizontal: 18,
-    marginVertical: 10,
     backgroundColor: '#FFFFFF',
   },
   icon: {
@@ -35,11 +34,59 @@ const styles = StyleSheet.create({
     height: 30,
   },
   cardContent: {
-    height: 42,
+    flex: 1,
+    justifyContent: 'center',
   },
   cardText: {
-    marginLeft: 16,
+    marginHorizontal: 16,
     fontFamily: 'roboto',
+  },
+  landingSubTitle: {
+    fontFamily: 'robotoBold',
+    fontSize: 25,
+    backgroundColor: '#eaedf5',
+    marginLeft: 11,
+  },
+  kpiCardContainer: {
+    flex: 2,
+    marginHorizontal: 10,
+    backgroundColor: '#FFFFFF',
+    width: 170,
+    alignItems: 'center',
+    textAlignVertical: 'center',
+  },
+  kpiCardText: {
+    fontFamily: 'roboto',
+    height: '100%',
+    fontSize: 70,
+  },
+  landingView: {
+    flex: 1,
+    backgroundColor: '#eaedf5',
+  },
+  landingHorizontalView: {
+    flex: 1.3,
+    paddingHorizontal: 9,
+    backgroundColor: '#eaedf5',
+  },
+  landingScrollView: {
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    alignContent: 'stretch',
+  },
+  landingScrollViewChild: {
+    flexDirection: 'row',
+    flexGrow: Dimensions.get('window').height / 2,
+  },
+  landingEvents: {
+    flex: 1,
+    backgroundColor: '#eaedf5',
+  },
+  landingEventsTitle: {
+    fontFamily: 'robotoBold',
+    fontSize: 25,
+    backgroundColor: '#eaedf5',
+    marginLeft: 20,
   },
   loginLogo: {
     width: 300,
@@ -49,7 +96,7 @@ const styles = StyleSheet.create({
   headerLogo: {
     width: 180,
     height: 100,
-    marginRight: 170,
+    marginRight: (Dimensions.get('window').width - 240) / 2,
   },
 });
 

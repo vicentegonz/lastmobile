@@ -4,7 +4,7 @@ import counterReducer from '@/store/counterSlice';
 import profileReducer from '@/store/profileSlice';
 import storeReducer from '@/store/storeSlice';
 import eventReducer from '@/store/eventSlice';
-
+import kpiReducer from '@/store/kpiSlice';
 import sessionReducer from '@/store/session';
 
 export default configureStore({
@@ -14,6 +14,7 @@ export default configureStore({
     store: storeReducer,
     event: eventReducer,
     session: sessionReducer,
+    kpi: kpiReducer,
   },
   middleware: getDefaultMiddleware({
     serializableCheck: false,
