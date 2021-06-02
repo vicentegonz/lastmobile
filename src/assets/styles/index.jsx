@@ -57,8 +57,8 @@ const styles = StyleSheet.create({
   },
   kpiCardText: {
     fontFamily: 'roboto',
-    height: '100%',
-    fontSize: 70,
+    flexDirection: 'column',
+    fontSize: 40,
   },
   landingView: {
     flex: 1,
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   headerLogo: {
     width: 180,
     height: 100,
-    marginRight: (Dimensions.get('window').width - 240) / 2,
+    alignContent: 'center',
   },
 });
 
