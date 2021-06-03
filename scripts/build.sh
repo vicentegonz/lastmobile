@@ -38,6 +38,11 @@ if [ $2 = "ios" ]; then
     --no-wait
 elif [ $2 = "android" ]; then
   expo build:android \
+    -t apk \
+    --release-channel $CHANNEL \
+    --no-publish \
+    --no-wait
+  expo build:android \
     -t app-bundle \
     --release-channel $CHANNEL \
     --no-publish \
