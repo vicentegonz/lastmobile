@@ -12,16 +12,11 @@ import { WhiteSpace } from '@ant-design/react-native';
 export default function Landing() {
   const navigation = useNavigation();
   const allKpis = useSelector((state) => state.kpi.storeKpis);
-  const last3Events = useSelector((state) => state.event.last3Events);
+  const lastNEvents = useSelector((state) => state.event.lastNEvents);
 
   // Might have to clean this a little bit
   const kpis1 = allKpis
-    .slice(0, allKpis.length / 2)
     .map((kpi) => <KpiCard navigation={navigation} kpi={kpi} key={kpi.id} />);
-  const kpis2 = allKpis
-    .slice(allKpis.length / 2)
-    .map((kpi) => <KpiCard navigation={navigation} kpi={kpi} key={kpi.id} />);
-
   const services1 = allKpis
     .slice(0, allKpis.length / 2)
     .map((service) => (
@@ -34,8 +29,7 @@ export default function Landing() {
     ));
 
   // Need endpoint for last n events.
-  const events = last3Events
-    .slice(-4)
+  const events = lastNEvents
     .map((event) => (
       <EventCard key={event.id} navigation={navigation} event={event} />
     ));
@@ -46,13 +40,12 @@ export default function Landing() {
 
       <WhiteSpace size="md" />
 
-      <View style={styles.landingHorizontalView}>
+      <View style={styles.landingHorizontalView2}>
         <Text style={styles.landingSubTitle}>KPI</Text>
         <ScrollView horizontal style={styles.landingScrollView}>
-          <View adjustsFontSizeToFit>
-            <View style={styles.landingScrollViewChild}>{kpis1}</View>
-            <View style={styles.landingScrollViewChild}>{kpis2}</View>
-          </View>
+
+          <View style={styles.landingScrollViewChild}>{kpis1}</View>
+
         </ScrollView>
       </View>
 

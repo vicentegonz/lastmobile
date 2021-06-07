@@ -64,8 +64,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#eaedf5',
   },
+
+  landingHorizontalView2: {
+    flex: 0.55,
+    paddingHorizontal: 9,
+    backgroundColor: '#eaedf5',
+  },
   landingHorizontalView: {
-    flex: 1.3,
+    flex: 1,
     paddingHorizontal: 9,
     backgroundColor: '#eaedf5',
   },

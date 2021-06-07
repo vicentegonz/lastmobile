@@ -32,8 +32,8 @@ export default function MainNavigator() {
 
   const [loading, setLoading] = useState(true);
 
-  const dispatch = useDispatch();
   const session = useSelector((state) => state.session.status);
+  const dispatch = useDispatch();
   const stores = useSelector((state) => state.profile.stores);
 
   useEffect(() => {
@@ -41,8 +41,8 @@ export default function MainNavigator() {
       const response = await api.account.validate();
       setLoading(false);
       if (response.status === 200) {
-        dispatch(setValidSession(true));
         dispatch(fetchUser());
+        dispatch(setValidSession(true));
       }
     }
     validateSession();
