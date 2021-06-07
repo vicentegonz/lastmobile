@@ -23,5 +23,9 @@ export default function App() {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
-  return <Provider store={store}><MainNavigator /></Provider>;
+  return (
+    <Provider store={store}>
+      <MainNavigator />
+    </Provider>
+  );
 }

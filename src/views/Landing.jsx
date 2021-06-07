@@ -37,7 +37,6 @@ export default function Landing() {
   return (
     <View style={styles.landingView}>
       <StatusBar backgroundColor="#052D4C" />
-
       <WhiteSpace size="md" />
 
       <View style={styles.landingHorizontalView2}>

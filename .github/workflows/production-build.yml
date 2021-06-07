@@ -43,7 +43,10 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Recreate production .env file
-        run: echo "GOOGLE_CLIENT_ID=${{ secrets.PRODUCTION_GOOGLE_CLIENT_ID }}" > .env
+        run: |
+          echo "GOOGLE_CLIENT_ID_EXPO=${{ secrets.PRODUCTION_GOOGLE_CLIENT_ID_EXPO }}" >> .env
+          echo "GOOGLE_CLIENT_ID_ANDROID=${{ secrets.PRODUCTION_GOOGLE_CLIENT_ID_ANDROID }}" >> .env
+          echo "GOOGLE_CLIENT_ID_IOS=${{ secrets.PRODUCTION_GOOGLE_CLIENT_ID_IOS }}" >> .env
 
       - name: Build the application
         run: sh ./scripts/build.sh production ${{ github.event.inputs.operating-system }}

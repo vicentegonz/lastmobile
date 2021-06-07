@@ -8,6 +8,7 @@ import Logo from '@/assets/ArcoprimeLogo.png';
 
 export default function Login() {
   const { asyncPromptLogin, request } = useGoogleAuthentication();
+
   return (
     <ScreenContainer>
       <StatusBar backgroundColor="#052D4C" />
