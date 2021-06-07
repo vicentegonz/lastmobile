@@ -42,11 +42,6 @@ elif [ $2 = "android" ]; then
     --release-channel $CHANNEL \
     --no-publish \
     --no-wait
-  expo build:android \
-    -t app-bundle \
-    --release-channel $CHANNEL \
-    --no-publish \
-    --no-wait
 else
   echo "The operating system passed doesn't correspond to a valid operating system (\"ios\", \"android\")."
   exit 1
