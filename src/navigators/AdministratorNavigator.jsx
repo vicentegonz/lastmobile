@@ -8,12 +8,8 @@ import useDeviceRegistration from '@/hooks/useDeviceRegistration';
 
 import styles from '@/assets/styles/index.jsx';
 import Landing from '@/views/Landing.jsx';
-import Stores from '@/views/Stores.jsx';
 import Events from '@/views/Events.jsx';
-import Contacts from '@/views/Contacts.jsx';
 import OneEvent from '@/views/OneEvent.jsx';
-import OneStore from '@/views/OneStore.jsx';
-import OneContact from '@/views/OneContact.jsx';
 
 import DrawerButton from '@/components/DrawerButton.jsx';
 
@@ -38,9 +34,7 @@ function AdministratorDrawerNavigator() {
       )}
     >
       <Drawer.Screen name="Inicio" component={Landing} />
-      <Drawer.Screen name="Tiendas" component={Stores} />
       <Drawer.Screen name="Eventos" component={Events} />
-      <Drawer.Screen name="Contactos" component={Contacts} />
     </Drawer.Navigator>
   );
 }
@@ -73,12 +67,6 @@ export default function AdministratorNavigator() {
           options={options}
         />
         <Stack.Screen name="Evento" component={OneEvent} options={options2} />
-        <Stack.Screen
-          name="Contacto"
-          component={OneContact}
-          options={options2}
-        />
-        <Stack.Screen name="Tienda" component={OneStore} options={options2} />
       </Stack.Navigator>
     </NavigationContainer>
   );
