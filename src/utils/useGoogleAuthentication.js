@@ -4,7 +4,6 @@ import Constants from 'expo-constants';
 import api from '@/api';
 import { useDispatch, useSelector } from 'react-redux';
 import { setValidSession } from '@/store/session';
-
 import { fetchUser } from '@/store/profileSlice';
 import { fetchEvents } from '@/store/eventSlice';
 import { fetchStores } from '@/store/storeSlice';

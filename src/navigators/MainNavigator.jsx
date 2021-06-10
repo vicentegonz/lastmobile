@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser } from '@/store/profileSlice';
 import { fetchEvents } from '@/store/eventSlice';
 import { fetchStores } from '@/store/storeSlice';
+import { fetchKPIs } from '@/store/kpiSlice';
 import { setValidSession } from '@/store/session';
 import AdministratorNavigator from './AdministratorNavigator.jsx';
 
@@ -35,6 +36,7 @@ export default function MainNavigator() {
   const session = useSelector((state) => state.session.status);
   const dispatch = useDispatch();
   const stores = useSelector((state) => state.profile.stores);
+  const firstStore = stores[0];
 
   useEffect(() => {
     async function validateSession() {
@@ -56,6 +58,12 @@ export default function MainNavigator() {
   // Use this navigator to render different navigators
   // based on the user being logged in or not
   if (session && !loading) {
+    // Now it selects the user's first store.
+    // Later, it should select by default the first one, but change when
+    // we the user selects another store with the landing store picker.
+    if (firstStore) {
+      dispatch(fetchKPIs(firstStore));
+    }
     stores.map((id) => dispatch(fetchEvents(id)));
     stores.map((id) => dispatch(fetchStores(id)));
     return <AdministratorNavigator />;

@@ -1,86 +1,61 @@
-/* eslint no-param-reassign: ["error", { "props": false }] */
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import CLIENT from '@/api/client';
+// import getDates from '@/utils/getDates';
+
+export const fetchKPIs = createAsyncThunk('kpi/fetchKPIs', async (idStore) => {
+  try {
+    const response = await CLIENT.get(`/v1/operations/stores/${idStore}/kpis/`);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+});
 
 export const kpiSlice = createSlice({
   name: 'kpi',
   initialState: {
-    // Need endpoint for kpi and service indicators.
-    storeKpis: [
-      {
-        id: 1,
-        name: 'Venta total',
-        value: 1000000,
-        created_at: '1621547176',
-      },
-      {
-        id: 2,
-        name: 'Venta total',
-        value: 1005000,
-        created_at: '1621633576',
-      },
-      {
-        id: 3,
-        name: 'Venta total',
-        value: 1100000,
-        created_at: '1621723576',
-      },
-      {
-        id: 4,
-        name: 'Venta total',
-        value: 909000,
-        created_at: '1621809976',
-      },
-      {
-        id: 5,
-        name: 'Venta neta',
-        value: 500000,
-        created_at: '1621547176',
-      },
-      {
-        id: 6,
-        name: 'Venta neta',
-        value: 550000,
-        created_at: '1621633576',
-      },
-      {
-        id: 7,
-        name: 'Venta neta',
-        value: 400000,
-        created_at: '1621723576',
-      },
-      {
-        id: 8,
-        name: 'Venta neta',
-        value: 600000,
-        created_at: '1621809976',
-      },
-      {
-        id: 9,
-        name: 'Margen',
-        value: 500000,
-        created_at: '1621547176',
-      },
-      {
-        id: 10,
-        name: 'Margen',
-        value: 455000,
-        created_at: '1621633576',
-      },
-      {
-        id: 11,
-        name: 'Margen',
-        value: 700000,
-        created_at: '1621723576',
-      },
-      {
-        id: 12,
-        name: 'Margen',
-        value: 700000,
-        created_at: '1621809976',
-      },
-    ],
+    storeKpis: [],
   },
   reducers: {},
+  extraReducers: {
+    [fetchKPIs.fulfilled]: (state, action) => {
+      const data = action.payload;
+      // const { today, yesterday, lastWeek } = getDates();
+
+      // Dates hardcoded because there is no real data yet, just seeds.
+      const today = '2021-06-17';
+      const yesterday = '2021-06-16';
+      const lastWeek = '2021-06-10';
+
+      const todayKPI = [];
+      const yesterdayKPI = [];
+      const lastWeekKPI = [];
+
+      data.map((kpi) => {
+        if (today === kpi.date) {
+          todayKPI.push(kpi);
+        } else if (yesterday === kpi.date) {
+          yesterdayKPI.push(kpi);
+        } else if (lastWeek === kpi.date) {
+          lastWeekKPI.push(kpi);
+        }
+        return undefined;
+      });
+
+      for (let i = 0; i < todayKPI.length; i += 1) {
+        const obj = {
+          id: i,
+          name: todayKPI[i].name,
+          store: todayKPI[i].store,
+          value: todayKPI[i].value,
+          differnceYesterday: todayKPI[i].value - yesterdayKPI[i].value,
+          differnceLastWeek: todayKPI[i].value - lastWeekKPI[i].value,
+        };
+
+        state.storeKpis.push(obj);
+      }
+    },
+  },
 });
 
 export default kpiSlice.reducer;

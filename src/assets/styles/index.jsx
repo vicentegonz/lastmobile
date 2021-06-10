@@ -7,9 +7,8 @@ const styles = StyleSheet.create({
     fontFamily: 'roboto',
   },
   titleBG: {
-    fontWeight: 'bold',
-    fontSize: 45,
-    fontFamily: 'roboto',
+    fontFamily: 'robotoBold',
+    fontSize: 35,
   },
   menuButtom: {
     width: 50,
@@ -43,54 +42,46 @@ const styles = StyleSheet.create({
   },
   landingSubTitle: {
     fontFamily: 'robotoBold',
-    fontSize: 25,
+    fontSize: 20,
     backgroundColor: '#eaedf5',
     marginLeft: 11,
   },
   kpiCardContainer: {
-    flex: 2,
     marginHorizontal: 10,
     backgroundColor: '#FFFFFF',
-    width: 170,
-    alignItems: 'center',
-    textAlignVertical: 'center',
+    width: Dimensions.get('window').width - 38,
   },
-  kpiCardText: {
-    fontFamily: 'roboto',
-    flexDirection: 'column',
-    fontSize: 40,
+  kpiCardBody: {
+    paddingVertical: 0,
+  },
+  kpiCardValue: {
+    fontFamily: 'robotoBold',
+    alignSelf: 'center',
+    fontSize: 30,
+  },
+  kpiDifferences: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 12,
   },
   landingView: {
     flex: 1,
     backgroundColor: '#eaedf5',
   },
-
-  landingHorizontalView2: {
-    flex: 0.55,
-    paddingHorizontal: 9,
-    backgroundColor: '#eaedf5',
-  },
   landingHorizontalView: {
-    flex: 1,
     paddingHorizontal: 9,
     backgroundColor: '#eaedf5',
   },
   landingScrollView: {
-    flexWrap: 'wrap',
     flexDirection: 'row',
     alignContent: 'stretch',
   },
   landingScrollViewChild: {
     flexDirection: 'row',
-    flexGrow: Dimensions.get('window').height / 2,
-  },
-  landingEvents: {
-    flex: 1,
-    backgroundColor: '#eaedf5',
   },
   landingEventsTitle: {
     fontFamily: 'robotoBold',
-    fontSize: 25,
+    fontSize: 20,
     backgroundColor: '#eaedf5',
     marginLeft: 20,
   },
