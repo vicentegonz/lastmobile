@@ -1,20 +1,22 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
-import { TouchableOpacity, View, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import { Card, WhiteSpace } from '@ant-design/react-native';
 import CardText from '@/components/CardText.jsx';
 import styles from '@/assets/styles/index.jsx';
 
-export default function ServiceCard({ navigation, service }) {
+export default function ServiceCardUnclickable({ service }) {
   return (
-    <TouchableOpacity onPress={() => navigation.navigate('Servicios')}>
+    <View>
       <WhiteSpace size="md" />
-      <Card style={styles.serviceCardContainer}>
+      <Card style={styles.service}>
         <Card.Header title={`S. ${service.name}`} />
-        <Card.Body style={styles.kpiCardBody}>
-          <View>
+        <Card.Body>
+          <View style={styles.cardContent}>
             {service.value !== undefined ? (
-              <Text style={styles.serviceCardText}>{service.value}</Text>
+              <Text adjustsFontSizeToFit style={styles.serviceCardUnclickText}>
+                {service.value}
+              </Text>
             ) : null}
           </View>
           <View style={styles.kpiDifferences}>
@@ -30,14 +32,11 @@ export default function ServiceCard({ navigation, service }) {
           </View>
         </Card.Body>
       </Card>
-    </TouchableOpacity>
+    </View>
   );
 }
 
-ServiceCard.propTypes = {
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
-  }).isRequired,
+ServiceCardUnclickable.propTypes = {
   service: PropTypes.shape({
     value: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,

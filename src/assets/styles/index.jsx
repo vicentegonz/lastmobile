@@ -68,8 +68,17 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#eaedf5',
   },
-  landingHorizontalView: {
-    paddingHorizontal: 9,
+  landingHorizontalViewKPI: {
+    marginHorizontal: 8,
+    backgroundColor: '#eaedf5',
+  },
+  landingHorizontalViewService: {
+    flex: 0.55,
+    marginHorizontal: 18,
+  },
+  landingSubTitleService: {
+    fontFamily: 'robotoBold',
+    fontSize: 20,
     backgroundColor: '#eaedf5',
   },
   landingScrollView: {
@@ -94,6 +103,35 @@ const styles = StyleSheet.create({
     width: 180,
     height: 100,
     alignContent: 'center',
+  },
+  servicesView: {
+    flex: 1,
+    marginLeft: 20,
+    marginRight: 20,
+    flexDirection: 'row',
+  },
+  service: {
+    flex: 1,
+    marginHorizontal: 5,
+    width: (Dimensions.get('window').width - 20) / 2,
+    textAlignVertical: 'center',
+  },
+  serviceCardContainer: {
+    backgroundColor: '#FFFFFF',
+    width: Dimensions.get('window').width - 38,
+    textAlignVertical: 'center',
+  },
+  serviceCardText: {
+    marginLeft: 120,
+    fontFamily: 'robotoBold',
+    flexDirection: 'column',
+    fontSize: 30,
+  },
+  serviceCardUnclickText: {
+    marginLeft: 60,
+    fontFamily: 'robotoBold',
+    flexDirection: 'column',
+    fontSize: 25,
   },
 });
 

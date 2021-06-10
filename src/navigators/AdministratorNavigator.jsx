@@ -10,6 +10,7 @@ import styles from '@/assets/styles/index.jsx';
 import Landing from '@/views/Landing.jsx';
 import Events from '@/views/Events.jsx';
 import OneEvent from '@/views/OneEvent.jsx';
+import services from '@/views/Services.jsx';
 
 import DrawerButton from '@/components/DrawerButton.jsx';
 
@@ -67,6 +68,7 @@ export default function AdministratorNavigator() {
           options={options}
         />
         <Stack.Screen name="Evento" component={OneEvent} options={options2} />
+        <Stack.Screen name="Servicios" component={services} options={options2} />
       </Stack.Navigator>
     </NavigationContainer>
   );

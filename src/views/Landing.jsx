@@ -5,13 +5,21 @@ import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import EventCard from '@/components/EventCard.jsx';
 import KpiCard from '@/components/KpiCard.jsx';
+import ServiceCard from '@/components/ServiceCard.jsx';
 import styles from '@/assets/styles/index.jsx';
 import { WhiteSpace } from '@ant-design/react-native';
 
 export default function Landing() {
   const navigation = useNavigation();
   const allKpis = useSelector((state) => state.kpi.storeKpis);
+  const allServices = useSelector((state) => state.services.storeServices);
   const lastNEvents = useSelector((state) => state.event.lastNEvents);
+
+  const services = allServices
+    .slice(allServices.length - 1, allServices.length)
+    .map((service) => (
+      <ServiceCard navigation={navigation} service={service} key={service.id} />
+    ));
 
   const kpis = allKpis.map((kpi) => (
     <KpiCard navigation={navigation} kpi={kpi} key={kpi.id} />
@@ -26,7 +34,7 @@ export default function Landing() {
       <StatusBar backgroundColor="#052D4C" />
       <WhiteSpace size="md" />
 
-      <View style={styles.landingHorizontalView}>
+      <View style={styles.landingHorizontalViewKPI}>
         <Text style={styles.landingSubTitle}>KPIs</Text>
         <ScrollView horizontal style={styles.landingScrollView}>
           <View>
@@ -36,13 +44,13 @@ export default function Landing() {
       </View>
 
       <WhiteSpace size="sm" />
-      <View style={styles.landingHorizontalView}>
-        <Text style={styles.landingSubTitle}>Indicadores de servicio</Text>
-        <ScrollView horizontal style={styles.landingScrollView}>
-          <View adjustsFontSizeToFit>
-            <View style={styles.landingScrollViewChild}>{kpis}</View>
-          </View>
-        </ScrollView>
+      <View style={styles.landingHorizontalViewService}>
+        <Text style={styles.landingSubTitleService}>
+          Indicadores de servicio
+        </Text>
+        <View>
+          <View>{services}</View>
+        </View>
       </View>
 
       <WhiteSpace size="sm" />
