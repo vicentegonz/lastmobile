@@ -1,3 +1,4 @@
+/* eslint no-param-reassign: ["error", { "props": false }] */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import CLIENT from '@/api/client';
 // import getDates from '@/utils/getDates';
@@ -41,7 +42,7 @@ export const kpiSlice = createSlice({
         }
         return undefined;
       });
-
+      const aux = [];
       for (let i = 0; i < todayKPI.length; i += 1) {
         const obj = {
           id: i,
@@ -52,8 +53,9 @@ export const kpiSlice = createSlice({
           differnceLastWeek: todayKPI[i].value - lastWeekKPI[i].value,
         };
 
-        state.storeKpis.push(obj);
+        aux.push(obj);
       }
+      state.storeKpis = aux;
     },
   },
 });

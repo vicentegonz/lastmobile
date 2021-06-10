@@ -1,3 +1,4 @@
+/* eslint no-param-reassign: ["error", { "props": false }] */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import CLIENT from '@/api/client';
 // import getDates from '@/utils/getDates';
@@ -45,6 +46,7 @@ export const servicesSlice = createSlice({
         }
         return undefined;
       });
+      const aux = [];
       for (let i = 0; i < 7; i += 1) {
         const obj = {
           id: i,
@@ -54,8 +56,10 @@ export const servicesSlice = createSlice({
           variationY: indicatorT[i].value - indicatorY[i].value + 1,
           variationLW: indicatorT[i].value - indicatorLW[i].value - 1,
         };
-        state.storeServices.push(obj);
+        aux.push(obj);
       }
+
+      state.storeServices = aux;
     },
   },
 });
