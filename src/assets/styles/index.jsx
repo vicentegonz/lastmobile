@@ -105,16 +105,10 @@ const styles = StyleSheet.create({
     alignContent: 'center',
   },
   servicesView: {
-    flex: 1,
-    marginLeft: 20,
-    marginRight: 20,
-    flexDirection: 'row',
+    marginHorizontal: 18,
   },
   service: {
-    flex: 1,
-    marginHorizontal: 5,
-    width: (Dimensions.get('window').width - 20) / 2,
-    textAlignVertical: 'center',
+    width: Dimensions.get('window').width - 36,
   },
   serviceCardContainer: {
     backgroundColor: '#FFFFFF',
@@ -122,16 +116,13 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
   },
   serviceCardText: {
-    marginLeft: 120,
     fontFamily: 'robotoBold',
-    flexDirection: 'column',
     fontSize: 30,
+    alignSelf: 'center',
   },
-  serviceCardUnclickText: {
-    marginLeft: 60,
-    fontFamily: 'robotoBold',
-    flexDirection: 'column',
-    fontSize: 25,
+  moreInformation: {
+    color: '#05426F',
+    alignSelf: 'flex-end',
   },
 });
 

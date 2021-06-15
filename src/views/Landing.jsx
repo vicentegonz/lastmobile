@@ -12,14 +12,8 @@ import { WhiteSpace } from '@ant-design/react-native';
 export default function Landing() {
   const navigation = useNavigation();
   const allKpis = useSelector((state) => state.kpi.storeKpis);
-  const allServices = useSelector((state) => state.services.storeServices);
+  const mainService = useSelector((state) => state.services.mainService);
   const lastNEvents = useSelector((state) => state.event.lastNEvents);
-
-  const services = allServices
-    .slice(allServices.length - 1, allServices.length)
-    .map((service) => (
-      <ServiceCard navigation={navigation} service={service} key={service.id} />
-    ));
 
   const kpis = allKpis.map((kpi) => (
     <KpiCard navigation={navigation} kpi={kpi} key={kpi.id} />
@@ -49,7 +43,13 @@ export default function Landing() {
           Indicadores de servicio
         </Text>
         <View>
-          <View>{services}</View>
+          <View>
+            <ServiceCard
+              navigation={navigation}
+              service={mainService}
+              key={mainService.name}
+            />
+          </View>
         </View>
       </View>
 
