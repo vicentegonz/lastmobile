@@ -162,10 +162,11 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width - 38,
     textAlignVertical: 'center',
   },
-  serviceValue: {
+  serviceCardGraphText: {
     fontFamily: 'robotoBold',
-    alignSelf: 'center',
     fontSize: 30,
+    padding: 15,
+    alignSelf: 'center',
   },
   servicesDifferences: {
     flexDirection: 'row',

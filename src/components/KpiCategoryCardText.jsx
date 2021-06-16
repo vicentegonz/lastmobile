@@ -4,7 +4,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Text, View } from 'react-native';
 import { Icon } from '@ant-design/react-native';
-import round from '@/utils/round';
+import { round } from '@/utils/round';
 
 export default function KpiCategoryCardText({ variationN, variationP, unit }) {
   let color;

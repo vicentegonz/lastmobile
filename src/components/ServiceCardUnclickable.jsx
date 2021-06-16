@@ -3,6 +3,7 @@ import { PropTypes } from 'prop-types';
 import { View, Text } from 'react-native';
 import { Card, WhiteSpace } from '@ant-design/react-native';
 import styles from '@/assets/styles/index.jsx';
+import LinearChart from '@/components/LinearChart.jsx';
 
 import ServiceCardText from '@/components/ServiceCardText.jsx';
 
@@ -12,10 +13,12 @@ export default function ServiceCardUnclickable({ service }) {
       <Card style={styles.service}>
         <Card.Header title={service.name} />
         <Card.Body style={styles.serviceBody}>
-          {service.value !== undefined ? (
-            <Text style={styles.serviceValue}>{service.value}</Text>
-          ) : null}
-
+          <View style={{ flexDirection: 'row' }}>
+            {service.value !== undefined ? (
+              <Text style={styles.serviceCardGraphText}>{service.value}</Text>
+            ) : null}
+            <LinearChart datesarray={service.data} />
+          </View>
           <View style={styles.servicesDifferences}>
             <View>
               <ServiceCardText
@@ -46,6 +49,16 @@ ServiceCardUnclickable.propTypes = {
   service: PropTypes.shape({
     value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
     name: PropTypes.string.isRequired,
+    data: PropTypes.shape({
+      v1: PropTypes.string,
+      v2: PropTypes.string,
+      v3: PropTypes.string,
+      v4: PropTypes.string,
+      v5: PropTypes.string,
+      v6: PropTypes.string,
+      v7: PropTypes.string,
+      v8: PropTypes.string,
+    }),
     variationLWNumber: PropTypes.number.isRequired,
     variationLWpercentage: PropTypes.number.isRequired,
     variationYNumber: PropTypes.number.isRequired,

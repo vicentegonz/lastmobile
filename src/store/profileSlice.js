@@ -30,8 +30,10 @@ export const profileSlice = createSlice({
       state.givenName = data.givenName;
       state.picture = data.picture;
       state.stores = data.stores;
-      // eslint-disable-next-line prefer-destructuring
-      state.firstStore = data.stores[1];
+      if (!state.firstStore) {
+        // eslint-disable-next-line prefer-destructuring
+        state.firstStore = data.stores[1];
+      }
     },
   },
 });

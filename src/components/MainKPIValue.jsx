@@ -3,7 +3,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Text } from 'react-native';
 import styles from '@/assets/styles/index.jsx';
-import round from '@/utils/round';
+import { round } from '@/utils/round';
 
 export default function MainKPIValue({ value, unit }) {
   let text;
