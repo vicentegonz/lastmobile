@@ -31,7 +31,7 @@ export const profileSlice = createSlice({
       state.picture = data.picture;
       state.stores = data.stores;
       // eslint-disable-next-line prefer-destructuring
-      state.firstStore = data.stores[0];
+      state.firstStore = data.stores[1];
     },
   },
 });

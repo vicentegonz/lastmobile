@@ -1,5 +1,5 @@
-/* eslint-disable no-param-reassign */
 /* eslint-disable operator-linebreak */
+/* eslint-disable no-param-reassign */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import CLIENT from '@/api/client';
 import getDates from '@/utils/getDates';
@@ -89,7 +89,6 @@ export const servicesSlice = createSlice({
               indicatorLW[nameKey].value) *
             100,
         };
-
         aux.push(obj);
       });
 

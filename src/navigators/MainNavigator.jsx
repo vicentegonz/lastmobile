@@ -35,8 +35,9 @@ export default function MainNavigator() {
   // const [loading, setLoading] = useState(true);
 
   const session = useSelector((state) => state.session.status);
+  const eventStatus = useSelector((state) => state.event.status);
   const dispatch = useDispatch();
-  const stores = useSelector((state) => state.profile.stores);
+
   const firstStore = useSelector((state) => state.profile.firstStore);
   const kpiStatus = useSelector((state) => state.kpi.status);
   const serviceStatus = useSelector((state) => state.services.status);
@@ -57,6 +58,7 @@ export default function MainNavigator() {
       if (firstStore) {
         await dispatch(fetchKPIs(firstStore));
         await dispatch(fetchServices(firstStore));
+        await dispatch(fetchEvents(firstStore));
       }
     }
     validateLandingData();
@@ -69,8 +71,8 @@ export default function MainNavigator() {
 
   // Use this navigator to render different navigators
   // based on the user being logged in or not
-  if (session && kpiStatus && serviceStatus) {
-    stores.map((id) => dispatch(fetchEvents(id)));
+
+  if (session && kpiStatus && serviceStatus && eventStatus) {
     return <AdministratorNavigator />;
   }
 

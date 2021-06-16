@@ -8,7 +8,6 @@ const account = {
         idToken,
       });
       await setCredentials(response.data.access, response.data.refresh);
-
       return response.data;
     } catch (error) {
       return error;
