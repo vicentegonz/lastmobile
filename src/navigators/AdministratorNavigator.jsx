@@ -63,7 +63,7 @@ export default function AdministratorNavigator() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="ArcoPrime">
         <Stack.Screen
-          name="ArcoPrime"
+          name=" "
           component={AdministratorDrawerNavigator}
           options={options}
         />
