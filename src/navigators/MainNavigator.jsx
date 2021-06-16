@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import Login from '@/views/Login.jsx';
 import Loading from '@/views/Loading.jsx';
@@ -6,7 +6,6 @@ import api from '@/api';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser } from '@/store/profileSlice';
 import { fetchEvents } from '@/store/eventSlice';
-import { fetchStores } from '@/store/storeSlice';
 import { fetchServices } from '@/store/servicesSlice';
 import { fetchKPIs } from '@/store/kpiSlice';
 
@@ -33,17 +32,18 @@ export default function MainNavigator() {
     hideSplashScreen();
   }, [applicationReady]);
 
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   const session = useSelector((state) => state.session.status);
   const dispatch = useDispatch();
   const stores = useSelector((state) => state.profile.stores);
-  const firstStore = stores[0];
+  const firstStore = useSelector((state) => state.profile.firstStore);
+  const kpiStatus = useSelector((state) => state.kpi.status);
+  const serviceStatus = useSelector((state) => state.services.status);
 
   useEffect(() => {
     async function validateSession() {
       const response = await api.account.validate();
-      setLoading(false);
       if (response.status === 200) {
         dispatch(fetchUser());
         dispatch(setValidSession(true));
@@ -52,6 +52,16 @@ export default function MainNavigator() {
     validateSession();
   }, [dispatch]);
 
+  useEffect(() => {
+    async function validateLandingData() {
+      if (firstStore) {
+        await dispatch(fetchKPIs(firstStore));
+        await dispatch(fetchServices(firstStore));
+      }
+    }
+    validateLandingData();
+  }, [dispatch, firstStore]);
+
   // Return nothing if application is not ready
   if (!applicationReady) {
     return null;
@@ -59,21 +69,13 @@ export default function MainNavigator() {
 
   // Use this navigator to render different navigators
   // based on the user being logged in or not
-  if (session && !loading) {
-    if (firstStore) {
-      // Now it selects the user's first store.
-      // Later, it should select by default the first one, but change when
-      // we the user selects another store with the landing store picker.
-      dispatch(fetchServices(firstStore));
-      dispatch(fetchKPIs(firstStore));
-    }
+  if (session && kpiStatus && serviceStatus) {
     stores.map((id) => dispatch(fetchEvents(id)));
-    stores.map((id) => dispatch(fetchStores(id)));
     return <AdministratorNavigator />;
   }
 
   // Using the same navigator, just as a placeholder
-  if (!loading && !session) {
+  if (!session) {
     return <Login />;
   }
   return <Loading />;

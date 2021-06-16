@@ -1,9 +1,13 @@
-export default function round(value, precision, fixed) {
-  const multiplier = 10 ** (precision || 0);
-  if (fixed) {
-    return (Math.round(value * multiplier) / multiplier)
+/* eslint-disable no-useless-escape */
+export default function round(value, main) {
+  if (main) {
+    return value
       .toFixed(1)
-      .replace('.', ',');
+      .replace('.', ',')
+      .replace(/\d(?=(\d{3})+\,)/g, '$&.');
   }
-  return Math.round(value * multiplier) / multiplier;
+  return (value * -1)
+    .toFixed(1)
+    .replace('.', ',')
+    .replace(/\d(?=(\d{3})+\,)/g, '$&.');
 }

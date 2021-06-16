@@ -24,9 +24,13 @@ export const servicesSlice = createSlice({
   initialState: {
     storeServices: [],
     mainService: {},
+    status: false,
   },
   reducers: {},
   extraReducers: {
+    [fetchServices.pending]: (state) => {
+      state.status = false;
+    },
     [fetchServices.fulfilled]: (state, action) => {
       const data = action.payload;
       const { today, yesterday, lastWeek } = getDates();
@@ -72,7 +76,7 @@ export const servicesSlice = createSlice({
           id: kpi.id,
           name: nameKey,
           store: kpi.store,
-          value: kpi.value.toFixed(1).replace('.', ','),
+          value: round(kpi.value, true),
           variationYNumber: indicatorY[nameKey].value - kpi.value,
           variationLWNumber: indicatorLW[nameKey].value - kpi.value,
           variationYpercentage:
@@ -96,7 +100,7 @@ export const servicesSlice = createSlice({
       const mainService = {
         name: 'Nota Final',
         id: 'mainService',
-        value: round(mainServiceT, 1, true),
+        value: round(mainServiceT, true),
         variationYNumber: mainServiceY - mainServiceT,
         variationLWNumber: mainServiceLW - mainServiceT,
         variationYpercentage:
@@ -108,6 +112,7 @@ export const servicesSlice = createSlice({
       state.mainService = mainService;
 
       state.storeServices = aux;
+      state.status = true;
     },
   },
 });

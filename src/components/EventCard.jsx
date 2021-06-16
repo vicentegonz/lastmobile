@@ -10,18 +10,20 @@ export default function EventCard({ navigation, event }) {
   return (
     <TouchableOpacity onPress={() => navigation.navigate('Evento')}>
       <WhiteSpace size="md" />
-      <Card style={styles.cardContainer}>
+      <Card style={styles.eventCard}>
         <Card.Header
           title={`Evento ${event.id}`}
-          thumbStyle={styles.thumbIcon}
+          thumbStyle={styles.eventThumbIcon}
           thumb={eventIcon}
         />
         <Card.Body>
-          <View style={styles.cardContent}>
+          <View style={styles.eventContent}>
             {event.data.date !== undefined ? (
-              <Text style={styles.cardText}>{`Fecha: ${event.data.date}`}</Text>
+              <Text style={styles.eventCardText}>
+                {`Fecha: ${event.data.date}`}
+              </Text>
             ) : null}
-            <Text style={styles.cardText}>
+            <Text style={styles.eventCardText}>
               {`Descripción: ${event.data.event}`}
             </Text>
           </View>

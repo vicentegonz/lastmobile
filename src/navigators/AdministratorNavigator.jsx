@@ -7,16 +7,16 @@ import { Image } from 'react-native';
 import useDeviceRegistration from '@/hooks/useDeviceRegistration';
 
 import styles from '@/assets/styles/index.jsx';
+import Logo from '@/assets/ArcoprimeLogo.png';
+
+import LogoutButton from '@/components/LogoutButton.jsx';
+import DrawerButton from '@/components/DrawerButton.jsx';
+
 import Landing from '@/views/Landing.jsx';
 import Events from '@/views/Events.jsx';
 import OneEvent from '@/views/OneEvent.jsx';
-import services from '@/views/Services.jsx';
-
-import DrawerButton from '@/components/DrawerButton.jsx';
-
-import LogoutButton from '@/components/LogoutButton.jsx';
-
-import Logo from '@/assets/ArcoprimeLogo.png';
+import Services from '@/views/Services.jsx';
+import Kpis from '@/views/Kpis.jsx';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -44,7 +44,7 @@ const options = ({ navigation }) => ({
   headerTitleAlign: 'center',
   headerStyle: styles.headerApp,
   headerTintColor: '#FFFFFF',
-  headerTitleStyle: styles.title,
+  headerTitleStyle: styles.headerTitleMain,
   headerRight: () => <DrawerButton navigation={navigation} />,
   headerTitle: () => <Image source={Logo} style={styles.headerLogo} />,
 });
@@ -53,7 +53,7 @@ const options2 = () => ({
   headerTitleAlign: 'center',
   headerStyle: styles.headerApp,
   headerTintColor: '#FFFFFF',
-  headerTitleStyle: styles.titleBG,
+  headerTitleStyle: styles.headerTitle,
 });
 
 export default function AdministratorNavigator() {
@@ -68,7 +68,12 @@ export default function AdministratorNavigator() {
           options={options}
         />
         <Stack.Screen name="Evento" component={OneEvent} options={options2} />
-        <Stack.Screen name="Servicios" component={services} options={options2} />
+        <Stack.Screen
+          name="Servicios"
+          component={Services}
+          options={options2}
+        />
+        <Stack.Screen name="Kpis" component={Kpis} options={options2} />
       </Stack.Navigator>
     </NavigationContainer>
   );

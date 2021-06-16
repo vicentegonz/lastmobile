@@ -3,20 +3,22 @@ import React from 'react';
 import { StatusBar, ScrollView, View, Text } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import EventCard from '@/components/EventCard.jsx';
-import KpiCard from '@/components/KpiCard.jsx';
-import ServiceCard from '@/components/ServiceCard.jsx';
-import styles from '@/assets/styles/index.jsx';
 import { WhiteSpace } from '@ant-design/react-native';
+import styles from '@/assets/styles/index.jsx';
+
+import MainKpiCard from '@/components/MainKpiCard.jsx';
+import EventCard from '@/components/EventCard.jsx';
+import ServiceCard from '@/components/ServiceCard.jsx';
 
 export default function Landing() {
   const navigation = useNavigation();
-  const allKpis = useSelector((state) => state.kpi.storeKpis);
+  const mainKPIs = useSelector((state) => state.kpi.mainKPIs);
+
   const mainService = useSelector((state) => state.services.mainService);
   const lastNEvents = useSelector((state) => state.event.lastNEvents);
 
-  const kpis = allKpis.map((kpi) => (
-    <KpiCard navigation={navigation} kpi={kpi} key={kpi.id} />
+  const kpis = mainKPIs.map((kpi) => (
+    <MainKpiCard navigation={navigation} kpi={kpi} key={kpi.id} />
   ));
 
   const events = lastNEvents.map((event) => (
@@ -24,42 +26,34 @@ export default function Landing() {
   ));
 
   return (
-    <ScrollView style={styles.landingView}>
+    <View style={styles.landingView}>
       <StatusBar backgroundColor="#052D4C" />
       <WhiteSpace size="md" />
 
-      <View style={styles.landingHorizontalViewKPI}>
-        <Text style={styles.landingSubTitle}>KPIs</Text>
-        <ScrollView horizontal style={styles.landingScrollView}>
-          <View>
-            <View style={styles.landingScrollViewChild}>{kpis}</View>
-          </View>
+      <View style={styles.kpiView}>
+        <Text style={styles.kpiTitle}>KPIs</Text>
+        <ScrollView horizontal style={styles.kpiScroll}>
+          <View style={styles.kpiCardsView}>{kpis}</View>
         </ScrollView>
       </View>
 
       <WhiteSpace size="sm" />
-      <View style={styles.landingHorizontalViewService}>
-        <Text style={styles.landingSubTitleService}>
-          Indicadores de servicio
-        </Text>
-        <View>
-          <View>
-            <ServiceCard
-              navigation={navigation}
-              service={mainService}
-              key={mainService.name}
-            />
-          </View>
-        </View>
+      <View style={styles.serviceView}>
+        <Text style={styles.serviceTitle}>Indicadores de servicio</Text>
+        <ServiceCard
+          navigation={navigation}
+          service={mainService}
+          key={mainService.name}
+        />
       </View>
 
       <WhiteSpace size="sm" />
       <View style={styles.landingView}>
-        <Text style={styles.landingEventsTitle}>Últimos eventos</Text>
+        <Text style={styles.eventsTitle}>Últimos eventos</Text>
         <ScrollView>{events}</ScrollView>
       </View>
 
       <WhiteSpace size="md" />
-    </ScrollView>
+    </View>
   );
 }

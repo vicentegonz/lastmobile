@@ -12,7 +12,7 @@ export default function DrawerButton(props) {
         onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}
         style={styles.menuButtom}
       >
-        <Icon name="menu" size="sm" color="black" style={styles.icon} />
+        <Icon name="menu" size="sm" color="black" style={styles.drawerIcon} />
       </Button>
     </View>
   );

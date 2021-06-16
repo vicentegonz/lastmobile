@@ -2,23 +2,23 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { View, Text } from 'react-native';
 import { Card, WhiteSpace } from '@ant-design/react-native';
-import CardText from '@/components/CardText.jsx';
 import styles from '@/assets/styles/index.jsx';
+
+import ServiceCardText from '@/components/ServiceCardText.jsx';
 
 export default function ServiceCardUnclickable({ service }) {
   return (
     <View>
       <Card style={styles.service}>
         <Card.Header title={service.name} />
-        <Card.Body style={styles.kpiCardBody}>
-          <View style={styles.servicesCardContent}>
-            {service.value !== undefined ? (
-              <Text style={styles.serviceCardText}>{service.value}</Text>
-            ) : null}
-          </View>
-          <View style={styles.kpiDifferences}>
+        <Card.Body style={styles.serviceBody}>
+          {service.value !== undefined ? (
+            <Text style={styles.serviceValue}>{service.value}</Text>
+          ) : null}
+
+          <View style={styles.servicesDifferences}>
             <View>
-              <CardText
+              <ServiceCardText
                 variationNumber={service.variationYNumber}
                 variationPercentage={service.variationYpercentage}
                 id={service.name}
@@ -27,7 +27,7 @@ export default function ServiceCardUnclickable({ service }) {
             </View>
 
             <View>
-              <CardText
+              <ServiceCardText
                 variationNumber={service.variationLWNumber}
                 variationPercentage={service.variationLWpercentage}
                 id={service.name}

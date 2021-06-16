@@ -1,10 +1,11 @@
 import React from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import EventContainer from '@/components/EventContainer.jsx';
-import ScreenContainer from '@/components/containers/GeneralScreensContainer.jsx';
 import { useSelector } from 'react-redux';
 import { WhiteSpace } from '@ant-design/react-native';
+import styles from '@/assets/styles/index.jsx';
+
+import EventContainer from '@/components/EventContainer.jsx';
 
 export default function Events() {
   const navigation = useNavigation();
@@ -15,10 +16,11 @@ export default function Events() {
   ));
 
   return (
-    <ScreenContainer>
+    <ScrollView style={styles.generalScreensContainer}>
       <StatusBar backgroundColor="#052D4C" />
+      <WhiteSpace size="sm" />
       {events}
-      <WhiteSpace size="md" />
-    </ScreenContainer>
+      <WhiteSpace size="sm" />
+    </ScrollView>
   );
 }

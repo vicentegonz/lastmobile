@@ -1,12 +1,35 @@
-/* eslint no-param-reassign: ["error", { "props": false }] */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-await-in-loop */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import CLIENT from '@/api/client';
-// import getDates from '@/utils/getDates';
+import getDates from '@/utils/getDates';
+import { processStoreKpis, processMainKpis } from '@/utils/processKpis';
 
 export const fetchKPIs = createAsyncThunk('kpi/fetchKPIs', async (idStore) => {
   try {
-    const response = await CLIENT.get(`/v1/operations/stores/${idStore}/kpis/`);
-    return response.data;
+    const { today } = getDates();
+
+    const response = await CLIENT.get(
+      `/v1/operations/stores/${idStore}/kpis/`,
+      { params: { date: today, size: 15 } },
+    );
+    const auxResponse = response.data.results;
+    const total = response.data.count;
+
+    let page = 2;
+    while (auxResponse.length !== total) {
+      const nextResponse = await CLIENT.get(
+        `/v1/operations/stores/${idStore}/kpis/`,
+        { params: { date: today, size: 15, page } },
+      );
+      nextResponse.data.results.map((kpi) => {
+        auxResponse.push(kpi);
+        return null;
+      });
+
+      page += 1;
+    }
+    return auxResponse;
   } catch (error) {
     return error;
   }
@@ -15,47 +38,38 @@ export const fetchKPIs = createAsyncThunk('kpi/fetchKPIs', async (idStore) => {
 export const kpiSlice = createSlice({
   name: 'kpi',
   initialState: {
-    storeKpis: [],
+    storeKpis: {},
+    status: false,
+    mainKPIs: [],
   },
   reducers: {},
   extraReducers: {
+    [fetchKPIs.pending]: (state) => {
+      state.status = false;
+    },
     [fetchKPIs.fulfilled]: (state, action) => {
       const data = action.payload;
-      // const { today, yesterday, lastWeek } = getDates();
 
-      // Dates hardcoded because there is no real data yet, just seeds.
-      const today = '2021-06-17';
-      const yesterday = '2021-06-16';
-      const lastWeek = '2021-06-10';
+      const { today, yesterday, lastWeek } = getDates();
 
-      const todayKPI = [];
-      const yesterdayKPI = [];
-      const lastWeekKPI = [];
+      const kpiT = [];
+      const kpiY = [];
+      const kpiLW = [];
 
       data.map((kpi) => {
         if (today === kpi.date) {
-          todayKPI.push(kpi);
+          kpiT.push(kpi);
         } else if (yesterday === kpi.date) {
-          yesterdayKPI.push(kpi);
+          kpiY.push(kpi);
         } else if (lastWeek === kpi.date) {
-          lastWeekKPI.push(kpi);
+          kpiLW.push(kpi);
         }
         return undefined;
       });
-      const aux = [];
-      for (let i = 0; i < todayKPI.length; i += 1) {
-        const obj = {
-          id: i,
-          name: todayKPI[i].name,
-          store: todayKPI[i].store,
-          value: todayKPI[i].value,
-          differnceYesterday: todayKPI[i].value - yesterdayKPI[i].value,
-          differnceLastWeek: todayKPI[i].value - lastWeekKPI[i].value,
-        };
 
-        aux.push(obj);
-      }
-      state.storeKpis = aux;
+      state.storeKpis = processStoreKpis(kpiT, kpiY, kpiLW);
+      state.mainKPIs = processMainKpis(kpiT, kpiY, kpiLW);
+      state.status = true;
     },
   },
 });

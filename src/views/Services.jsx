@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { View, StatusBar } from 'react-native';
-import ServiceCardUnclickable from '@/components/ServiceCardUnclickable.jsx';
-import ScreenContainer from '@/components/containers/GeneralScreensContainer.jsx';
+import { View, StatusBar, ScrollView } from 'react-native';
 import styles from '@/assets/styles/index.jsx';
 import { WhiteSpace } from '@ant-design/react-native';
+
+import ServiceCardUnclickable from '@/components/ServiceCardUnclickable.jsx';
 
 export default function Services() {
   const allServices = useSelector((state) => state.services.storeServices);
@@ -14,12 +14,10 @@ export default function Services() {
   ));
 
   return (
-    <ScreenContainer>
+    <ScrollView style={styles.generalScreensContainer}>
       <StatusBar backgroundColor="#052D4C" />
-      <View>
-        <View style={styles.servicesView}>{services}</View>
-      </View>
       <WhiteSpace size="md" />
-    </ScreenContainer>
+      <View style={styles.servicesView}>{services}</View>
+    </ScrollView>
   );
 }
