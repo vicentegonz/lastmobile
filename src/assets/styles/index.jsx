@@ -80,16 +80,12 @@ const styles = StyleSheet.create({
   mainKpiCard: {
     backgroundColor: '#FFFFFF',
     width: Dimensions.get('window').width - 90,
+    flexGrow: 1,
   },
   mainKpiDifferences: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 12,
-  },
-  // More Information
-  moreInformation: {
-    color: '#05426F',
-    alignSelf: 'flex-end',
   },
   // Main Kpi Value (landing and category)
   KpiValue: {

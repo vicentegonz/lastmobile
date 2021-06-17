@@ -1,7 +1,13 @@
 import * as React from 'react';
-import styles from '@/assets/styles/index.jsx';
-import { Text } from 'react-native';
+import { Icon } from '@ant-design/react-native';
 
 export default function MoreInformation() {
-  return <Text style={styles.moreInformation}>Más información</Text>;
+  return (
+    <Icon
+      name="right-square"
+      size="md"
+      color="#05426F"
+      style={{ alignSelf: 'flex-end' }}
+    />
+  );
 }

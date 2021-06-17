@@ -13,10 +13,7 @@ export default function ServiceCard({ navigation, service }) {
     <TouchableOpacity onPress={() => navigation.navigate('Servicios')}>
       <WhiteSpace size="md" />
       <Card style={styles.mainServiceCard}>
-        <Card.Header
-          title={service.name}
-          extra={<MoreInformation message="Más información" />}
-        />
+        <Card.Header title={service.name} extra={<MoreInformation />} />
         <Card.Body style={styles.mainServiceBody}>
           <View style={{ flexDirection: 'row' }}>
             {service.value !== undefined ? (

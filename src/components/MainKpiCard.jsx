@@ -18,7 +18,8 @@ export default function MainKpiCard({ kpi, navigation }) {
       <Card style={styles.mainKpiCard}>
         <Card.Header
           title={kpi.name}
-          extra={<MoreInformation message="Ver categorías" />}
+          extra={<MoreInformation />}
+          style={{ flexGrow: 25 }}
         />
         <Card.Body>
           {kpi.value !== undefined ? (
