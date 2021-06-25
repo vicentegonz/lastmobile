@@ -2,7 +2,7 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Card, WhiteSpace } from '@ant-design/react-native';
-import styles from '@/assets/styles/index.jsx';
+import kpiStyles from '@/assets/styles/kpis';
 
 import MoreInformation from '@/components/MoreInformation.jsx';
 import MainKPIValue from '@/components/MainKPIValue.jsx';
@@ -12,10 +12,10 @@ export default function MainKpiCard({ kpi, navigation }) {
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate('Kpis', { mainKpi: kpi })}
-      style={styles.mainKpiContainer}
+      style={kpiStyles.mainKpiContainer}
     >
       <WhiteSpace size="md" />
-      <Card style={styles.mainKpiCard}>
+      <Card style={kpiStyles.mainKpiCard}>
         <Card.Header
           title={kpi.name}
           extra={<MoreInformation />}
@@ -26,7 +26,7 @@ export default function MainKpiCard({ kpi, navigation }) {
             <MainKPIValue value={kpi.value} unit={kpi.units} />
           ) : null}
           <WhiteSpace size="sm" />
-          <View style={styles.mainKpiDifferences}>
+          <View style={kpiStyles.mainKpiDifferences}>
             <View>
               <MainKpiCardText
                 variationN={kpi.variationYNumber}

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Text } from 'react-native';
-import styles from '@/assets/styles/index.jsx';
+import kpiStyles from '@/assets/styles/kpis';
 import { round } from '@/utils/round';
 
 export default function MainKPIValue({ value, unit }) {
@@ -10,14 +10,14 @@ export default function MainKPIValue({ value, unit }) {
 
   if (unit === 'unidades') {
     text = (
-      <Text style={styles.KpiValue}>{`${round(value, true)} ${unit}`}</Text>
+      <Text style={kpiStyles.KpiValue}>{`${round(value, true)} ${unit}`}</Text>
     );
   } else if (unit === '$') {
     text = (
-      <Text style={styles.KpiValue}>{`${unit} ${round(value, true)}`}</Text>
+      <Text style={kpiStyles.KpiValue}>{`${unit} ${round(value, true)}`}</Text>
     );
   } else {
-    text = <Text style={styles.KpiValue}>{`${round(value, true)}`}</Text>;
+    text = <Text style={kpiStyles.KpiValue}>{`${round(value, true)}`}</Text>;
   }
 
   return text;

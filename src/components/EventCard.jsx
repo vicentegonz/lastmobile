@@ -2,7 +2,7 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { TouchableOpacity, View, Text } from 'react-native';
 import { Card, Icon, WhiteSpace } from '@ant-design/react-native';
-import styles from '@/assets/styles/index.jsx';
+import eventsStyles from '@/assets/styles/events';
 
 export default function EventCard({ navigation, event }) {
   const eventIcon = <Icon name="alert" size="md" color="black" />;
@@ -10,20 +10,20 @@ export default function EventCard({ navigation, event }) {
   return (
     <TouchableOpacity onPress={() => navigation.navigate('Evento')}>
       <WhiteSpace size="md" />
-      <Card style={styles.eventCard}>
+      <Card style={eventsStyles.eventCard}>
         <Card.Header
           title={`Evento ${event.id}`}
-          thumbStyle={styles.eventThumbIcon}
+          thumbStyle={eventsStyles.eventThumbIcon}
           thumb={eventIcon}
         />
         <Card.Body>
-          <View style={styles.eventContent}>
+          <View style={eventsStyles.eventContent}>
             {event.data.date !== undefined ? (
-              <Text style={styles.eventCardText}>
+              <Text style={eventsStyles.eventCardText}>
                 {`Fecha: ${event.data.date}`}
               </Text>
             ) : null}
-            <Text style={styles.eventCardText}>
+            <Text style={eventsStyles.eventCardText}>
               {`Descripción: ${event.data.event}`}
             </Text>
           </View>

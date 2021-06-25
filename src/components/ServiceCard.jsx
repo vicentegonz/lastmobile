@@ -2,7 +2,7 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { TouchableOpacity, View, Text } from 'react-native';
 import { Card, WhiteSpace } from '@ant-design/react-native';
-import styles from '@/assets/styles/index.jsx';
+import servicesStyles from '@/assets/styles/services';
 import MoreInformation from '@/components/MoreInformation.jsx';
 import LinearChart from '@/components/LinearChart.jsx';
 
@@ -12,16 +12,16 @@ export default function ServiceCard({ navigation, service }) {
   return (
     <TouchableOpacity onPress={() => navigation.navigate('Servicios')}>
       <WhiteSpace size="md" />
-      <Card style={styles.mainServiceCard}>
+      <Card style={servicesStyles.mainServiceCard}>
         <Card.Header title={service.name} extra={<MoreInformation />} />
-        <Card.Body style={styles.mainServiceBody}>
-          <View style={{ flexDirection: 'row' }}>
+        <Card.Body style={servicesStyles.mainServiceBody}>
+          <View style={servicesStyles.cardView}>
             {service.value !== undefined ? (
-              <Text style={styles.serviceCardGraphText}>{service.value}</Text>
+              <Text style={servicesStyles.serviceCardGraphText}>{service.value}</Text>
             ) : null}
             <LinearChart datesarray={service.data} />
           </View>
-          <View style={styles.mainServiceDifferences}>
+          <View style={servicesStyles.mainServiceDifferences}>
             <View>
               <ServiceCardText
                 variationNumber={service.variationYNumber}

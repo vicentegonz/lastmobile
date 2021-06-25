@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { WhiteSpace, Pagination } from '@ant-design/react-native';
 import EventCard from '@/components/EventCard.jsx';
 import { incrementByAmount } from '@/store/eventSlice';
+import eventsStyles from '@/assets/styles/events';
 
 export default function Events() {
   const navigation = useNavigation();
@@ -22,27 +23,26 @@ export default function Events() {
     <EventCard key={event.id} navigation={navigation} event={event} />
   ));
   return (
-    <View style={{ flex: 1 }}>
+    <View style={eventsStyles.eventsView}>
       <StatusBar backgroundColor="#052D4C" />
 
       <WhiteSpace size="md" />
-
-      <View style={{ flex: 1 }}>{events}</View>
-      <Pagination
-        style={{
-          marginTop: 10,
-          marginLeft: 10,
-          marginRight: 10,
-        }}
-        total={totalPages}
-        locale={locale}
-        current={Currentpage}
-        onChange={(page) => {
-          dispatch(incrementByAmount(page));
-        }}
-        responsive={false}
-      />
+      {events}
       <WhiteSpace size="md" />
+      <View style={eventsStyles.eventPagination}>
+        <Pagination
+          style={{}}
+          total={totalPages}
+          locale={locale}
+          current={Currentpage}
+          onChange={(page) => {
+            dispatch(incrementByAmount(page));
+          }}
+          responsive
+        />
+        <WhiteSpace size="lg" />
+      </View>
+
     </View>
   );
 }

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import styles from '@/assets/styles/index.jsx';
+import navStyles from '@/assets/styles/navigation';
 import { Button, Icon } from '@ant-design/react-native';
 import { DrawerActions } from '@react-navigation/native';
 import PropTypes from 'prop-types';
@@ -10,9 +10,9 @@ export default function DrawerButton(props) {
     <View>
       <Button
         onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}
-        style={styles.menuButtom}
+        style={navStyles.menuButtom}
       >
-        <Icon name="menu" size="sm" color="black" style={styles.drawerIcon} />
+        <Icon name="menu" size="sm" color="black" style={navStyles.drawerIcon} />
       </Button>
     </View>
   );

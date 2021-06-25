@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Text, View } from 'react-native';
 import { Icon } from '@ant-design/react-native';
 import { round } from '@/utils/round';
+import servicesStyles from '@/assets/styles/services';
 
 export default function ServiceCardText({
   variationNumber,
@@ -18,7 +19,7 @@ export default function ServiceCardText({
   if (variationNumber > 0 && !isZero) {
     tone = 'red';
     icon = (
-      <Icon name="arrow-down" size="md" color={tone} style={{ marginTop: 0 }} />
+      <Icon name="arrow-down" size="md" color={tone} style={servicesStyles.icon} />
     );
     text = (
       <Text
@@ -38,7 +39,7 @@ export default function ServiceCardText({
   } else if (variationNumber < 0 && !isZero) {
     tone = 'green';
     icon = (
-      <Icon name="arrow-up" size="md" color={tone} style={{ marginTop: 0 }} />
+      <Icon name="arrow-up" size="md" color={tone} style={servicesStyles.icon} />
     );
     text = (
       <Text
@@ -71,7 +72,7 @@ export default function ServiceCardText({
     );
   }
   return (
-    <View style={{ flexDirection: 'row', marginLeft: 0 }}>
+    <View style={servicesStyles.cardTextView}>
       {icon}
       {text}
     </View>

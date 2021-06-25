@@ -4,7 +4,8 @@ import { StatusBar, ScrollView, Text, View } from 'react-native';
 import { PropTypes } from 'prop-types';
 import { useSelector } from 'react-redux';
 import { WhiteSpace } from '@ant-design/react-native';
-import styles from '@/assets/styles/index.jsx';
+import styles from '@/assets/styles/index';
+import kpiStyles from '@/assets/styles/kpis';
 
 import KpiCategory from '@/components/KpiCategory.jsx';
 import KpiCategoryTopText from '@/components/KpiCategoryTopText.jsx';
@@ -21,11 +22,11 @@ export default function Kpis({ route }) {
   ));
 
   return (
-    <View style={styles.generalScreensContainer}>
+    <ScrollView style={styles.generalScreensContainer}>
       <StatusBar backgroundColor="#052D4C" />
       <WhiteSpace size="md" />
-      <View style={styles.kpiCategoryTop}>
-        <Text style={styles.kpiName}>{mainKpi.name}</Text>
+      <View style={kpiStyles.kpiCategoryTop}>
+        <Text style={kpiStyles.kpiName}>{mainKpi.name}</Text>
         <WhiteSpace size="lg" />
 
         <KpiCategoryTopText
@@ -45,7 +46,7 @@ export default function Kpis({ route }) {
       </View>
       <WhiteSpace size="md" />
       <ScrollView>{kpis}</ScrollView>
-    </View>
+    </ScrollView>
   );
 }
 

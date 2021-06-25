@@ -6,7 +6,7 @@ import { Image } from 'react-native';
 
 import useDeviceRegistration from '@/hooks/useDeviceRegistration';
 
-import styles from '@/assets/styles/index.jsx';
+import navStyles from '@/assets/styles/navigation';
 import Logo from '@/assets/ArcoprimeLogo.png';
 
 import LogoutButton from '@/components/LogoutButton.jsx';
@@ -42,18 +42,18 @@ function AdministratorDrawerNavigator() {
 
 const options = ({ navigation }) => ({
   headerTitleAlign: 'center',
-  headerStyle: styles.headerApp,
+  headerStyle: navStyles.headerApp,
   headerTintColor: '#FFFFFF',
-  headerTitleStyle: styles.headerTitleMain,
+  headerTitleStyle: navStyles.headerTitleMain,
   headerRight: () => <DrawerButton navigation={navigation} />,
-  headerTitle: () => <Image source={Logo} style={styles.headerLogo} />,
+  headerTitle: () => <Image source={Logo} style={navStyles.headerLogo} />,
 });
 
 const options2 = () => ({
   headerTitleAlign: 'center',
-  headerStyle: styles.headerApp,
+  headerStyle: navStyles.headerApp,
   headerTintColor: '#FFFFFF',
-  headerTitleStyle: styles.headerTitle,
+  headerTitleStyle: navStyles.headerTitle,
 });
 
 export default function AdministratorNavigator() {

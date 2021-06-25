@@ -4,7 +4,7 @@ import { StatusBar, ScrollView, View, Text } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { WhiteSpace } from '@ant-design/react-native';
-import styles from '@/assets/styles/index.jsx';
+import styles from '@/assets/styles/index';
 
 import MainKpiCard from '@/components/MainKpiCard.jsx';
 import EventCard from '@/components/EventCard.jsx';

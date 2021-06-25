@@ -2,7 +2,7 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { View, Text } from 'react-native';
 import { Card, WhiteSpace } from '@ant-design/react-native';
-import styles from '@/assets/styles/index.jsx';
+import kpiStyles from '@/assets/styles/kpis';
 
 import MainKPIValue from '@/components/MainKPIValue.jsx';
 import KpiCategoryCardText from '@/components/KpiCategoryCardText.jsx';
@@ -11,14 +11,14 @@ export default function KpiCategory({ kpi }) {
   return (
     <View>
       <WhiteSpace size="md" />
-      <Card style={styles.categoryKpiCard}>
+      <Card style={kpiStyles.categoryKpiCard}>
         <Card.Header title={kpi.category} />
         <Card.Body>
           {kpi.value !== undefined ? (
             <MainKPIValue value={kpi.value} unit={kpi.units} />
           ) : null}
           <WhiteSpace size="sm" />
-          <View style={styles.categoryKpiDifferences}>
+          <View style={kpiStyles.categoryKpiDifferences}>
             <View>
               <Text style={{ fontSize: 16 }}>Ayer</Text>
               <KpiCategoryCardText
@@ -29,7 +29,7 @@ export default function KpiCategory({ kpi }) {
             </View>
 
             <View>
-              <Text style={{ fontSize: 16 }}>Semana pasada</Text>
+              <Text style={kpiStyles.categoryText}>Semana pasada</Text>
               <KpiCategoryCardText
                 variationN={kpi.variationLWNumber}
                 variationP={kpi.variationLWpercentage}

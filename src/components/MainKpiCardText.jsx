@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { Text, View } from 'react-native';
 import { Icon } from '@ant-design/react-native';
 import { round } from '@/utils/round';
+import kpiStyles from '@/assets/styles/kpis';
 
 export default function MainKpiCardText({ variationN, variationP }) {
   let color;
@@ -23,7 +24,7 @@ export default function MainKpiCardText({ variationN, variationP }) {
   }
 
   return (
-    <View style={{ flexDirection: 'row' }}>
+    <View style={kpiStyles.mainKpiView}>
       {icon}
       <Text
         style={{

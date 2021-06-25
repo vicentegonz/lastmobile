@@ -2,7 +2,7 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { View, Text } from 'react-native';
 import { Card, WhiteSpace } from '@ant-design/react-native';
-import styles from '@/assets/styles/index.jsx';
+import servicesStyles from '@/assets/styles/services';
 import LinearChart from '@/components/LinearChart.jsx';
 
 import ServiceCardText from '@/components/ServiceCardText.jsx';
@@ -10,16 +10,16 @@ import ServiceCardText from '@/components/ServiceCardText.jsx';
 export default function ServiceCardUnclickable({ service }) {
   return (
     <View>
-      <Card style={styles.service}>
+      <Card style={servicesStyles.service}>
         <Card.Header title={service.name} />
-        <Card.Body style={styles.serviceBody}>
-          <View style={{ flexDirection: 'row' }}>
+        <Card.Body style={servicesStyles.serviceBody}>
+          <View style={servicesStyles.cardView}>
             {service.value !== undefined ? (
-              <Text style={styles.serviceCardGraphText}>{service.value}</Text>
+              <Text style={servicesStyles.serviceCardGraphText}>{service.value}</Text>
             ) : null}
             <LinearChart datesarray={service.data} />
           </View>
-          <View style={styles.servicesDifferences}>
+          <View style={servicesStyles.servicesDifferences}>
             <View>
               <ServiceCardText
                 variationNumber={service.variationYNumber}
