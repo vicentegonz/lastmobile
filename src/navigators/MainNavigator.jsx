@@ -38,7 +38,7 @@ export default function MainNavigator() {
   const eventStatus = useSelector((state) => state.event.status);
   const dispatch = useDispatch();
 
-  const firstStore = useSelector((state) => state.profile.firstStore);
+  const currentStore = useSelector((state) => state.profile.currentStore);
   const kpiStatus = useSelector((state) => state.kpi.status);
   const serviceStatus = useSelector((state) => state.services.status);
 
@@ -55,14 +55,14 @@ export default function MainNavigator() {
 
   useEffect(() => {
     async function validateLandingData() {
-      if (firstStore) {
-        await dispatch(fetchKPIs(firstStore));
-        await dispatch(fetchServices(firstStore));
-        await dispatch(fetchEvents(firstStore));
+      if (currentStore) {
+        await dispatch(fetchKPIs(currentStore));
+        await dispatch(fetchServices(currentStore));
+        await dispatch(fetchEvents(currentStore));
       }
     }
     validateLandingData();
-  }, [dispatch, firstStore]);
+  }, [dispatch, currentStore]);
 
   // Return nothing if application is not ready
   if (!applicationReady) {

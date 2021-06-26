@@ -19,7 +19,7 @@ export const profileSlice = createSlice({
     givenName: null,
     picture: null,
     stores: [],
-    firstStore: undefined,
+    currentStore: undefined,
   },
   reducers: {},
   extraReducers: {
@@ -30,9 +30,9 @@ export const profileSlice = createSlice({
       state.givenName = data.givenName;
       state.picture = data.picture;
       state.stores = data.stores;
-      if (!state.firstStore) {
+      if (!state.currentStore && data.stores) {
         // eslint-disable-next-line prefer-destructuring
-        state.firstStore = data.stores[1];
+        state.currentStore = data.stores[1];
       }
     },
   },
