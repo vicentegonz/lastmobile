@@ -61,33 +61,33 @@ export const servicesSlice = createSlice({
       let s6 = 0;
       let p6 = 0;
 
-      data.map((kpi) => {
-        if (today === kpi.date) {
-          indicatorT[kpi.name] = kpi;
-        } else if (yesterday === kpi.date) {
-          indicatorY[kpi.name] = kpi;
-        } else if (date2 === kpi.date) {
-          indicatord2[kpi.name] = kpi;
-          s2 += kpi.value * kpi.amountOfSurveys;
-          p2 += kpi.amountOfSurveys;
-        } else if (date3 === kpi.date) {
-          indicatord3[kpi.name] = kpi;
-          s3 += kpi.value * kpi.amountOfSurveys;
-          p3 += kpi.amountOfSurveys;
-        } else if (date4 === kpi.date) {
-          indicatord4[kpi.name] = kpi;
-          s4 += kpi.value * kpi.amountOfSurveys;
-          p4 += kpi.amountOfSurveys;
-        } else if (date5 === kpi.date) {
-          indicatord5[kpi.name] = kpi;
-          s5 += kpi.value * kpi.amountOfSurveys;
-          p5 += kpi.amountOfSurveys;
-        } else if (date6 === kpi.date) {
-          indicatord6[kpi.name] = kpi;
-          s6 += kpi.value * kpi.amountOfSurveys;
-          p6 += kpi.amountOfSurveys;
-        } else if (lastWeek === kpi.date) {
-          indicatorLW[kpi.name] = kpi;
+      data.map((servicios) => {
+        if (today === servicios.date) {
+          indicatorT[servicios.name] = servicios;
+        } else if (yesterday === servicios.date) {
+          indicatorY[servicios.name] = servicios;
+        } else if (date2 === servicios.date) {
+          indicatord2[servicios.name] = servicios;
+          s2 += servicios.value * servicios.amountOfSurveys;
+          p2 += servicios.amountOfSurveys;
+        } else if (date3 === servicios.date) {
+          indicatord3[servicios.name] = servicios;
+          s3 += servicios.value * servicios.amountOfSurveys;
+          p3 += servicios.amountOfSurveys;
+        } else if (date4 === servicios.date) {
+          indicatord4[servicios.name] = servicios;
+          s4 += servicios.value * servicios.amountOfSurveys;
+          p4 += servicios.amountOfSurveys;
+        } else if (date5 === servicios.date) {
+          indicatord5[servicios.name] = servicios;
+          s5 += servicios.value * servicios.amountOfSurveys;
+          p5 += servicios.amountOfSurveys;
+        } else if (date6 === servicios.date) {
+          indicatord6[servicios.name] = servicios;
+          s6 += servicios.value * servicios.amountOfSurveys;
+          p6 += servicios.amountOfSurveys;
+        } else if (lastWeek === servicios.date) {
+          indicatorLW[servicios.name] = servicios;
         }
         return undefined;
       });
@@ -102,9 +102,9 @@ export const servicesSlice = createSlice({
       let ponderadosLW = 0;
       let surveysLW = 0;
 
-      Object.entries(indicatorT).forEach(([nameKey, kpi]) => {
-        ponderadosT += kpi.value * kpi.amountOfSurveys;
-        surveysT += kpi.amountOfSurveys;
+      Object.entries(indicatorT).forEach(([nameKey, servicios]) => {
+        ponderadosT += servicios.value * servicios.amountOfSurveys;
+        surveysT += servicios.amountOfSurveys;
 
         ponderadosY
           += indicatorY[nameKey].value * indicatorY[nameKey].amountOfSurveys;
@@ -115,10 +115,10 @@ export const servicesSlice = createSlice({
         surveysLW += indicatorLW[nameKey].amountOfSurveys;
 
         const obj = {
-          id: kpi.id,
+          id: servicios.id,
           name: nameKey,
-          store: kpi.store,
-          value: round(kpi.value, 2),
+          store: servicios.store,
+          value: round(servicios.value, 2),
           data: {
             v1: round(indicatorLW[nameKey].value, 2),
             v2: round(indicatord6[nameKey].value, 2),
@@ -129,15 +129,15 @@ export const servicesSlice = createSlice({
             v7: round(indicatorY[nameKey].value, 2),
             v8: round(indicatorT[nameKey].value, 2),
           },
-          variationYNumber: indicatorY[nameKey].value - kpi.value,
-          variationLWNumber: indicatorLW[nameKey].value - kpi.value,
+          variationYNumber: indicatorY[nameKey].value - servicios.value,
+          variationLWNumber: indicatorLW[nameKey].value - servicios.value,
           variationYpercentage:
-            ((indicatorY[nameKey].value - kpi.value)
+            ((indicatorY[nameKey].value - servicios.value)
               / indicatorY[nameKey].value)
             * 100,
 
           variationLWpercentage:
-            ((indicatorLW[nameKey].value - kpi.value)
+            ((indicatorLW[nameKey].value - servicios.value)
               / indicatorLW[nameKey].value)
             * 100,
         };
