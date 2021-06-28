@@ -17,10 +17,14 @@ export default function ServiceCard({ navigation, service }) {
         <Card.Body style={servicesStyles.mainServiceBody}>
           <View style={servicesStyles.cardView}>
             {service.value !== undefined ? (
-              <Text style={servicesStyles.serviceCardGraphText}>{service.value}</Text>
+              <Text style={servicesStyles.serviceCardGraphText}>
+                {service.value}
+              </Text>
             ) : null}
             <LinearChart datesarray={service.data} />
           </View>
+          <WhiteSpace size="md" />
+
           <View style={servicesStyles.mainServiceDifferences}>
             <View>
               <ServiceCardText

@@ -1,4 +1,5 @@
-/* eslint no-param-reassign: ["error", { "props": false }] */
+/* eslint-disable no-param-reassign */
+
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import CLIENT from '@/api/client';
 
@@ -19,7 +20,11 @@ export const storeSlice = createSlice({
   initialState: {
     storeObjects: {},
   },
-  reducers: {},
+  reducers: {
+    clear: (state) => {
+      state.storeObjects = {};
+    },
+  },
   extraReducers: {
     [fetchStores.fulfilled]: (state, action) => {
       const data = action.payload;
@@ -28,4 +33,5 @@ export const storeSlice = createSlice({
   },
 });
 
+export const { clear } = storeSlice.actions;
 export default storeSlice.reducer;

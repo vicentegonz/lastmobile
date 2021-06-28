@@ -14,7 +14,6 @@ import DrawerButton from '@/components/DrawerButton.jsx';
 
 import Landing from '@/views/Landing.jsx';
 import Events from '@/views/Events.jsx';
-import OneEvent from '@/views/OneEvent.jsx';
 import Services from '@/views/Services.jsx';
 import Kpis from '@/views/Kpis.jsx';
 
@@ -67,7 +66,6 @@ export default function AdministratorNavigator() {
           component={AdministratorDrawerNavigator}
           options={options}
         />
-        <Stack.Screen name="Evento" component={OneEvent} options={options2} />
         <Stack.Screen
           name="Servicios"
           component={Services}

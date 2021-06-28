@@ -4,17 +4,17 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Text, View } from 'react-native';
 import { Icon } from '@ant-design/react-native';
-import { round } from '@/utils/round';
+import round from '@/utils/round';
 
 export default function KpiCategoryCardText({ variationN, variationP, unit }) {
   let color;
   let icon;
   let text;
 
-  const isZero = round(variationN, false) === ('-0,0' || '0,0');
+  const isZero = round(variationN, 1) === ('-0,0' || '0,0');
 
   if (variationN > 0 && !isZero) {
-    color = 'red';
+    color = '#ff4d4f';
     icon = (
       <Icon
         name="arrow-down"
@@ -24,7 +24,7 @@ export default function KpiCategoryCardText({ variationN, variationP, unit }) {
       />
     );
   } else if (variationN < 0 && !isZero) {
-    color = 'green';
+    color = '#52c41a';
     icon = (
       <Icon
         name="arrow-up"
@@ -58,7 +58,7 @@ export default function KpiCategoryCardText({ variationN, variationP, unit }) {
             fontSize: 20,
           }}
         >
-          {`${round(variationN, false)} ${unit}`}
+          {`${round(variationN, 1)}`}
         </Text>
         <Text
           style={{
@@ -67,7 +67,7 @@ export default function KpiCategoryCardText({ variationN, variationP, unit }) {
             fontSize: 20,
           }}
         >
-          {`${round(variationP, false)}%`}
+          {`(${round(variationP, 1)}%)`}
         </Text>
       </View>
     );
@@ -81,7 +81,7 @@ export default function KpiCategoryCardText({ variationN, variationP, unit }) {
             fontSize: 20,
           }}
         >
-          {`${unit} ${round(variationN, false)}`}
+          {`${unit} ${round(variationN, 1)}`}
         </Text>
         <Text
           style={{
@@ -90,7 +90,7 @@ export default function KpiCategoryCardText({ variationN, variationP, unit }) {
             fontSize: 20,
           }}
         >
-          {`${round(variationP, false)}%`}
+          {`(${round(variationP, 1)}%)`}
         </Text>
       </View>
     );
@@ -104,7 +104,7 @@ export default function KpiCategoryCardText({ variationN, variationP, unit }) {
             fontSize: 20,
           }}
         >
-          {`${round(variationN, false)}`}
+          {`${round(variationN, 1)}`}
         </Text>
         <Text
           style={{
@@ -113,7 +113,7 @@ export default function KpiCategoryCardText({ variationN, variationP, unit }) {
             fontSize: 20,
           }}
         >
-          {`${round(variationP, false)}%`}
+          {`(${round(variationP, 1)}%)`}
         </Text>
       </View>
     );

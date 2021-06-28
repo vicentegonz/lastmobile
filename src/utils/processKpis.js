@@ -1,4 +1,3 @@
-/* eslint-disable operator-linebreak */
 /* eslint-disable no-param-reassign */
 /* eslint-disable array-callback-return */
 export const processStoreKpis = (kpiT, kpiY, kpiLW) => {
@@ -23,15 +22,13 @@ export const processStoreKpis = (kpiT, kpiY, kpiLW) => {
   kpiY.map((kpi) => {
     const diferencia = kpi.value - aux[kpi.name][kpi.category].value;
     aux[kpi.name][kpi.category].variationYNumber = diferencia;
-    aux[kpi.name][kpi.category].variationYpercentage =
-      (diferencia / kpi.value) * 100;
+    aux[kpi.name][kpi.category].variationYpercentage = (diferencia / kpi.value) * 100;
   });
 
   kpiLW.map((kpi) => {
     const diferencia = kpi.value - aux[kpi.name][kpi.category].value;
     aux[kpi.name][kpi.category].variationLWNumber = diferencia;
-    aux[kpi.name][kpi.category].variationLWpercentage =
-      (diferencia / kpi.value) * 100;
+    aux[kpi.name][kpi.category].variationLWpercentage = (diferencia / kpi.value) * 100;
   });
 
   return aux;

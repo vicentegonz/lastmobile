@@ -3,7 +3,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Text, View } from 'react-native';
 import { Icon } from '@ant-design/react-native';
-import { round } from '@/utils/round';
+import round from '@/utils/round';
 import servicesStyles from '@/assets/styles/services';
 
 export default function ServiceCardText({
@@ -14,12 +14,17 @@ export default function ServiceCardText({
   let icon;
   let text;
 
-  const isZero = round(variationNumber, false) === ('-0,0' || '0,0');
+  const isZero = round(variationNumber, 2) === ('-0,0' || '0,0');
 
   if (variationNumber > 0 && !isZero) {
-    tone = 'red';
+    tone = '#ff4d4f';
     icon = (
-      <Icon name="arrow-down" size="md" color={tone} style={servicesStyles.icon} />
+      <Icon
+        name="arrow-down"
+        size="md"
+        color={tone}
+        style={servicesStyles.icon}
+      />
     );
     text = (
       <Text
@@ -30,16 +35,18 @@ export default function ServiceCardText({
           fontFamily: 'robotoBold',
         }}
       >
-        {`${round(variationNumber, false)} (${round(
-          variationPercentage,
-          false,
-        )}%)`}
+        {`${round(variationNumber, 2)} (${round(variationPercentage, 1)}%)`}
       </Text>
     );
   } else if (variationNumber < 0 && !isZero) {
-    tone = 'green';
+    tone = '#52c41a';
     icon = (
-      <Icon name="arrow-up" size="md" color={tone} style={servicesStyles.icon} />
+      <Icon
+        name="arrow-up"
+        size="md"
+        color={tone}
+        style={servicesStyles.icon}
+      />
     );
     text = (
       <Text
@@ -50,10 +57,7 @@ export default function ServiceCardText({
           fontFamily: 'robotoBold',
         }}
       >
-        {`${round(variationNumber, false)} (${round(
-          variationPercentage,
-          false,
-        )}%)`}
+        {`${round(variationNumber, 2)} (${round(variationPercentage, 1)}%)`}
       </Text>
     );
   } else {

@@ -72,11 +72,23 @@ export const eventSlice = createSlice({
       state.page = action.payload;
       state.pageEvents = state.storeEvents[action.payload];
     },
+    clear: (state) => {
+      state.storeEvents = [];
+      state.lastNEvents = [];
+      state.status = false;
+      state.pageEvents = [];
+      state.page = 1;
+      state.totalPages = undefined;
+    },
   },
   extraReducers: {
     [fetchNextEvents.fulfilled]: (state, action) => {
       const data = action.payload;
       state.pageEvents = data.results;
+    },
+
+    [fetchEvents.pending]: (state) => {
+      state.status = false;
     },
     [fetchEvents.fulfilled]: (state, action) => {
       const data = action.payload;
@@ -90,5 +102,5 @@ export const eventSlice = createSlice({
   },
 });
 
+export const { incrementByAmount, clear } = eventSlice.actions;
 export default eventSlice.reducer;
-export const { incrementByAmount } = eventSlice.actions;

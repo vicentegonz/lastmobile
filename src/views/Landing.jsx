@@ -37,7 +37,7 @@ export default function Landing() {
         </ScrollView>
       </View>
 
-      <WhiteSpace size="sm" />
+      <WhiteSpace size="md" />
       <View style={styles.serviceView}>
         <Text style={styles.serviceTitle}>Indicadores de servicio</Text>
         <ServiceCard
@@ -47,7 +47,7 @@ export default function Landing() {
         />
       </View>
 
-      <WhiteSpace size="sm" />
+      <WhiteSpace size="md" />
       <View style={styles.landingView}>
         <Text style={styles.eventsTitle}>Últimos eventos</Text>
         <ScrollView>{events}</ScrollView>

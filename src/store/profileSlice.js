@@ -21,7 +21,16 @@ export const profileSlice = createSlice({
     stores: [],
     currentStore: undefined,
   },
-  reducers: {},
+  reducers: {
+    clear: (state) => {
+      state.email = null;
+      state.familyName = null;
+      state.givenName = null;
+      state.picture = null;
+      state.stores = [];
+      state.currentStore = undefined;
+    },
+  },
   extraReducers: {
     [fetchUser.fulfilled]: (state, action) => {
       const data = action.payload;
@@ -30,12 +39,15 @@ export const profileSlice = createSlice({
       state.givenName = data.givenName;
       state.picture = data.picture;
       state.stores = data.stores;
-      if (!state.currentStore && data.stores) {
+      if (!state.currentStore && data.stores.length === 0) {
+        state.currentStore = 'empty';
+      } else if (!state.currentStore && data.stores) {
         // eslint-disable-next-line prefer-destructuring
-        state.currentStore = data.stores[1];
+        state.currentStore = data.stores[0];
       }
     },
   },
 });
 
+export const { clear, clearCurrentStore } = profileSlice.actions;
 export default profileSlice.reducer;

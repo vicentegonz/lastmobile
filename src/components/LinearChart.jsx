@@ -39,7 +39,7 @@ export default function LinearChart(datesarray) {
   return (
     <LineChart
       data={data}
-      width={screenWidth - 110}
+      width={screenWidth - 130}
       height={80}
       chartConfig={chartConfig}
       withHorizontalLabels={false}

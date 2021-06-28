@@ -3,13 +3,13 @@ import * as SplashScreen from 'expo-splash-screen';
 import Login from '@/views/Login.jsx';
 import Loading from '@/views/Loading.jsx';
 import api from '@/api';
+import { removeCredentials } from '@/utils/credentials';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUser } from '@/store/profileSlice';
 import { fetchEvents } from '@/store/eventSlice';
 import { fetchServices } from '@/store/servicesSlice';
 import { fetchKPIs } from '@/store/kpiSlice';
-
-import { setValidSession } from '@/store/session';
+import { setValidSession, setLoginValue } from '@/store/session';
+import { clear as clearProfile, fetchUser } from '@/store/profileSlice';
 import AdministratorNavigator from './AdministratorNavigator.jsx';
 
 export default function MainNavigator() {
@@ -32,8 +32,6 @@ export default function MainNavigator() {
     hideSplashScreen();
   }, [applicationReady]);
 
-  // const [loading, setLoading] = useState(true);
-
   const session = useSelector((state) => state.session.status);
   const eventStatus = useSelector((state) => state.event.status);
   const dispatch = useDispatch();
@@ -55,11 +53,18 @@ export default function MainNavigator() {
 
   useEffect(() => {
     async function validateLandingData() {
-      if (currentStore) {
+      if (currentStore !== 'empty' && currentStore !== undefined) {
         await dispatch(fetchKPIs(currentStore));
         await dispatch(fetchServices(currentStore));
         await dispatch(fetchEvents(currentStore));
       }
+      if (currentStore === 'empty') {
+        await removeCredentials();
+        await dispatch(setValidSession(false));
+        await dispatch(clearProfile());
+        await dispatch(setLoginValue('sinTienda'));
+      }
+      return null;
     }
     validateLandingData();
   }, [dispatch, currentStore]);
@@ -71,14 +76,13 @@ export default function MainNavigator() {
 
   // Use this navigator to render different navigators
   // based on the user being logged in or not
-
   if (session && kpiStatus && serviceStatus && eventStatus) {
     return <AdministratorNavigator />;
   }
-
   // Using the same navigator, just as a placeholder
   if (!session) {
     return <Login />;
   }
+
   return <Loading />;
 }

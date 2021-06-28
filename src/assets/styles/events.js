@@ -6,6 +6,7 @@ const eventsStyles = StyleSheet.create({
   eventPagination: {
     position: 'absolute',
     width: '100%',
+    paddingTop: 20,
     paddingLeft: 20,
     paddingRight: 20,
     bottom: 0,

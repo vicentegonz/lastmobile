@@ -42,7 +42,13 @@ export const kpiSlice = createSlice({
     status: false,
     mainKPIs: [],
   },
-  reducers: {},
+  reducers: {
+    clear: (state) => {
+      state.storeKpis = {};
+      state.status = false;
+      state.mainKPIs = [];
+    },
+  },
   extraReducers: {
     [fetchKPIs.pending]: (state) => {
       state.status = false;
@@ -74,4 +80,5 @@ export const kpiSlice = createSlice({
   },
 });
 
+export const { clear } = kpiSlice.actions;
 export default kpiSlice.reducer;

@@ -1,10 +1,9 @@
 /* eslint-disable object-curly-newline */
-/* eslint-disable operator-linebreak */
 /* eslint-disable no-param-reassign */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import CLIENT from '@/api/client';
 import getDates from '@/utils/getDates';
-import { round1 } from '@/utils/round';
+import round from '@/utils/round';
 
 export const fetchServices = createAsyncThunk(
   'services/fetchServices',
@@ -27,15 +26,20 @@ export const servicesSlice = createSlice({
     mainService: {},
     status: false,
   },
-  reducers: {},
+  reducers: {
+    clear: (state) => {
+      state.storeServices = [];
+      state.mainService = {};
+      state.status = false;
+    },
+  },
   extraReducers: {
     [fetchServices.pending]: (state) => {
       state.status = false;
     },
     [fetchServices.fulfilled]: (state, action) => {
       const data = action.payload;
-      const { today, yesterday, date2, date3, date4, date5, date6, lastWeek } =
-        getDates();
+      const { today, yesterday, date2, date3, date4, date5, date6, lastWeek } = getDates();
 
       const indicatorT = {};
       const indicatorY = {};
@@ -102,40 +106,40 @@ export const servicesSlice = createSlice({
         ponderadosT += kpi.value * kpi.amountOfSurveys;
         surveysT += kpi.amountOfSurveys;
 
-        ponderadosY +=
-          indicatorY[nameKey].value * indicatorY[nameKey].amountOfSurveys;
+        ponderadosY
+          += indicatorY[nameKey].value * indicatorY[nameKey].amountOfSurveys;
         surveysY += indicatorY[nameKey].amountOfSurveys;
 
-        ponderadosLW +=
-          indicatorLW[nameKey].value * indicatorLW[nameKey].amountOfSurveys;
+        ponderadosLW
+          += indicatorLW[nameKey].value * indicatorLW[nameKey].amountOfSurveys;
         surveysLW += indicatorLW[nameKey].amountOfSurveys;
 
         const obj = {
           id: kpi.id,
           name: nameKey,
           store: kpi.store,
-          value: kpi.value.toFixed(1).replace('.', ','),
+          value: round(kpi.value, 2),
           data: {
-            v1: round1(indicatorLW[nameKey].value, 1, true),
-            v2: round1(indicatord6[nameKey].value, 1, true),
-            v3: round1(indicatord5[nameKey].value, 1, true),
-            v4: round1(indicatord4[nameKey].value, 1, true),
-            v5: round1(indicatord3[nameKey].value, 1, true),
-            v6: round1(indicatord2[nameKey].value, 1, true),
-            v7: round1(indicatorY[nameKey].value, 1, true),
-            v8: round1(indicatorT[nameKey].value, 1, true),
+            v1: round(indicatorLW[nameKey].value, 2),
+            v2: round(indicatord6[nameKey].value, 2),
+            v3: round(indicatord5[nameKey].value, 2),
+            v4: round(indicatord4[nameKey].value, 2),
+            v5: round(indicatord3[nameKey].value, 2),
+            v6: round(indicatord2[nameKey].value, 2),
+            v7: round(indicatorY[nameKey].value, 2),
+            v8: round(indicatorT[nameKey].value, 2),
           },
           variationYNumber: indicatorY[nameKey].value - kpi.value,
           variationLWNumber: indicatorLW[nameKey].value - kpi.value,
           variationYpercentage:
-            ((indicatorY[nameKey].value - kpi.value) /
-              indicatorY[nameKey].value) *
-            100,
+            ((indicatorY[nameKey].value - kpi.value)
+              / indicatorY[nameKey].value)
+            * 100,
 
           variationLWpercentage:
-            ((indicatorLW[nameKey].value - kpi.value) /
-              indicatorLW[nameKey].value) *
-            100,
+            ((indicatorLW[nameKey].value - kpi.value)
+              / indicatorLW[nameKey].value)
+            * 100,
         };
         aux.push(obj);
       });
@@ -152,16 +156,16 @@ export const servicesSlice = createSlice({
       const mainService = {
         name: 'Nota Final',
         id: 'mainService',
-        value: round1(mainServiceT, 1, true),
+        value: round(mainServiceT, 2),
         data: {
-          v1: round1(mainServiceLW, 2, true),
-          v2: round1(mainServiced6, 2, true),
-          v3: round1(mainServiced5, 2, true),
-          v4: round1(mainServiced4, 2, true),
-          v5: round1(mainServiced3, 2, true),
-          v6: round1(mainServiced2, 2, true),
-          v7: round1(mainServiceY, 2, true),
-          v8: round1(mainServiceT, 2, true),
+          v1: round(mainServiceLW, 2),
+          v2: round(mainServiced6, 2),
+          v3: round(mainServiced5, 2),
+          v4: round(mainServiced4, 2),
+          v5: round(mainServiced3, 2),
+          v6: round(mainServiced2, 2),
+          v7: round(mainServiceY, 2),
+          v8: round(mainServiceT, 2),
         },
         variationYNumber: mainServiceY - mainServiceT,
         variationLWNumber: mainServiceLW - mainServiceT,
@@ -179,4 +183,5 @@ export const servicesSlice = createSlice({
   },
 });
 
+export const { clear } = servicesSlice.actions;
 export default servicesSlice.reducer;

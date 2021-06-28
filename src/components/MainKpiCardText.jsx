@@ -4,7 +4,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Text, View } from 'react-native';
 import { Icon } from '@ant-design/react-native';
-import { round } from '@/utils/round';
+import round from '@/utils/round';
 import kpiStyles from '@/assets/styles/kpis';
 
 export default function MainKpiCardText({ variationN, variationP }) {
@@ -12,10 +12,10 @@ export default function MainKpiCardText({ variationN, variationP }) {
   let icon;
 
   if (variationN > 0) {
-    color = 'red';
+    color = '#ff4d4f';
     icon = <Icon name="arrow-down" size="md" color={color} />;
   } else if (variationN < 0) {
-    color = 'green';
+    color = '#52c41a';
     icon = <Icon name="arrow-up" size="md" color={color} />;
   } else {
     color = 'black';
@@ -34,7 +34,7 @@ export default function MainKpiCardText({ variationN, variationP }) {
           fontSize: 20,
         }}
       >
-        {`${round(variationP, false)}%`}
+        {`${round(variationP, 1)}%`}
       </Text>
     </View>
   );

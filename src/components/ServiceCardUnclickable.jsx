@@ -15,10 +15,15 @@ export default function ServiceCardUnclickable({ service }) {
         <Card.Body style={servicesStyles.serviceBody}>
           <View style={servicesStyles.cardView}>
             {service.value !== undefined ? (
-              <Text style={servicesStyles.serviceCardGraphText}>{service.value}</Text>
+              <Text style={servicesStyles.serviceCardGraphText}>
+                {service.value}
+              </Text>
             ) : null}
             <LinearChart datesarray={service.data} />
           </View>
+
+          <WhiteSpace size="md" />
+
           <View style={servicesStyles.servicesDifferences}>
             <View>
               <ServiceCardText

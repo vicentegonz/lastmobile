@@ -8,14 +8,26 @@ import {
 } from '@react-navigation/drawer';
 import { removeCredentials } from '@/utils/credentials';
 import { useDispatch } from 'react-redux';
-import { setValidSession } from '@/store/session';
+
+import { setValidSession, clear as clearSession } from '@/store/session';
+import { clear as clearEvent } from '@/store/eventSlice';
+import { clear as clearStore } from '@/store/storeSlice';
+import { clear as clearServices } from '@/store/servicesSlice';
+import { clear as clearProfile } from '@/store/profileSlice';
+import { clear as clearKpi } from '@/store/kpiSlice';
 
 export default function LogoutButton({ state, navigation, descriptors }) {
   const dispatch = useDispatch();
 
   const handler = async () => {
     await removeCredentials();
-    dispatch(setValidSession(false));
+    await dispatch(setValidSession(false));
+    await dispatch(clearSession());
+    await dispatch(clearEvent());
+    await dispatch(clearStore());
+    await dispatch(clearServices());
+    await dispatch(clearProfile());
+    await dispatch(clearKpi());
   };
   return (
     <DrawerContentScrollView

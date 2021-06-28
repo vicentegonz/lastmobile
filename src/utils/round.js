@@ -1,23 +1,32 @@
 /* eslint-disable no-useless-escape */
-export function round1(value, precision, fixed) {
-  const multiplier = 10 ** (precision || 0);
-  if (fixed) {
-    return (Math.round(value * multiplier) / multiplier)
-      .toFixed(1)
-      .replace('.', ',');
+function zeroDecimal(value) {
+  if (value.slice(-2, -1) === '00') {
+    return value.slice(0, -2);
   }
-  return Math.round(value * multiplier) / multiplier;
+  if (value.slice(-2) === ',0') {
+    return value.slice(0, -2);
+  }
+  if (value.slice(-1) === '0') {
+    return value.slice(0, -1);
+  }
+  return value;
 }
 
-export function round(value, main) {
-  if (main) {
-    return value
-      .toFixed(1)
-      .replace('.', ',')
-      .replace(/\d(?=(\d{3})+\,)/g, '$&.');
+function stripMinus(value) {
+  if (value.slice(0, 1) === '-') {
+    return value.slice(1);
   }
-  return (value * -1)
-    .toFixed(1)
-    .replace('.', ',')
-    .replace(/\d(?=(\d{3})+\,)/g, '$&.');
+  return value;
+}
+
+export default function round(value, precision) {
+  const number = stripMinus(
+    zeroDecimal(
+      value
+        .toFixed(precision)
+        .replace('.', ',')
+        .replace(/\d(?=(\d{3})+\,)/g, '$&.'),
+    ),
+  );
+  return number;
 }

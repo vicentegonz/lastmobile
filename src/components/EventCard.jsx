@@ -1,20 +1,21 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
-import { TouchableOpacity, View, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import { Card, Icon, WhiteSpace } from '@ant-design/react-native';
 import eventsStyles from '@/assets/styles/events';
 
-export default function EventCard({ navigation, event }) {
+export default function EventCard({ event }) {
   const eventIcon = <Icon name="alert" size="md" color="black" />;
 
   return (
-    <TouchableOpacity onPress={() => navigation.navigate('Evento')}>
+    <View>
       <WhiteSpace size="md" />
       <Card style={eventsStyles.eventCard}>
         <Card.Header
           title={`Evento ${event.id}`}
           thumbStyle={eventsStyles.eventThumbIcon}
           thumb={eventIcon}
+          extra={`Tienda: ${event.store}`}
         />
         <Card.Body>
           <View style={eventsStyles.eventContent}>
@@ -29,19 +30,17 @@ export default function EventCard({ navigation, event }) {
           </View>
         </Card.Body>
       </Card>
-    </TouchableOpacity>
+    </View>
   );
 }
 
 EventCard.propTypes = {
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
-  }).isRequired,
   event: PropTypes.shape({
     data: PropTypes.shape({
       date: PropTypes.string,
       event: PropTypes.string.isRequired,
     }),
     id: PropTypes.number.isRequired,
+    store: PropTypes.number.isRequired,
   }).isRequired,
 };

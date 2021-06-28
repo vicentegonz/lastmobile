@@ -4,7 +4,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Text, View } from 'react-native';
 import { Icon } from '@ant-design/react-native';
-import { round } from '@/utils/round';
+import round from '@/utils/round';
 
 export default function KpiCategoryTopText({
   variationN,
@@ -16,13 +16,13 @@ export default function KpiCategoryTopText({
   let icon;
   let text;
 
-  const isZero = round(variationN, false) === ('-0,0' || '0,0');
+  const isZero = round(variationN, 1) === ('-0,0' || '0,0');
 
   if (variationN > 0 && !isZero) {
-    color = 'red';
+    color = '#ff4d4f';
     icon = <Icon name="arrow-down" size="md" color={color} />;
   } else if (variationN < 0 && !isZero) {
-    color = 'green';
+    color = '#52c41a';
     icon = <Icon name="arrow-up" size="md" color={color} />;
   } else {
     color = 'black';
@@ -48,7 +48,7 @@ export default function KpiCategoryTopText({
           fontSize: 20,
         }}
       >
-        {`${round(variationN, false)} ${unit}`}
+        {`${round(variationN, 1)} ${unit}`}
       </Text>
     );
   } else if (unit === '$') {
@@ -60,7 +60,7 @@ export default function KpiCategoryTopText({
           fontSize: 20,
         }}
       >
-        {`${unit} ${round(variationN, false)}`}
+        {`${unit} ${round(variationN, 1)}`}
       </Text>
     );
   } else if (!isZero) {
@@ -72,7 +72,7 @@ export default function KpiCategoryTopText({
           fontSize: 20,
         }}
       >
-        {`${round(variationN, false)}`}
+        {`${round(variationN, 1)}`}
       </Text>
     );
   }
@@ -92,7 +92,7 @@ export default function KpiCategoryTopText({
           fontSize: 20,
         }}
       >
-        {`${round(variationP, false)}%`}
+        {`${round(variationP, 1)}%`}
       </Text>
     </View>
   );

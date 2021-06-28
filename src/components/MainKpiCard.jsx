@@ -25,7 +25,7 @@ export default function MainKpiCard({ kpi, navigation }) {
           {kpi.value !== undefined ? (
             <MainKPIValue value={kpi.value} unit={kpi.units} />
           ) : null}
-          <WhiteSpace size="sm" />
+          <WhiteSpace size="md" />
           <View style={kpiStyles.mainKpiDifferences}>
             <View>
               <MainKpiCardText

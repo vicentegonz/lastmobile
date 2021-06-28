@@ -17,7 +17,9 @@ export default function KpiCategory({ kpi }) {
           {kpi.value !== undefined ? (
             <MainKPIValue value={kpi.value} unit={kpi.units} />
           ) : null}
-          <WhiteSpace size="sm" />
+
+          <WhiteSpace size="md" />
+
           <View style={kpiStyles.categoryKpiDifferences}>
             <View>
               <Text style={{ fontSize: 16 }}>Ayer</Text>
