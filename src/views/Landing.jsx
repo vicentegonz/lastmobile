@@ -9,6 +9,7 @@ import styles from '@/assets/styles/index';
 import MainKpiCard from '@/components/MainKpiCard.jsx';
 import EventCard from '@/components/EventCard.jsx';
 import ServiceCard from '@/components/ServiceCard.jsx';
+import DropPicker from '@/components/DropPicker.jsx';
 
 export default function Landing() {
   const navigation = useNavigation();
@@ -28,32 +29,36 @@ export default function Landing() {
   return (
     <View style={styles.landingView}>
       <StatusBar backgroundColor="#052D4C" />
-      <WhiteSpace size="md" />
 
-      <View style={styles.kpiView}>
-        <Text style={styles.kpiTitle}>KPIs</Text>
-        <ScrollView horizontal style={styles.kpiScroll}>
-          <View style={styles.kpiCardsView}>{kpis}</View>
-        </ScrollView>
-      </View>
+      <DropPicker />
 
-      <WhiteSpace size="md" />
-      <View style={styles.serviceView}>
-        <Text style={styles.serviceTitle}>Indicadores de servicio</Text>
-        <ServiceCard
-          navigation={navigation}
-          service={mainService}
-          key={mainService.name}
-        />
-      </View>
+      <ScrollView style={{ flex: 1 }}>
+        <WhiteSpace size="sm" />
+        <View style={styles.kpiView}>
+          <Text style={styles.kpiTitle}>KPIs</Text>
+          <ScrollView horizontal style={styles.kpiScroll}>
+            <View style={styles.kpiCardsView}>{kpis}</View>
+          </ScrollView>
+        </View>
 
-      <WhiteSpace size="md" />
-      <View style={styles.landingView}>
-        <Text style={styles.eventsTitle}>Últimos eventos</Text>
-        <ScrollView>{events}</ScrollView>
-      </View>
+        <WhiteSpace size="md" />
+        <View style={styles.serviceView}>
+          <Text style={styles.serviceTitle}>Indicadores de servicio</Text>
+          <ServiceCard
+            navigation={navigation}
+            service={mainService}
+            key={mainService.name}
+          />
+        </View>
 
-      <WhiteSpace size="md" />
+        <WhiteSpace size="md" />
+        <View style={styles.landingView}>
+          <Text style={styles.eventsTitle}>Últimos eventos</Text>
+          <ScrollView>{events}</ScrollView>
+        </View>
+
+        <WhiteSpace size="md" />
+      </ScrollView>
     </View>
   );
 }

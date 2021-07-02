@@ -20,13 +20,13 @@ export default function Events() {
   const events = pageEvents.map((event) => (
     <EventCard key={event.id} event={event} />
   ));
+
   return (
     <View style={eventsStyles.eventsView}>
       <StatusBar backgroundColor="#052D4C" />
+
       <WhiteSpace size="md" />
-      <View>
-        {events}
-      </View>
+      <View>{events}</View>
       <WhiteSpace size="md" />
       <View style={eventsStyles.eventPagination}>
         <Pagination

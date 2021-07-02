@@ -8,7 +8,6 @@ import {
 } from '@react-navigation/drawer';
 import { removeCredentials } from '@/utils/credentials';
 import { useDispatch } from 'react-redux';
-
 import { setValidSession, clear as clearSession } from '@/store/session';
 import { clear as clearEvent } from '@/store/eventSlice';
 import { clear as clearStore } from '@/store/storeSlice';

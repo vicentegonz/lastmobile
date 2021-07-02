@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   // Landing
   landingView: {
-    flex: 1,
+    flex: 3,
     backgroundColor: '#eaedf5',
   },
   kpiView: {
@@ -47,6 +47,17 @@ const styles = StyleSheet.create({
   },
   informationIcon: {
     alignSelf: 'flex-end',
+  },
+  pickerStyle: {
+    borderRadius: 0,
+    borderColor: '#dddddd',
+  },
+  pickerContainerStyle: {
+    borderColor: '#dddddd',
+    borderRadius: 0,
+  },
+  pickerText: {
+    fontFamily: 'roboto',
   },
 });
 

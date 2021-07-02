@@ -2,7 +2,6 @@ import { StyleSheet } from 'react-native';
 
 const eventsStyles = StyleSheet.create({
 // Event Card (landing and events screen)
-
   eventPagination: {
     position: 'absolute',
     width: '100%',

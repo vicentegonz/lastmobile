@@ -22,6 +22,9 @@ export const profileSlice = createSlice({
     currentStore: undefined,
   },
   reducers: {
+    setPickerStore: (state, action) => {
+      state.pickerStore = action.payload;
+    },
     clear: (state) => {
       state.email = null;
       state.familyName = null;
@@ -29,6 +32,7 @@ export const profileSlice = createSlice({
       state.picture = null;
       state.stores = [];
       state.currentStore = undefined;
+      state.pickerStore = undefined;
     },
   },
   extraReducers: {
@@ -44,10 +48,12 @@ export const profileSlice = createSlice({
       } else if (!state.currentStore && data.stores) {
         // eslint-disable-next-line prefer-destructuring
         state.currentStore = data.stores[0];
+        // eslint-disable-next-line prefer-destructuring
+        state.pickerStore = data.stores[0];
       }
     },
   },
 });
 
-export const { clear, clearCurrentStore } = profileSlice.actions;
+export const { clear, clearCurrentStore, setPickerStore } = profileSlice.actions;
 export default profileSlice.reducer;
