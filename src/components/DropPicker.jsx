@@ -29,7 +29,6 @@ export default function DropPicker() {
   }, [stores, pickerStore]);
 
   useEffect(() => {
-    setLoading(true);
     if (loading) {
       dispatch(fetchKPIs(pickerStore));
       dispatch(fetchServices(pickerStore));
@@ -38,12 +37,13 @@ export default function DropPicker() {
       dispatch(fetchNextEvents([pickerStore, 1]));
       setLoading(false);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pickerStore, dispatch]);
 
   useEffect(() => {
     if (value) {
       dispatch(setPickerStore(value));
+      setLoading(true);
     }
   }, [value, dispatch]);
 

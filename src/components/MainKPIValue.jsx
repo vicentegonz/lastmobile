@@ -1,4 +1,3 @@
-/* eslint-disable no-useless-escape */
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Text } from 'react-native';

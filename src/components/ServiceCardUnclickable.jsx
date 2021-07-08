@@ -9,7 +9,7 @@ import ServiceCardText from '@/components/ServiceCardText.jsx';
 
 export default function ServiceCardUnclickable({ service }) {
   return (
-    <View>
+    <View style={servicesStyles.fullView}>
       <Card style={servicesStyles.service}>
         <Card.Header title={service.name} />
         <Card.Body style={servicesStyles.serviceBody}>
@@ -45,7 +45,6 @@ export default function ServiceCardUnclickable({ service }) {
           </View>
         </Card.Body>
       </Card>
-      <WhiteSpace size="md" />
     </View>
   );
 }

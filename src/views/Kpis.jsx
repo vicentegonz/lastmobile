@@ -1,6 +1,7 @@
-/* eslint-disable object-curly-newline */
 import React from 'react';
-import { StatusBar, ScrollView, Text, View } from 'react-native';
+import {
+  StatusBar, ScrollView, Text, View,
+} from 'react-native';
 import { PropTypes } from 'prop-types';
 import { useSelector } from 'react-redux';
 import { WhiteSpace } from '@ant-design/react-native';

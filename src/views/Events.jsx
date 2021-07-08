@@ -30,7 +30,6 @@ export default function Events() {
       <WhiteSpace size="md" />
       <View style={eventsStyles.eventPagination}>
         <Pagination
-          style={{}}
           total={totalPages}
           locale={locale}
           current={Currentpage}

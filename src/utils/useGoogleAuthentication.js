@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setValidSession } from '@/store/session';
 import { fetchUser } from '@/store/profileSlice';
 import { fetchEvents } from '@/store/eventSlice';
-// import { fetchStores } from '@/store/storeSlice';
 
 export default function useGoogleAuthentication() {
   WebBrowser.maybeCompleteAuthSession();
@@ -28,7 +27,6 @@ export default function useGoogleAuthentication() {
       .then(() => {
         dispatch(setValidSession(true));
         dispatch(fetchUser());
-        // stores.map((id) => dispatch(fetchStores(id)));
         stores.map((id) => dispatch(fetchEvents(id)));
       })
       .catch(() => {

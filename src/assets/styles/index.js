@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
     flex: 3,
     backgroundColor: '#eaedf5',
   },
+  landingScroll: {
+    flex: 1,
+  },
   kpiView: {
     marginHorizontal: 8,
     backgroundColor: '#eaedf5',
@@ -30,6 +33,7 @@ const styles = StyleSheet.create({
     fontFamily: 'robotoBold',
     fontSize: 20,
     backgroundColor: '#eaedf5',
+    marginLeft: 18,
   },
   eventsTitle: {
     fontFamily: 'robotoBold',
@@ -58,6 +62,12 @@ const styles = StyleSheet.create({
   },
   pickerText: {
     fontFamily: 'roboto',
+  },
+  // Loading
+  loadingView: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
   },
 });
 

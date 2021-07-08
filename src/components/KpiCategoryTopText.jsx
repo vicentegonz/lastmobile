@@ -1,10 +1,10 @@
-/* eslint-disable no-useless-escape */
 /* eslint-disable no-param-reassign */
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Text, View } from 'react-native';
 import { Icon } from '@ant-design/react-native';
 import round from '@/utils/round';
+import kpiStyles from '@/assets/styles/kpis';
 
 export default function KpiCategoryTopText({
   variationN,
@@ -78,11 +78,11 @@ export default function KpiCategoryTopText({
   }
 
   return (
-    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+    <View style={kpiStyles.topView}>
       {text}
-      <View style={{ flexDirection: 'row' }}>
+      <View style={kpiStyles.textView}>
         {icon}
-        <Text style={{ fontFamily: 'robotoBold', fontSize: 15 }}>{middle}</Text>
+        <Text style={kpiStyles.text}>{middle}</Text>
       </View>
 
       <Text

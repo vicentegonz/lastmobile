@@ -1,4 +1,3 @@
-/* eslint-disable no-useless-escape */
 /* eslint-disable no-param-reassign */
 import * as React from 'react';
 import PropTypes from 'prop-types';

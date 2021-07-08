@@ -1,10 +1,10 @@
-/* eslint-disable no-useless-escape */
 /* eslint-disable no-param-reassign */
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Text, View } from 'react-native';
 import { Icon } from '@ant-design/react-native';
 import round from '@/utils/round';
+import kpiStyles from '@/assets/styles/kpis';
 
 export default function KpiCategoryCardText({ variationN, variationP, unit }) {
   let color;
@@ -16,22 +16,12 @@ export default function KpiCategoryCardText({ variationN, variationP, unit }) {
   if (variationN > 0 && !isZero) {
     color = '#ff4d4f';
     icon = (
-      <Icon
-        name="arrow-down"
-        size={30}
-        color={color}
-        style={{ alignSelf: 'center' }}
-      />
+      <Icon name="arrow-down" size={30} color={color} style={kpiStyles.icon} />
     );
   } else if (variationN < 0 && !isZero) {
     color = '#52c41a';
     icon = (
-      <Icon
-        name="arrow-up"
-        size={30}
-        color={color}
-        style={{ alignSelf: 'center' }}
-      />
+      <Icon name="arrow-up" size={30} color={color} style={kpiStyles.icon} />
     );
   } else {
     color = 'black';
@@ -120,7 +110,7 @@ export default function KpiCategoryCardText({ variationN, variationP, unit }) {
   }
 
   return (
-    <View style={{ flexDirection: 'row' }}>
+    <View style={kpiStyles.textView}>
       {icon}
       {text}
     </View>

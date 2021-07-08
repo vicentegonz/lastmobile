@@ -1,7 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
 const kpiStyles = StyleSheet.create({
-// Kpi View (by category)
+  // Kpi View (by category)
   categoryKpiCard: {
     marginHorizontal: 10,
     backgroundColor: '#FFFFFF',
@@ -27,6 +27,9 @@ const kpiStyles = StyleSheet.create({
     marginHorizontal: 10,
     paddingBottom: 0,
   },
+  mainKpiHeader: {
+    flexGrow: 25,
+  },
   mainKpiCard: {
     backgroundColor: '#FFFFFF',
     width: Dimensions.get('window').width - 90,
@@ -48,6 +51,20 @@ const kpiStyles = StyleSheet.create({
   },
   mainKpiView: {
     flexDirection: 'row',
+  },
+  topView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  textView: {
+    flexDirection: 'row',
+  },
+  text: {
+    fontFamily: 'robotoBold',
+    fontSize: 15,
+  },
+  icon: {
+    alignSelf: 'center',
   },
 });
 

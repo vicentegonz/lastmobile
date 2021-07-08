@@ -4,6 +4,10 @@ const servicesStyles = StyleSheet.create({
   service: {
     width: Dimensions.get('window').width - 36,
   },
+  fullView: {
+    marginTop: 10,
+    marginBottom: 0,
+  },
   serviceBody: {
     paddingVertical: 0,
     backgroundColor: '#FFFFFF',
@@ -28,6 +32,7 @@ const servicesStyles = StyleSheet.create({
   // Main service (landing)
   mainServiceCard: {
     justifyContent: 'center',
+    marginRight: 10,
   },
   mainServiceBody: {
     paddingVertical: 0,

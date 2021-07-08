@@ -1,5 +1,4 @@
 /* eslint-disable import/prefer-default-export */
-
 import * as SecureStore from 'expo-secure-store';
 
 import { ACCESS_SECURE_STORE_KEY } from '@/utils/constants';

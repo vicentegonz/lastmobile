@@ -1,7 +1,7 @@
+/* eslint-disable no-await-in-loop */
 /* eslint no-param-reassign: ["error", { "props": false }] */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import CLIENT from '@/api/client';
-// import getDates from '@/utils/getDates';
 
 export const fetchEvents = createAsyncThunk(
   'event/fetchEvents',
@@ -20,7 +20,7 @@ export const fetchEvents = createAsyncThunk(
       const total = response.data.count;
 
       let page = 2;
-      /* eslint-disable no-await-in-loop */
+
       while (tengo !== total) {
         const nextResponse = await CLIENT.get(
           `/v1/operations/stores/${idStore}/events/?page=${page}`,
@@ -31,7 +31,7 @@ export const fetchEvents = createAsyncThunk(
         tengo += nextResponse.data.results.length;
         page += 1;
       }
-      /* eslint-enable no-await-in-loop */
+
       const auxResponse = {};
       auxResponse.results = response.data.results;
       auxResponse.pagination = paginationResponse;
@@ -62,7 +62,7 @@ export const fetchNextEvents = createAsyncThunk(
       let tengo = response.data.results.length;
       const total = response.data.count;
       let auxPage = 2;
-      /* eslint-disable no-await-in-loop */
+
       while (tengo !== total) {
         const nextResponse = await CLIENT.get(
           `/v1/operations/stores/${idStore}/events/?page=${auxPage}`,
@@ -73,7 +73,7 @@ export const fetchNextEvents = createAsyncThunk(
         tengo += nextResponse.data.results.length;
         auxPage += 1;
       }
-      /* eslint-enable no-await-in-loop */
+
       response.data.sizePag = sizePag;
       response.data.pagination = paginationResponse;
       return response.data;
@@ -93,6 +93,7 @@ export const eventSlice = createSlice({
     page: 1,
     totalPages: undefined,
     store: undefined,
+    picker: false,
   },
   reducers: {
     setStore: (state, action) => {
@@ -121,7 +122,7 @@ export const eventSlice = createSlice({
       state.page = 1;
     },
     [fetchEvents.pending]: (state) => {
-      state.status = false;
+      state.picker = true;
     },
     [fetchEvents.fulfilled]: (state, action) => {
       const data = action.payload;
@@ -134,6 +135,7 @@ export const eventSlice = createSlice({
       }
       state.lastNEvents = data.results;
       state.status = true;
+      state.picker = false;
     },
   },
 });

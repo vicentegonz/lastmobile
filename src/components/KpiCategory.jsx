@@ -10,7 +10,6 @@ import KpiCategoryCardText from '@/components/KpiCategoryCardText.jsx';
 export default function KpiCategory({ kpi }) {
   return (
     <View>
-      <WhiteSpace size="md" />
       <Card style={kpiStyles.categoryKpiCard}>
         <Card.Header title={kpi.category} />
         <Card.Body>
@@ -22,7 +21,7 @@ export default function KpiCategory({ kpi }) {
 
           <View style={kpiStyles.categoryKpiDifferences}>
             <View>
-              <Text style={{ fontSize: 16 }}>Ayer</Text>
+              <Text style={kpiStyles.categoryText}>Ayer</Text>
               <KpiCategoryCardText
                 variationN={kpi.variationYNumber}
                 variationP={kpi.variationYpercentage}
@@ -41,6 +40,7 @@ export default function KpiCategory({ kpi }) {
           </View>
         </Card.Body>
       </Card>
+      <WhiteSpace size="md" />
     </View>
   );
 }

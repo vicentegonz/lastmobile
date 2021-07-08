@@ -17,8 +17,8 @@ export default function Services() {
   return (
     <ScrollView style={styles.generalScreensContainer}>
       <StatusBar backgroundColor="#052D4C" />
-      <WhiteSpace size="md" />
       <View style={servicesStyles.servicesView}>{services}</View>
+      <WhiteSpace size="md" />
     </ScrollView>
   );
 }
