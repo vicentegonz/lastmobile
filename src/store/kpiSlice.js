@@ -22,9 +22,8 @@ export const fetchKPIs = createAsyncThunk('kpi/fetchKPIs', async (idStore) => {
         `/v1/operations/stores/${idStore}/kpis/`,
         { params: { date: today, size: 15, page } },
       );
-      nextResponse.data.results.map((kpi) => {
+      nextResponse.data.results.forEach((kpi) => {
         auxResponse.push(kpi);
-        return null;
       });
 
       page += 1;

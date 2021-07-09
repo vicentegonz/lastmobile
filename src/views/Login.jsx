@@ -9,6 +9,7 @@ import navStyles from '@/assets/styles/navigation';
 import { Button } from '@ant-design/react-native';
 import { setLoginValue } from '@/store/session';
 import Logo from '@/assets/ArcoprimeLogo.png';
+import alertMessages from '@/utils/alerts';
 
 export default function Login() {
   const { asyncPromptLogin, request } = useGoogleAuthentication();
@@ -17,9 +18,11 @@ export default function Login() {
 
   const showAlert = async () => {
     await dispatch(setLoginValue(''));
+    const alert = alertMessages.noStore;
+
     Alert.alert(
-      'Usuario sin tiendas',
-      'Elija un usuario con tiendas.',
+      alert.title,
+      alert.message,
       [
         {
           text: 'OK',

@@ -1,5 +1,3 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable array-callback-return */
 export const processStoreKpis = (kpiT, kpiY, kpiLW) => {
   const aux = {};
 
@@ -10,17 +8,16 @@ export const processStoreKpis = (kpiT, kpiY, kpiLW) => {
     'Ticket promedio',
     'Transacciones',
   ];
-
-  kpis.map((name) => {
+  kpis.forEach((name) => {
     aux[name] = {};
   });
 
-  kpis.map((name) => {
-    kpiT.map((kpi) => {
+  kpis.forEach((name) => {
+    kpiT.forEach((kpi) => {
       aux[name][kpi.category] = {};
     });
 
-    kpiT.map((kpi) => {
+    kpiT.forEach((kpi) => {
       let units;
       let value;
       if (name === 'Contribución') {
@@ -48,7 +45,7 @@ export const processStoreKpis = (kpiT, kpiY, kpiLW) => {
       aux[name][kpi.category].category = kpi.category;
     });
 
-    kpiY.map((kpi) => {
+    kpiY.forEach((kpi) => {
       let difference;
       let percentage;
 
@@ -73,7 +70,7 @@ export const processStoreKpis = (kpiT, kpiY, kpiLW) => {
       aux[name][kpi.category].variationYpercentage = percentage;
     });
 
-    kpiLW.map((kpi) => {
+    kpiLW.forEach((kpi) => {
       let difference;
       let percentage;
 
@@ -120,7 +117,7 @@ export const processMainKpis = (kpiT, kpiY, kpiLW) => {
 
   let store;
 
-  kpiT.map((kpi) => {
+  kpiT.forEach((kpi) => {
     contributionT += kpi.contribution;
     grossSaleT += kpi.grossSale;
     netSaleT += kpi.netSale;
@@ -128,14 +125,14 @@ export const processMainKpis = (kpiT, kpiY, kpiLW) => {
     store = kpi.store;
   });
 
-  kpiY.map((kpi) => {
+  kpiY.forEach((kpi) => {
     contributionY += kpi.contribution;
     grossSaleY += kpi.grossSale;
     netSaleY += kpi.netSale;
     transactionsY += kpi.transactions;
   });
 
-  kpiLW.map((kpi) => {
+  kpiLW.forEach((kpi) => {
     contributionLW += kpi.contribution;
     grossSaleLW += kpi.grossSale;
     netSaleLW += kpi.netSale;
@@ -156,7 +153,7 @@ export const processMainKpis = (kpiT, kpiY, kpiLW) => {
 
   const auxMainKpi = [];
 
-  kpis.map((name) => {
+  kpis.forEach((name) => {
     let units;
     let valueT;
     let valueY;

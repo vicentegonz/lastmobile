@@ -1,5 +1,5 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable prefer-destructuring */
-/* eslint no-param-reassign: ["error", { "props": false }] */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import CLIENT from '@/api/client';
 

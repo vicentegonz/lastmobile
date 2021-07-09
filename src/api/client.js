@@ -3,7 +3,7 @@ import { camelizeKeys, decamelizeKeys } from 'humps';
 import Constants from 'expo-constants';
 import * as SecureStore from 'expo-secure-store';
 import { useDispatch } from 'react-redux';
-import { getAuthHeaders } from '@/utils/auth';
+import getAuthHeaders from '@/utils/auth';
 import { setCredentials, removeCredentials } from '@/utils/credentials';
 import { setValidSession } from '@/store/session';
 

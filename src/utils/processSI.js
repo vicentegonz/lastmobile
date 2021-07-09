@@ -1,4 +1,3 @@
-/* eslint-disable array-callback-return */
 import {
   experienceGrade,
   waitingTimeGrade,
@@ -55,7 +54,7 @@ export default function processSI(data) {
   let indicatord6;
   let indicatordLW;
 
-  data.map((obj) => {
+  data.forEach((obj) => {
     if (obj.date === today) {
       indicatorT = makeIndicator(obj);
     } else if (obj.date === yesterday) {
@@ -131,7 +130,7 @@ export default function processSI(data) {
 
   const aux = [];
 
-  serviceNames.map((name) => {
+  serviceNames.forEach((name) => {
     let v1;
     let v2;
     let v3;
