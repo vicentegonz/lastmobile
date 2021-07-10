@@ -37,6 +37,17 @@ const getDates = () => {
   let lastWeek = new Date(today);
   lastWeek.setDate(today.getDate() - 7);
 
+  const days = {
+    d0: lastWeek.getDay(),
+    d1: date6.getDay(),
+    d2: date5.getDay(),
+    d3: date4.getDay(),
+    d4: date3.getDay(),
+    d5: date2.getDay(),
+    d6: yesterday.getDay(),
+    d7: today.getDay(),
+  };
+
   today = formatDate(today);
   yesterday = formatDate(yesterday);
   date2 = formatDate(date2);
@@ -47,7 +58,7 @@ const getDates = () => {
   lastWeek = formatDate(lastWeek);
 
   return {
-    today, yesterday, date2, date3, date4, date5, date6, lastWeek,
+    today, yesterday, date2, date3, date4, date5, date6, lastWeek, days,
   };
 };
 

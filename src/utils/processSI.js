@@ -42,7 +42,7 @@ function makeIndicator(obj) {
 
 export default function processSI(data) {
   const {
-    today, yesterday, date2, date3, date4, date5, date6, lastWeek,
+    today, yesterday, date2, date3, date4, date5, date6, lastWeek, days,
   } = getDates();
 
   let indicatorT;
@@ -88,6 +88,7 @@ export default function processSI(data) {
       v7: round(indicatorY.service, 2),
       v8: round(indicatorT.service, 2),
     },
+    weekDates: days,
     variationYNumber: indicatorY.service - indicatorT.service,
     variationLWNumber: indicatordLW.service - indicatorT.service,
     variationYpercentage:
@@ -111,6 +112,7 @@ export default function processSI(data) {
       v7: round(indicatorY.nps, 2),
       v8: round(indicatorT.nps, 2),
     },
+    weekDates: days,
     variationYNumber: indicatorY.nps - indicatorT.nps,
     variationLWNumber: indicatordLW.nps - indicatorT.nps,
     variationYpercentage:
@@ -210,6 +212,7 @@ export default function processSI(data) {
         v7: round(v7, 2),
         v8: round(v8, 2),
       },
+      weekDates: days,
       variationYNumber: v7 - v8,
       variationLWNumber: v1 - v8,
       variationYpercentage: ((v7 - v8) / v7) * 100,

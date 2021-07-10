@@ -21,7 +21,7 @@ export default function ServiceCard({ navigation, service }) {
                 {service.value}
               </Text>
             ) : null}
-            <LinearChart datesarray={service.data} />
+            <LinearChart datesarray={service.data} weekarray={service.weekDates} />
           </View>
           <WhiteSpace size="md" />
 
@@ -68,6 +68,16 @@ ServiceCard.propTypes = {
       v6: PropTypes.string,
       v7: PropTypes.string,
       v8: PropTypes.string,
+    }),
+    weekDates: PropTypes.shape({
+      d0: PropTypes.number,
+      d1: PropTypes.number,
+      d2: PropTypes.number,
+      d3: PropTypes.number,
+      d4: PropTypes.number,
+      d5: PropTypes.number,
+      d6: PropTypes.number,
+      d7: PropTypes.number,
     }),
   }),
 };

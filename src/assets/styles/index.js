@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   serviceView: {
-    marginHorizontal: 18,
+    marginHorizontal: 0,
   },
   serviceTitle: {
     fontFamily: 'robotoBold',
