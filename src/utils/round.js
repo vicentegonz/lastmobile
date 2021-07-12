@@ -20,6 +20,9 @@ function stripMinus(value) {
 }
 
 export default function round(value, precision) {
+  if (value === '-') {
+    return value;
+  }
   const number = stripMinus(
     zeroDecimal(
       value

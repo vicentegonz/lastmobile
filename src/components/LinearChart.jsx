@@ -55,7 +55,7 @@ export default function LinearChart(datesarray) {
     ],
   };
 
-  let chartWidth = 150;
+  let chartWidth = 160;
   if (array[7].toString().length < 4) {
     chartWidth = 130;
   }

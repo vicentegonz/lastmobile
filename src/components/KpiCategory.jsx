@@ -23,8 +23,10 @@ export default function KpiCategory({ kpi }) {
             <View>
               <Text style={kpiStyles.categoryText}>Ayer</Text>
               <KpiCategoryCardText
-                variationN={kpi.variationYNumber}
-                variationP={kpi.variationYpercentage}
+                variationN={kpi.variationYNumber ? kpi.variationYNumber : '-'}
+                variationP={
+                  kpi.variationYpercentage ? kpi.variationYpercentage : '-'
+                }
                 unit={kpi.units}
               />
             </View>
@@ -32,8 +34,10 @@ export default function KpiCategory({ kpi }) {
             <View>
               <Text style={kpiStyles.categoryText}>Semana pasada</Text>
               <KpiCategoryCardText
-                variationN={kpi.variationLWNumber}
-                variationP={kpi.variationLWpercentage}
+                variationN={kpi.variationLWNumber ? kpi.variationLWNumber : '-'}
+                variationP={
+                  kpi.variationLWpercentage ? kpi.variationLWpercentage : '-'
+                }
                 unit={kpi.units}
               />
             </View>

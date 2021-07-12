@@ -16,6 +16,9 @@ export default function MainKpiCardText({ variationN, variationP }) {
   } else if (variationN < 0) {
     color = '#52c41a';
     icon = <Icon name="arrow-up" size="md" color={color} />;
+  } else if (variationN === '-') {
+    color = 'grey';
+    variationP = '-';
   } else {
     color = 'black';
     variationN = 'Sin variación';
@@ -33,15 +36,17 @@ export default function MainKpiCardText({ variationN, variationP }) {
           fontSize: 20,
         }}
       >
-        {`${round(variationP, 1)}%`}
+        {round(variationP, 1) === '-'
+          ? round(variationP, 1)
+          : `${round(variationP, 1)}%`}
       </Text>
     </View>
   );
 }
 
 MainKpiCardText.propTypes = {
-  variationN: PropTypes.number,
-  variationP: PropTypes.number,
+  variationN: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  variationP: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 MainKpiCardText.defaultProps = {

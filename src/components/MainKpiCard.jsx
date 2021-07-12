@@ -29,16 +29,20 @@ export default function MainKpiCard({ kpi, navigation }) {
           <View style={kpiStyles.mainKpiDifferences}>
             <View>
               <MainKpiCardText
-                variationN={kpi.variationYNumber}
-                variationP={kpi.variationYpercentage}
+                variationN={kpi.variationYNumber ? kpi.variationYNumber : '-'}
+                variationP={
+                  kpi.variationYpercentage ? kpi.variationYpercentage : '-'
+                }
               />
               <Text>Ayer</Text>
             </View>
 
             <View>
               <MainKpiCardText
-                variationN={kpi.variationLWNumber}
-                variationP={kpi.variationLWpercentage}
+                variationN={kpi.variationLWNumber ? kpi.variationLWNumber : '-'}
+                variationP={
+                  kpi.variationLWpercentage ? kpi.variationLWpercentage : '-'
+                }
               />
               <Text>Semana pasada</Text>
             </View>
@@ -57,10 +61,19 @@ MainKpiCard.propTypes = {
     name: PropTypes.string,
     value: PropTypes.number,
     units: PropTypes.string,
-    variationYNumber: PropTypes.number,
-    variationYpercentage: PropTypes.number,
-    variationLWNumber: PropTypes.number,
-    variationLWpercentage: PropTypes.number,
+    variationYNumber: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    variationYpercentage: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+    ]),
+    variationLWNumber: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+    ]),
+    variationLWpercentage: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+    ]),
   }),
 };
 

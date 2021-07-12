@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable no-await-in-loop */
 /* eslint no-param-reassign: ["error", { "props": false }] */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
@@ -129,7 +130,6 @@ export const eventSlice = createSlice({
       if (state.pageEvents.length === 0) {
         state.totalPages = Math.ceil(data.count / data.sizePag);
         state.storeEvents = data.pagination;
-        /* eslint prefer-destructuring: ["error", {VariableDeclarator: {object: true}}] */
         state.pageEvents = data.pagination[1];
         state.store = action.meta.arg;
       }

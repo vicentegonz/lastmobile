@@ -3,6 +3,7 @@ const formatDate = (date) => {
 
   let mm = date.getMonth() + 1;
   const yyyy = date.getFullYear();
+
   if (dd < 10) {
     dd = `0${dd}`;
   }
@@ -58,7 +59,15 @@ const getDates = () => {
   lastWeek = formatDate(lastWeek);
 
   return {
-    today, yesterday, date2, date3, date4, date5, date6, lastWeek, days,
+    today,
+    yesterday,
+    date2,
+    date3,
+    date4,
+    date5,
+    date6,
+    lastWeek,
+    days,
   };
 };
 

@@ -6,11 +6,19 @@ import {
   bathroomGrade,
   kindnessGrade,
   npsGrade,
+  checkYesterday,
+  checkLastWeek,
+  checkSubYesterday,
+  checkSubLastWeek,
 } from '@/utils/formulasSI';
 import getDates from '@/utils/getDates';
 import round from '@/utils/round';
 
 function makeIndicator(obj) {
+  // ASK CLIENTS:
+  // WHAT IF ONE IS MISSING? (0)
+  // Chart working with zeros -> should it not be displayed?
+
   const experience = experienceGrade(obj);
   const waitingTime = waitingTimeGrade(obj);
   const speed = speedGrade(obj);
@@ -19,12 +27,16 @@ function makeIndicator(obj) {
   const kindness = kindnessGrade(obj);
   const nps = npsGrade(obj);
 
-  const service = experience * 0.125
+  let service = experience * 0.125
     + waitingTime * 0.175
     + speed * 0.175
     + quality * 0.175
     + bathroom * 0.175
     + kindness * 0.175;
+
+  if (!service) {
+    service = '-';
+  }
 
   const finalObj = {
     experience,
@@ -40,9 +52,31 @@ function makeIndicator(obj) {
   return finalObj;
 }
 
+function getValues(key, indicators) {
+  const v1 = indicators[0] ? indicators[0][key] : 0;
+  const v2 = indicators[1][key];
+  const v3 = indicators[2][key];
+  const v4 = indicators[3][key];
+  const v5 = indicators[4][key];
+  const v6 = indicators[5][key];
+  const v7 = indicators[6] ? indicators[6][key] : 0;
+  const v8 = indicators[7][key];
+  return {
+    v1, v2, v3, v4, v5, v6, v7, v8,
+  };
+}
+
 export default function processSI(data) {
   const {
-    today, yesterday, date2, date3, date4, date5, date6, lastWeek, days,
+    today,
+    yesterday,
+    date2,
+    date3,
+    date4,
+    date5,
+    date6,
+    lastWeek,
+    days,
   } = getDates();
 
   let indicatorT;
@@ -74,6 +108,13 @@ export default function processSI(data) {
     }
   });
 
+  if (indicatorT === undefined) {
+    const mainService = {};
+    const aux = [];
+    const npsService = {};
+    return { mainService, aux, npsService };
+  }
+
   const mainService = {
     name: 'Nota Final',
     id: 'mainService',
@@ -89,13 +130,6 @@ export default function processSI(data) {
       v8: round(indicatorT.service, 2),
     },
     weekDates: days,
-    variationYNumber: indicatorY.service - indicatorT.service,
-    variationLWNumber: indicatordLW.service - indicatorT.service,
-    variationYpercentage:
-      ((indicatorY.service - indicatorT.service) / indicatorY.service) * 100,
-    variationLWpercentage:
-      ((indicatordLW.service - indicatorT.service) / indicatordLW.service)
-      * 100,
   };
 
   const npsService = {
@@ -113,13 +147,10 @@ export default function processSI(data) {
       v8: round(indicatorT.nps, 2),
     },
     weekDates: days,
-    variationYNumber: indicatorY.nps - indicatorT.nps,
-    variationLWNumber: indicatordLW.nps - indicatorT.nps,
-    variationYpercentage:
-      ((indicatorY.nps - indicatorT.nps) / indicatorY.nps) * 100,
-    variationLWpercentage:
-      ((indicatordLW.nps - indicatorT.nps) / indicatordLW.nps) * 100,
   };
+
+  checkYesterday(indicatorT, indicatorY, mainService, npsService);
+  checkLastWeek(indicatorT, indicatordLW, mainService, npsService);
 
   const serviceNames = [
     'Experiencia',
@@ -132,92 +163,53 @@ export default function processSI(data) {
 
   const aux = [];
 
+  const indicadores = [
+    indicatordLW,
+    indicatord6,
+    indicatord5,
+    indicatord4,
+    indicatord3,
+    indicatord2,
+    indicatorY,
+    indicatorT,
+  ];
+
   serviceNames.forEach((name) => {
-    let v1;
-    let v2;
-    let v3;
-    let v4;
-    let v5;
-    let v6;
-    let v7;
-    let v8;
+    let values;
 
     if (name === 'Experiencia') {
-      v1 = indicatordLW.experience;
-      v2 = indicatord6.experience;
-      v3 = indicatord5.experience;
-      v4 = indicatord4.experience;
-      v5 = indicatord3.experience;
-      v6 = indicatord2.experience;
-      v7 = indicatorY.experience;
-      v8 = indicatorT.experience;
+      values = getValues('experience', indicadores);
     } else if (name === 'Tiempo de espera') {
-      v1 = indicatordLW.waitingTime;
-      v2 = indicatord6.waitingTime;
-      v3 = indicatord5.waitingTime;
-      v4 = indicatord4.waitingTime;
-      v5 = indicatord3.waitingTime;
-      v6 = indicatord2.waitingTime;
-      v7 = indicatorY.waitingTime;
-      v8 = indicatorT.waitingTime;
+      values = getValues('waitingTime', indicadores);
     } else if (name === 'Velocidad') {
-      v1 = indicatordLW.speed;
-      v2 = indicatord6.speed;
-      v3 = indicatord5.speed;
-      v4 = indicatord4.speed;
-      v5 = indicatord3.speed;
-      v6 = indicatord2.speed;
-      v7 = indicatorY.speed;
-      v8 = indicatorT.speed;
+      values = getValues('speed', indicadores);
     } else if (name === 'Calidad') {
-      v1 = indicatordLW.quality;
-      v2 = indicatord6.quality;
-      v3 = indicatord5.quality;
-      v4 = indicatord4.quality;
-      v5 = indicatord3.quality;
-      v6 = indicatord2.quality;
-      v7 = indicatorY.quality;
-      v8 = indicatorT.quality;
+      values = getValues('quality', indicadores);
     } else if (name === 'Baño') {
-      v1 = indicatordLW.bathroom;
-      v2 = indicatord6.bathroom;
-      v3 = indicatord5.bathroom;
-      v4 = indicatord4.bathroom;
-      v5 = indicatord3.bathroom;
-      v6 = indicatord2.bathroom;
-      v7 = indicatorY.bathroom;
-      v8 = indicatorT.bathroom;
+      values = getValues('bathroom', indicadores);
     } else if (name === 'Amabilidad') {
-      v1 = indicatordLW.kindness;
-      v2 = indicatord6.kindness;
-      v3 = indicatord5.kindness;
-      v4 = indicatord4.kindness;
-      v5 = indicatord3.kindness;
-      v6 = indicatord2.kindness;
-      v7 = indicatorY.kindness;
-      v8 = indicatorT.kindness;
+      values = getValues('kindness', indicadores);
     }
 
     const subService = {
       name,
       id: name,
-      value: round(v8, 2),
+      value: round(values.v8, 2),
       data: {
-        v1: round(v1, 2),
-        v2: round(v2, 2),
-        v3: round(v3, 2),
-        v4: round(v4, 2),
-        v5: round(v5, 2),
-        v6: round(v6, 2),
-        v7: round(v7, 2),
-        v8: round(v8, 2),
+        v1: round(values.v1, 2),
+        v2: round(values.v2, 2),
+        v3: round(values.v3, 2),
+        v4: round(values.v4, 2),
+        v5: round(values.v5, 2),
+        v6: round(values.v6, 2),
+        v7: round(values.v7, 2),
+        v8: round(values.v8, 2),
       },
       weekDates: days,
-      variationYNumber: v7 - v8,
-      variationLWNumber: v1 - v8,
-      variationYpercentage: ((v7 - v8) / v7) * 100,
-      variationLWpercentage: ((v1 - v8) / v1) * 100,
     };
+
+    checkSubYesterday(subService, values.v7, values.v8);
+    checkSubLastWeek(subService, values.v1, values.v8);
 
     aux.push(subService);
   });

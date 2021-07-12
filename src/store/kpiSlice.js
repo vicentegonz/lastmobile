@@ -62,7 +62,7 @@ export const kpiSlice = createSlice({
       const kpiY = [];
       const kpiLW = [];
 
-      data.map((kpi) => {
+      data.forEach((kpi) => {
         if (today === kpi.date) {
           kpiT.push(kpi);
         } else if (yesterday === kpi.date) {
@@ -70,11 +70,12 @@ export const kpiSlice = createSlice({
         } else if (lastWeek === kpi.date) {
           kpiLW.push(kpi);
         }
-        return undefined;
       });
 
-      state.storeKpis = processStoreKpis(kpiT, kpiY, kpiLW);
       state.mainKPIs = processMainKpis(kpiT, kpiY, kpiLW);
+
+      state.storeKpis = processStoreKpis(kpiT, kpiY, kpiLW);
+
       state.status = true;
       state.picker = false;
     },

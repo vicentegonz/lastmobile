@@ -1,5 +1,5 @@
 import React from 'react';
-import { StatusBar, View } from 'react-native';
+import { StatusBar, View, Text } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { WhiteSpace, Pagination } from '@ant-design/react-native';
 import EventCard from '@/components/EventCard.jsx';
@@ -26,20 +26,29 @@ export default function Events() {
       <StatusBar backgroundColor="#052D4C" />
 
       <WhiteSpace size="md" />
-      <View>{events}</View>
+      {events.length > 0 ? (
+        <View>{events}</View>
+      ) : (
+        <View style={eventsStyles.eventWarning}>
+          <Text style={eventsStyles.eventWarningText}>No hay eventos para mostrar.</Text>
+        </View>
+
+      )}
       <WhiteSpace size="md" />
-      <View style={eventsStyles.eventPagination}>
-        <Pagination
-          total={totalPages}
-          locale={locale}
-          current={Currentpage}
-          onChange={(page) => {
-            dispatch(incrementByAmount(page));
-          }}
-          responsive
-        />
-        <WhiteSpace size="sm" />
-      </View>
+      {events.length > 0 ? (
+        <View style={eventsStyles.eventPagination}>
+          <Pagination
+            total={totalPages}
+            locale={locale}
+            current={Currentpage}
+            onChange={(page) => {
+              dispatch(incrementByAmount(page));
+            }}
+            responsive
+          />
+          <WhiteSpace size="sm" />
+        </View>
+      ) : null}
     </View>
   );
 }

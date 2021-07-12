@@ -69,6 +69,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
+  // No info
+  warningText: {
+    paddingHorizontal: 20,
+    fontSize: 15,
+    marginVertical: 20,
+  },
 });
 
 export default styles;

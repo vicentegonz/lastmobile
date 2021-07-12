@@ -1,13 +1,22 @@
-export const processStoreKpis = (kpiT, kpiY, kpiLW) => {
+export const processStoreKpis = (today, yesterday, lastWeek) => {
+  if (today.length === 0) {
+    return {};
+  }
+
+  const kpiT = today.filter((kpi) => kpi.category !== 'TOTAL');
+  const kpiY = yesterday.filter((kpi) => kpi.category !== 'TOTAL');
+  const kpiLW = lastWeek.filter((kpi) => kpi.category !== 'TOTAL');
+
   const aux = {};
 
   const kpis = [
     'Contribución',
-    'Venta Gross',
+    'Venta Bruta',
     'Venta Neta',
     'Ticket promedio',
     'Transacciones',
   ];
+
   kpis.forEach((name) => {
     aux[name] = {};
   });
@@ -23,7 +32,7 @@ export const processStoreKpis = (kpiT, kpiY, kpiLW) => {
       if (name === 'Contribución') {
         units = '$';
         value = kpi.contribution;
-      } else if (name === 'Venta Gross') {
+      } else if (name === 'Venta Bruta') {
         units = '$';
         value = kpi.grossSale;
       } else if (name === 'Venta Neta') {
@@ -51,19 +60,19 @@ export const processStoreKpis = (kpiT, kpiY, kpiLW) => {
 
       if (name === 'Contribución') {
         difference = kpi.contribution - aux[name][kpi.category].value;
-        percentage = difference / kpi.contribution / 100;
-      } else if (name === 'Venta Gross') {
+        percentage = (difference / kpi.contribution) * 100;
+      } else if (name === 'Venta Bruta') {
         difference = kpi.grossSale - aux[name][kpi.category].value;
-        percentage = difference / kpi.grossSale / 100;
+        percentage = (difference / kpi.grossSale) * 100;
       } else if (name === 'Venta Neta') {
         difference = kpi.netSale - aux[name][kpi.category].value;
-        percentage = difference / kpi.netSale / 100;
+        percentage = (difference / kpi.netSale) * 100;
       } else if (name === 'Ticket promedio') {
         difference = kpi.netSale / kpi.transactions - aux[name][kpi.category].value;
-        percentage = difference / (kpi.netSale / kpi.transactions) / 100;
+        percentage = (difference / (kpi.netSale / kpi.transactions)) * 100;
       } else if (name === 'Transacciones') {
         difference = kpi.transactions - aux[name][kpi.category].value;
-        percentage = difference / kpi.transactions / 100;
+        percentage = (difference / kpi.transactions) * 100;
       }
 
       aux[name][kpi.category].variationYNumber = difference;
@@ -76,19 +85,19 @@ export const processStoreKpis = (kpiT, kpiY, kpiLW) => {
 
       if (name === 'Contribución') {
         difference = kpi.contribution - aux[name][kpi.category].value;
-        percentage = difference / kpi.contribution / 100;
-      } else if (name === 'Venta Gross') {
+        percentage = (difference / kpi.contribution) * 100;
+      } else if (name === 'Venta Bruta') {
         difference = kpi.grossSale - aux[name][kpi.category].value;
-        percentage = difference / kpi.grossSale / 100;
+        percentage = (difference / kpi.grossSale) * 100;
       } else if (name === 'Venta Neta') {
         difference = kpi.netSale - aux[name][kpi.category].value;
-        percentage = difference / kpi.netSale / 100;
+        percentage = (difference / kpi.netSale) * 100;
       } else if (name === 'Ticket promedio') {
         difference = kpi.netSale / kpi.transactions - aux[name][kpi.category].value;
-        percentage = difference / (kpi.netSale / kpi.transactions) / 100;
+        percentage = (difference / (kpi.netSale / kpi.transactions)) * 100;
       } else if (name === 'Transacciones') {
         difference = kpi.transactions - aux[name][kpi.category].value;
-        percentage = difference / kpi.transactions / 100;
+        percentage = (difference / kpi.transactions) * 100;
       }
 
       aux[name][kpi.category].variationLWNumber = difference;
@@ -100,52 +109,31 @@ export const processStoreKpis = (kpiT, kpiY, kpiLW) => {
 };
 
 export const processMainKpis = (kpiT, kpiY, kpiLW) => {
-  let contributionT = 0;
-  let grossSaleT = 0;
-  let netSaleT = 0;
-  let transactionsT = 0;
+  if (kpiT.length === 0) {
+    return [];
+  }
 
-  let contributionY = 0;
-  let grossSaleY = 0;
-  let netSaleY = 0;
-  let transactionsY = 0;
+  let totalY;
+  let totalLW;
+  let averageTicketY;
+  let averageTicketLW;
 
-  let contributionLW = 0;
-  let grossSaleLW = 0;
-  let netSaleLW = 0;
-  let transactionsLW = 0;
+  if (kpiY.length > 0) {
+    totalY = kpiY.find((kpi) => kpi.category === 'TOTAL');
+    averageTicketY = totalY.netSale / totalY.transactions;
+  }
 
-  let store;
+  if (kpiLW.length > 0) {
+    totalLW = kpiLW.find((kpi) => kpi.category === 'TOTAL');
+    averageTicketLW = totalLW.netSale / totalLW.transactions;
+  }
+  const totalT = kpiT.find((kpi) => kpi.category === 'TOTAL');
 
-  kpiT.forEach((kpi) => {
-    contributionT += kpi.contribution;
-    grossSaleT += kpi.grossSale;
-    netSaleT += kpi.netSale;
-    transactionsT += kpi.transactions;
-    store = kpi.store;
-  });
-
-  kpiY.forEach((kpi) => {
-    contributionY += kpi.contribution;
-    grossSaleY += kpi.grossSale;
-    netSaleY += kpi.netSale;
-    transactionsY += kpi.transactions;
-  });
-
-  kpiLW.forEach((kpi) => {
-    contributionLW += kpi.contribution;
-    grossSaleLW += kpi.grossSale;
-    netSaleLW += kpi.netSale;
-    transactionsLW += kpi.transactions;
-  });
-
-  const averageTicketT = netSaleT / transactionsT;
-  const averageTicketY = netSaleY / transactionsY;
-  const averageTicketLW = netSaleLW / transactionsLW;
+  const averageTicketT = totalT.netSale / totalT.transactions;
 
   const kpis = [
     'Contribución',
-    'Venta Gross',
+    'Venta Bruta',
     'Venta Neta',
     'Ticket promedio',
     'Transacciones',
@@ -161,41 +149,48 @@ export const processMainKpis = (kpiT, kpiY, kpiLW) => {
 
     if (name === 'Contribución') {
       units = '$';
-      valueT = contributionT / kpiT.length;
-      valueY = contributionY / kpiY.length;
-      valueLW = contributionLW / kpiLW.length;
-    } else if (name === 'Venta Gross') {
+      valueT = totalT ? totalT.contribution : -1;
+      valueY = totalY ? totalY.contribution : -1;
+      valueLW = totalLW ? totalLW.contribution : -1;
+    } else if (name === 'Venta Bruta') {
       units = '$';
-      valueT = grossSaleT / kpiT.length;
-      valueY = grossSaleY / kpiY.length;
-      valueLW = grossSaleLW / kpiLW.length;
+      valueT = totalT ? totalT.grossSale : -1;
+      valueY = totalY ? totalY.grossSale : -1;
+      valueLW = totalLW ? totalLW.grossSale : -1;
     } else if (name === 'Venta Neta') {
       units = '$';
-      valueT = netSaleT / kpiT.length;
-      valueY = netSaleY / kpiY.length;
-      valueLW = netSaleLW / kpiLW.length;
+      valueT = totalT ? totalT.netSale : -1;
+      valueY = totalY ? totalY.netSale : -1;
+      valueLW = totalLW ? totalLW.netSale : -1;
     } else if (name === 'Ticket promedio') {
       units = '';
-      valueT = averageTicketT / kpiT.length;
-      valueY = averageTicketY / kpiY.length;
-      valueLW = averageTicketLW / kpiLW.length;
+      valueT = totalT ? averageTicketT : -1;
+      valueY = totalY ? averageTicketY : -1;
+      valueLW = totalLW ? averageTicketLW : -1;
     } else if (name === 'Transacciones') {
       units = 'unidades';
-      valueT = transactionsT / kpiT.length;
-      valueY = transactionsY / kpiY.length;
-      valueLW = transactionsLW / kpiLW.length;
+      valueT = totalT ? totalT.transactions : -1;
+      valueY = totalY ? totalY.transactions : -1;
+      valueLW = totalLW ? totalLW.transactions : -1;
     }
 
     const obj = {
       id: name,
       name,
-      store,
+      store: totalT.store,
       units,
       value: valueT,
-      variationYNumber: valueY - valueT,
-      variationLWNumber: valueLW - valueT,
-      variationYpercentage: ((valueY - valueT) / valueY) * 100,
-      variationLWpercentage: ((valueLW - valueT) / valueLW) * 100,
+      variationYNumber: valueY === -1 || valueT === -1 ? '-' : valueY - valueT,
+      variationLWNumber:
+        valueLW === -1 || valueT === -1 ? '-' : valueLW - valueT,
+      variationYpercentage:
+        valueY === -1 || valueT === -1
+          ? '-'
+          : ((valueY - valueT) / valueY) * 100,
+      variationLWpercentage:
+        valueLW === -1 || valueT === -1
+          ? '-'
+          : ((valueLW - valueT) / valueLW) * 100,
     };
 
     auxMainKpi.push(obj);

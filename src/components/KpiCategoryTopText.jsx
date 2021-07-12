@@ -48,7 +48,9 @@ export default function KpiCategoryTopText({
           fontSize: 20,
         }}
       >
-        {`${round(variationN, 1)} ${unit}`}
+        {round(variationN, 1) === '-'
+          ? round(variationN, 1)
+          : `${round(variationN, 1)} ${unit}`}
       </Text>
     );
   } else if (unit === '$') {
@@ -60,7 +62,9 @@ export default function KpiCategoryTopText({
           fontSize: 20,
         }}
       >
-        {`${unit} ${round(variationN, 1)}`}
+        {round(variationN, 1) === '-'
+          ? round(variationN, 1)
+          : `${unit} ${round(variationN, 1)}`}
       </Text>
     );
   } else if (!isZero) {
@@ -92,15 +96,17 @@ export default function KpiCategoryTopText({
           fontSize: 20,
         }}
       >
-        {`${round(variationP, 1)}%`}
+        {round(variationP, 1) === '-'
+          ? round(variationP, 1)
+          : `${round(variationP, 1)}%`}
       </Text>
     </View>
   );
 }
 
 KpiCategoryTopText.propTypes = {
-  variationN: PropTypes.number,
-  variationP: PropTypes.number,
+  variationN: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  variationP: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   middle: PropTypes.string,
   unit: PropTypes.string,
 };

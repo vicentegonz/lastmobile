@@ -48,17 +48,21 @@ export default function KpiCategoryCardText({ variationN, variationP, unit }) {
             fontSize: 20,
           }}
         >
-          {`${round(variationN, 1)}`}
+          {round(variationN, 1) === '-'
+            ? round(variationN, 1)
+            : `${round(variationN, 1)}`}
         </Text>
-        <Text
-          style={{
-            color,
-            fontFamily: 'robotoBold',
-            fontSize: 20,
-          }}
-        >
-          {`(${round(variationP, 1)}%)`}
-        </Text>
+        {round(variationP, 1) === '-' ? null : (
+          <Text
+            style={{
+              color,
+              fontFamily: 'robotoBold',
+              fontSize: 20,
+            }}
+          >
+            {`${round(variationP, 1)}%`}
+          </Text>
+        )}
       </View>
     );
   } else if (unit === '$') {
@@ -71,17 +75,21 @@ export default function KpiCategoryCardText({ variationN, variationP, unit }) {
             fontSize: 20,
           }}
         >
-          {`${unit} ${round(variationN, 1)}`}
+          {round(variationN, 1) === '-'
+            ? round(variationN, 1)
+            : `${unit} ${round(variationN, 1)}`}
         </Text>
-        <Text
-          style={{
-            color,
-            fontFamily: 'robotoBold',
-            fontSize: 20,
-          }}
-        >
-          {`(${round(variationP, 1)}%)`}
-        </Text>
+        {round(variationP, 1) === '-' ? null : (
+          <Text
+            style={{
+              color,
+              fontFamily: 'robotoBold',
+              fontSize: 20,
+            }}
+          >
+            {`${round(variationP, 1)}%`}
+          </Text>
+        )}
       </View>
     );
   } else if (!isZero) {
@@ -94,17 +102,21 @@ export default function KpiCategoryCardText({ variationN, variationP, unit }) {
             fontSize: 20,
           }}
         >
-          {`${round(variationN, 1)}`}
+          {round(variationN, 1) === '-'
+            ? round(variationN, 1)
+            : `${round(variationN, 1)}`}
         </Text>
-        <Text
-          style={{
-            color,
-            fontFamily: 'robotoBold',
-            fontSize: 20,
-          }}
-        >
-          {`(${round(variationP, 1)}%)`}
-        </Text>
+        {round(variationP, 1) === '-' ? null : (
+          <Text
+            style={{
+              color,
+              fontFamily: 'robotoBold',
+              fontSize: 20,
+            }}
+          >
+            {`${round(variationP, 1)}%`}
+          </Text>
+        )}
       </View>
     );
   }
@@ -118,8 +130,8 @@ export default function KpiCategoryCardText({ variationN, variationP, unit }) {
 }
 
 KpiCategoryCardText.propTypes = {
-  variationN: PropTypes.number,
-  variationP: PropTypes.number,
+  variationN: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  variationP: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   unit: PropTypes.string,
 };
 

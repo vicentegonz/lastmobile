@@ -21,7 +21,10 @@ export default function ServiceCard({ navigation, service }) {
                 {service.value}
               </Text>
             ) : null}
-            <LinearChart datesarray={service.data} weekarray={service.weekDates} />
+            <LinearChart
+              datesarray={service.data}
+              weekarray={service.weekDates}
+            />
           </View>
           <WhiteSpace size="md" />
 
@@ -55,10 +58,19 @@ ServiceCard.propTypes = {
   service: PropTypes.shape({
     value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     name: PropTypes.string,
-    variationLWNumber: PropTypes.number,
-    variationLWpercentage: PropTypes.number,
-    variationYNumber: PropTypes.number,
-    variationYpercentage: PropTypes.number,
+    variationLWNumber: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+    ]),
+    variationLWpercentage: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+    ]),
+    variationYNumber: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    variationYpercentage: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+    ]),
     data: PropTypes.shape({
       v1: PropTypes.string,
       v2: PropTypes.string,
@@ -99,6 +111,16 @@ ServiceCard.defaultProps = {
       v6: '0',
       v7: '0',
       v8: '0',
+    }),
+    weekDates: PropTypes.shape({
+      d0: 0,
+      d1: 0,
+      d2: 0,
+      d3: 0,
+      d4: 0,
+      d5: 0,
+      d6: 0,
+      d7: 0,
     }),
   }),
 };

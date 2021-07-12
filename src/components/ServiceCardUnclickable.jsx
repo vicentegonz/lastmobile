@@ -19,7 +19,10 @@ export default function ServiceCardUnclickable({ service }) {
                 {service.value}
               </Text>
             ) : null}
-            <LinearChart datesarray={service.data} weekarray={service.weekDates} />
+            <LinearChart
+              datesarray={service.data}
+              weekarray={service.weekDates}
+            />
           </View>
 
           <WhiteSpace size="md" />
@@ -51,8 +54,8 @@ export default function ServiceCardUnclickable({ service }) {
 
 ServiceCardUnclickable.propTypes = {
   service: PropTypes.shape({
-    value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-    name: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    name: PropTypes.string,
     data: PropTypes.shape({
       v1: PropTypes.string,
       v2: PropTypes.string,
@@ -73,10 +76,51 @@ ServiceCardUnclickable.propTypes = {
       d6: PropTypes.number,
       d7: PropTypes.number,
     }),
-    variationLWNumber: PropTypes.number.isRequired,
-    variationLWpercentage: PropTypes.number.isRequired,
-    variationYNumber: PropTypes.number.isRequired,
-    variationYpercentage: PropTypes.number.isRequired,
-    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-  }).isRequired,
+    variationLWNumber: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+    ]),
+    variationLWpercentage: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+    ]),
+    variationYNumber: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    variationYpercentage: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+    ]),
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  }),
+};
+
+ServiceCardUnclickable.defaultProps = {
+  service: PropTypes.shape({
+    value: 0,
+    name: 'SI',
+    data: PropTypes.shape({
+      v1: '0',
+      v2: '0',
+      v3: '0',
+      v4: '0',
+      v5: '0',
+      v6: '0',
+      v7: '0',
+      v8: '0',
+    }),
+    weekDates: PropTypes.shape({
+      d0: 0,
+      d1: 0,
+      d2: 0,
+      d3: 0,
+      d4: 0,
+      d5: 0,
+      d6: 0,
+      d7: 0,
+    }),
+    variationLWNumber: 0,
+    variationLWpercentage: 0,
+    variationYNumber: 0,
+    variationYpercentage: 0,
+    id: 0,
+  }),
 };

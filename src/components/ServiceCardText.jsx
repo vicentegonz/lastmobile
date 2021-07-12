@@ -14,7 +14,6 @@ export default function ServiceCardText({
   let text;
 
   const isZero = round(variationNumber, 2) === ('-0,0' || '0,0');
-
   if (variationNumber > 0 && !isZero) {
     tone = '#ff4d4f';
     icon = (
@@ -74,6 +73,21 @@ export default function ServiceCardText({
       </Text>
     );
   }
+  if (variationNumber === '-') {
+    tone = 'grey';
+    text = (
+      <Text
+        style={{
+          color: tone,
+          marginTop: 0,
+          fontSize: 20,
+          fontFamily: 'robotoBold',
+        }}
+      >
+        -
+      </Text>
+    );
+  }
   return (
     <View style={servicesStyles.cardTextView}>
       {icon}
@@ -83,8 +97,11 @@ export default function ServiceCardText({
 }
 
 ServiceCardText.propTypes = {
-  variationNumber: PropTypes.number,
-  variationPercentage: PropTypes.number,
+  variationNumber: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  variationPercentage: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
 };
 
 ServiceCardText.defaultProps = {

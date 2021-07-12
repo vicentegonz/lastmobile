@@ -28,6 +28,14 @@ const eventsStyles = StyleSheet.create({
     marginHorizontal: 16,
     fontFamily: 'roboto',
   },
+  eventWarning: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  eventWarningText: {
+    fontSize: 20,
+  },
 });
 
 export default eventsStyles;

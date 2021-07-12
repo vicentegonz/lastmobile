@@ -12,15 +12,18 @@ import KpiCategory from '@/components/KpiCategory.jsx';
 import KpiCategoryTopText from '@/components/KpiCategoryTopText.jsx';
 
 export default function Kpis({ route }) {
+  let kpis;
   const { mainKpi } = route.params;
 
   const allKpis = useSelector((state) => state.kpi.storeKpis);
 
-  const thisKpi = Object.values(allKpis[mainKpi.name]);
+  if (Object.keys(allKpis).length > 0) {
+    const thisKpi = Object.values(allKpis[mainKpi.name]);
 
-  const kpis = thisKpi.map((kpi) => (
-    <KpiCategory kpi={kpi} key={`${mainKpi.name}-${kpi.category}`} />
-  ));
+    kpis = thisKpi.map((kpi) => (
+      <KpiCategory kpi={kpi} key={`${mainKpi.name}-${kpi.category}`} />
+    ));
+  }
 
   return (
     <ScrollView style={styles.generalScreensContainer}>
@@ -31,22 +34,32 @@ export default function Kpis({ route }) {
         <WhiteSpace size="lg" />
 
         <KpiCategoryTopText
-          variationN={mainKpi.variationYNumber}
-          variationP={mainKpi.variationYpercentage}
+          variationN={mainKpi.variationYNumber ? mainKpi.variationYNumber : '-'}
+          variationP={
+            mainKpi.variationYpercentage ? mainKpi.variationYpercentage : '-'
+          }
           middle="Ayer"
           unit={mainKpi.units}
         />
         <WhiteSpace size="lg" />
 
         <KpiCategoryTopText
-          variationN={mainKpi.variationLWNumber}
-          variationP={mainKpi.variationLWpercentage}
+          variationN={
+            mainKpi.variationLWNumber ? mainKpi.variationLWNumber : '-'
+          }
+          variationP={
+            mainKpi.variationLWpercentage ? mainKpi.variationLWpercentage : '-'
+          }
           middle="Semana pasada"
           unit={mainKpi.units}
         />
       </View>
       <WhiteSpace size="md" />
-      <ScrollView>{kpis}</ScrollView>
+      {kpis ? (
+        <ScrollView>{kpis}</ScrollView>
+      ) : (
+        <Text>No hay KPIs para mostrar.</Text>
+      )}
     </ScrollView>
   );
 }
@@ -56,10 +69,22 @@ Kpis.propTypes = {
     params: PropTypes.shape({
       mainKpi: PropTypes.shape({
         name: PropTypes.string.isRequired,
-        variationYNumber: PropTypes.number.isRequired,
-        variationLWNumber: PropTypes.number.isRequired,
-        variationYpercentage: PropTypes.number.isRequired,
-        variationLWpercentage: PropTypes.number.isRequired,
+        variationYNumber: PropTypes.oneOfType([
+          PropTypes.number,
+          PropTypes.string,
+        ]).isRequired,
+        variationLWNumber: PropTypes.oneOfType([
+          PropTypes.number,
+          PropTypes.string,
+        ]).isRequired,
+        variationYpercentage: PropTypes.oneOfType([
+          PropTypes.number,
+          PropTypes.string,
+        ]).isRequired,
+        variationLWpercentage: PropTypes.oneOfType([
+          PropTypes.number,
+          PropTypes.string,
+        ]).isRequired,
         units: PropTypes.string,
       }).isRequired,
     }).isRequired,
