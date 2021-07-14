@@ -6,19 +6,53 @@ import { Dimensions } from 'react-native';
 const screenWidth = Dimensions.get('window').width;
 
 export default function LinearChart(datesarray) {
-  const array = [
-    parseFloat(datesarray.datesarray.v1.replace(',', '.')),
-    parseFloat(datesarray.datesarray.v2.replace(',', '.')),
-    parseFloat(datesarray.datesarray.v3.replace(',', '.')),
-    parseFloat(datesarray.datesarray.v4.replace(',', '.')),
-    parseFloat(datesarray.datesarray.v5.replace(',', '.')),
-    parseFloat(datesarray.datesarray.v6.replace(',', '.')),
-    parseFloat(datesarray.datesarray.v7.replace(',', '.')),
-    parseFloat(datesarray.datesarray.v8.replace(',', '.')),
-  ];
+  const array = [];
+  const labelArr = [];
+  const week = ['D', 'L', 'M', 'M', 'J', 'V', 'S'];
+  let last = -1;
+
+  if (parseFloat(datesarray.datesarray.v1.replace(',', '.')) > 0) {
+    array.push((parseFloat(datesarray.datesarray.v1.replace(',', '.'))));
+    labelArr.push(week[datesarray.weekarray.d0]);
+    last += 1;
+  }
+  if (parseFloat(datesarray.datesarray.v2.replace(',', '.')) > 0) {
+    array.push((parseFloat(datesarray.datesarray.v2.replace(',', '.'))));
+    labelArr.push(week[datesarray.weekarray.d1]);
+    last += 1;
+  }
+  if (parseFloat(datesarray.datesarray.v3.replace(',', '.')) > 0) {
+    array.push((parseFloat(datesarray.datesarray.v3.replace(',', '.'))));
+    labelArr.push(week[datesarray.weekarray.d2]);
+    last += 1;
+  }
+  if (parseFloat(datesarray.datesarray.v4.replace(',', '.')) > 0) {
+    array.push((parseFloat(datesarray.datesarray.v4.replace(',', '.'))));
+    labelArr.push(week[datesarray.weekarray.d3]);
+    last += 1;
+  }
+  if (parseFloat(datesarray.datesarray.v5.replace(',', '.')) > 0) {
+    array.push((parseFloat(datesarray.datesarray.v5.replace(',', '.'))));
+    labelArr.push(week[datesarray.weekarray.d4]);
+    last += 1;
+  }
+  if (parseFloat(datesarray.datesarray.v6.replace(',', '.')) > 0) {
+    array.push((parseFloat(datesarray.datesarray.v6.replace(',', '.'))));
+    labelArr.push(week[datesarray.weekarray.d5]);
+    last += 1;
+  }
+  if (parseFloat(datesarray.datesarray.v7.replace(',', '.')) > 0) {
+    array.push((parseFloat(datesarray.datesarray.v7.replace(',', '.'))));
+    labelArr.push(week[datesarray.weekarray.d6]);
+    last += 1;
+  }
+  if (parseFloat(datesarray.datesarray.v8.replace(',', '.')) > 0) {
+    array.push((parseFloat(datesarray.datesarray.v8.replace(',', '.'))));
+    labelArr.push(week[datesarray.weekarray.d7]);
+    last += 1;
+  }
   const min = Math.min(...array);
   const max = Math.max(...array);
-  const week = ['D', 'L', 'M', 'M', 'J', 'V', 'S'];
 
   function* yLabel() {
     yield* [min, '', max];
@@ -38,25 +72,15 @@ export default function LinearChart(datesarray) {
   };
 
   const data = {
-    labels: [
-      week[datesarray.weekarray.d0],
-      week[datesarray.weekarray.d1],
-      week[datesarray.weekarray.d2],
-      week[datesarray.weekarray.d3],
-      week[datesarray.weekarray.d4],
-      week[datesarray.weekarray.d5],
-      week[datesarray.weekarray.d6],
-      week[datesarray.weekarray.d7],
-    ],
+    labels: labelArr,
     datasets: [
       {
         data: array,
       },
     ],
   };
-
   let chartWidth = 160;
-  if (array[7].toString().length < 4) {
+  if (array[last].toString().length < 4) {
     chartWidth = 130;
   }
 
