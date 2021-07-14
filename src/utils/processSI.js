@@ -52,6 +52,35 @@ function makeIndicator(obj) {
   return finalObj;
 }
 
+function makeIndicatorEmpty() {
+  // ASK CLIENTS:
+  // WHAT IF ONE IS MISSING? (0)
+  // Chart working with zeros -> should it not be displayed?
+
+  const experience = 0;
+  const waitingTime = 0;
+  const speed = 0;
+  const quality = 0;
+  const bathroom = 0;
+  const kindness = 0;
+  const nps = 0;
+
+  const service = 0;
+
+  const finalObj = {
+    experience,
+    waitingTime,
+    speed,
+    quality,
+    bathroom,
+    kindness,
+    service,
+    nps,
+  };
+
+  return finalObj;
+}
+
 function getValues(key, indicators) {
   const v1 = indicators[0] ? indicators[0][key] : 0;
   const v2 = indicators[1][key];
@@ -80,13 +109,13 @@ export default function processSI(data) {
   } = getDates();
 
   let indicatorT;
-  let indicatorY;
-  let indicatord2;
-  let indicatord3;
-  let indicatord4;
-  let indicatord5;
-  let indicatord6;
-  let indicatordLW;
+  let indicatorY = makeIndicatorEmpty();
+  let indicatord2 = makeIndicatorEmpty();
+  let indicatord3 = makeIndicatorEmpty();
+  let indicatord4 = makeIndicatorEmpty();
+  let indicatord5 = makeIndicatorEmpty();
+  let indicatord6 = makeIndicatorEmpty();
+  let indicatordLW = makeIndicatorEmpty();
 
   data.forEach((obj) => {
     if (obj.date === today) {
