@@ -2,7 +2,9 @@
   "expo": {
     "name": "Capstone",
     "slug": "capstone",
+    "scheme": "com.proyectoespecialidad.arcoprime",
     "privacy": "hidden",
+    "owner": "proyectoespecialidad",
     "version": "0.0.1",
     "description": "Grupo 8's mobile application",
     "orientation": "portrait",
@@ -17,9 +19,11 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.proyectoespecialidad.arcoprime",
       "supportsTablet": true
     },
     "android": {
+      "package": "com.proyectoespecialidad.arcoprime",
       "versionCode": 1,
       "permissions": [],
       "adaptiveIcon": {

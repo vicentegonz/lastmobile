@@ -8,9 +8,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
       - name: Set up Node.js v12
         uses: actions/setup-node@v1
@@ -23,7 +23,6 @@ jobs:
           expo-version: 4.x
           expo-token: ${{ secrets.EXPO_ACCESS_TOKEN }}
 
-      # Cache the node_modules directory
       - name: Set up node_modules cache
         uses: actions/cache@v2
         id: node-modules-cache
@@ -34,6 +33,12 @@ jobs:
       - name: Install dependencies
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
+
+      - name: Recreate staging .env file
+        run: |
+          echo "GOOGLE_CLIENT_ID_EXPO=${{ secrets.STAGING_GOOGLE_CLIENT_ID_EXPO }}" >> .env
+          echo "GOOGLE_CLIENT_ID_ANDROID=${{ secrets.STAGING_GOOGLE_CLIENT_ID_ANDROID }}" >> .env
+          echo "GOOGLE_CLIENT_ID_IOS=${{ secrets.STAGING_GOOGLE_CLIENT_ID_IOS }}" >> .env
 
       - name: Publish with Expo to default channel
         run: expo publish --non-interactive

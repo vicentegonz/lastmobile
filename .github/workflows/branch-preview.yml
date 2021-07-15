@@ -13,7 +13,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
 
@@ -45,13 +44,19 @@ jobs:
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
 
+      - name: Recreate staging .env file
+        run: |
+          echo "GOOGLE_CLIENT_ID_EXPO=${{ secrets.STAGING_GOOGLE_CLIENT_ID_EXPO }}" >> .env
+          echo "GOOGLE_CLIENT_ID_ANDROID=${{ secrets.STAGING_GOOGLE_CLIENT_ID_ANDROID }}" >> .env
+          echo "GOOGLE_CLIENT_ID_IOS=${{ secrets.STAGING_GOOGLE_CLIENT_ID_IOS }}" >> .env
+
       - name: Publish preview with Expo
         run: expo publish --non-interactive --release-channel pr-${{ github.event.number }}-preview
 
       - name: Add comment with QR to the Pull Request
         uses: marocchino/sticky-pull-request-comment@v2
         env:
-          EXPO_PROJECT: "@capstone/capstone"
+          EXPO_PROJECT: "@proyectoespecialidad/capstone"
         with:
           message: |
             # Branch preview:
