@@ -4,14 +4,14 @@ export const processStoreKpis = (today, yesterday, lastWeek) => {
   }
 
   const kpiT = today.filter(
-    (kpi) => kpi.category !== 'TOTAL' && kpi.category !== 'Poa',
+    (kpi) => kpi.category !== 'TOTAL' && kpi.category !== 'POA',
   );
 
   const kpiY = yesterday.filter(
-    (kpi) => kpi.category !== 'TOTAL' && kpi.category !== 'Poa',
+    (kpi) => kpi.category !== 'TOTAL' && kpi.category !== 'POA',
   );
   const kpiLW = lastWeek.filter(
-    (kpi) => kpi.category !== 'TOTAL' && kpi.category !== 'Poa',
+    (kpi) => kpi.category !== 'TOTAL' && kpi.category !== 'POA',
   );
 
   const aux = {};
@@ -66,62 +66,73 @@ export const processStoreKpis = (today, yesterday, lastWeek) => {
       let difference;
       let percentage;
 
-      if (name === 'Contribución') {
-        difference = kpi.contribution - aux[name][kpi.category].value;
-        percentage = (difference / kpi.contribution) * 100;
-      } else if (name === 'Venta Bruta') {
-        difference = kpi.grossSale - aux[name][kpi.category].value;
-        percentage = (difference / kpi.grossSale) * 100;
-      } else if (name === 'Venta Neta') {
-        difference = kpi.netSale - aux[name][kpi.category].value;
-        percentage = (difference / kpi.netSale) * 100;
-      } else if (name === 'Ticket promedio') {
-        difference = kpi.netSale / kpi.transactions - aux[name][kpi.category].value;
-        percentage = (difference / (kpi.netSale / kpi.transactions)) * 100;
-      } else if (name === 'Transacciones') {
-        difference = kpi.transactions - aux[name][kpi.category].value;
-        percentage = (difference / kpi.transactions) * 100;
-      }
+      if (aux[name][kpi.category]) {
+        if (name === 'Contribución') {
+          difference = kpi.contribution - aux[name][kpi.category].value;
+          percentage = (difference / kpi.contribution) * 100;
+        } else if (name === 'Venta Bruta') {
+          difference = kpi.grossSale - aux[name][kpi.category].value;
+          percentage = (difference / kpi.grossSale) * 100;
+        } else if (name === 'Venta Neta') {
+          difference = kpi.netSale - aux[name][kpi.category].value;
+          percentage = (difference / kpi.netSale) * 100;
+        } else if (name === 'Ticket promedio') {
+          difference = kpi.netSale / kpi.transactions - aux[name][kpi.category].value;
+          percentage = (difference / (kpi.netSale / kpi.transactions)) * 100;
+        } else if (name === 'Transacciones') {
+          difference = kpi.transactions - aux[name][kpi.category].value;
+          percentage = (difference / kpi.transactions) * 100;
+        }
 
-      aux[name][kpi.category].variationYNumber = difference;
-      aux[name][kpi.category].variationYpercentage = percentage;
+        aux[name][kpi.category].variationYNumber = difference;
+        aux[name][kpi.category].variationYpercentage = percentage;
+      }
     });
 
     kpiLW.forEach((kpi) => {
       let difference;
       let percentage;
+      if (aux[name][kpi.category]) {
+        if (name === 'Contribución') {
+          difference = kpi.contribution - aux[name][kpi.category].value;
+          percentage = (difference / kpi.contribution) * 100;
+        } else if (name === 'Venta Bruta') {
+          difference = kpi.grossSale - aux[name][kpi.category].value;
+          percentage = (difference / kpi.grossSale) * 100;
+        } else if (name === 'Venta Neta') {
+          difference = kpi.netSale - aux[name][kpi.category].value;
+          percentage = (difference / kpi.netSale) * 100;
+        } else if (name === 'Ticket promedio') {
+          difference = kpi.netSale / kpi.transactions - aux[name][kpi.category].value;
+          percentage = (difference / (kpi.netSale / kpi.transactions)) * 100;
+        } else if (name === 'Transacciones') {
+          difference = kpi.transactions - aux[name][kpi.category].value;
+          percentage = (difference / kpi.transactions) * 100;
+        }
 
-      if (name === 'Contribución') {
-        difference = kpi.contribution - aux[name][kpi.category].value;
-        percentage = (difference / kpi.contribution) * 100;
-      } else if (name === 'Venta Bruta') {
-        difference = kpi.grossSale - aux[name][kpi.category].value;
-        percentage = (difference / kpi.grossSale) * 100;
-      } else if (name === 'Venta Neta') {
-        difference = kpi.netSale - aux[name][kpi.category].value;
-        percentage = (difference / kpi.netSale) * 100;
-      } else if (name === 'Ticket promedio') {
-        difference = kpi.netSale / kpi.transactions - aux[name][kpi.category].value;
-        percentage = (difference / (kpi.netSale / kpi.transactions)) * 100;
-      } else if (name === 'Transacciones') {
-        difference = kpi.transactions - aux[name][kpi.category].value;
-        percentage = (difference / kpi.transactions) * 100;
+        aux[name][kpi.category].variationLWNumber = difference;
+        aux[name][kpi.category].variationLWpercentage = percentage;
       }
-
-      aux[name][kpi.category].variationLWNumber = difference;
-      aux[name][kpi.category].variationLWpercentage = percentage;
     });
   });
 
   return aux;
 };
 
+function getStore(kpiTotal, kpiPoa) {
+  let store;
+  store = kpiTotal ? kpiTotal.store : null;
+  store = kpiPoa ? kpiPoa.store : null;
+
+  return store;
+}
+
 export const processMainKpis = (kpiT, kpiY, kpiLW) => {
   if (kpiT.length === 0) {
     return [];
   }
 
-  const poaT = kpiT.filter((kpi) => kpi.category === 'Poa')[0];
+  const poaT = kpiT.filter((kpi) => kpi.category === 'POA')[0];
 
   let totalY;
   let totalLW;
@@ -130,16 +141,16 @@ export const processMainKpis = (kpiT, kpiY, kpiLW) => {
 
   if (kpiY.length > 0) {
     totalY = kpiY.find((kpi) => kpi.category === 'TOTAL');
-    averageTicketY = totalY.netSale / totalY.transactions;
+    averageTicketY = totalY ? totalY.netSale / totalY.transactions : null;
   }
 
   if (kpiLW.length > 0) {
     totalLW = kpiLW.find((kpi) => kpi.category === 'TOTAL');
-    averageTicketLW = totalLW.netSale / totalLW.transactions;
+    averageTicketLW = totalLW ? totalLW.netSale / totalLW.transactions : null;
   }
   const totalT = kpiT.find((kpi) => kpi.category === 'TOTAL');
 
-  const averageTicketT = totalT.netSale / totalT.transactions;
+  const averageTicketT = totalT ? totalT.netSale / totalT.transactions : null;
 
   const kpis = [
     'Contribución',
@@ -193,7 +204,7 @@ export const processMainKpis = (kpiT, kpiY, kpiLW) => {
     const obj = {
       id: name,
       name,
-      store: totalT.store,
+      store: getStore(totalT, poaT),
       units,
       value: valueT,
       poa,
