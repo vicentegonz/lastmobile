@@ -65,8 +65,9 @@ export default function Landing() {
           <Text style={styles.serviceTitle}>Indicadores de servicio</Text>
           {Object.keys(mainService).length === 0
           && mainService.constructor === Object ? (
-
-            <Text style={styles.warningText}>Por el momento no hay indicadores para mostrar</Text>
+            <Text style={styles.warningText}>
+              Por el momento no hay indicadores para mostrar
+            </Text>
             ) : (
               <ScrollView horizontal style={styles.serviceView}>
                 <ServiceCard
@@ -87,7 +88,10 @@ export default function Landing() {
             {events.length > 0 ? (
               <ScrollView>{events}</ScrollView>
             ) : (
-              <Text style={styles.warningText}> No hay eventos para mostrar</Text>
+              <Text style={styles.warningText}>
+                {' '}
+                No hay eventos para mostrar
+              </Text>
             )}
           </View>
 

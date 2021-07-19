@@ -3,9 +3,16 @@ export const processStoreKpis = (today, yesterday, lastWeek) => {
     return {};
   }
 
-  const kpiT = today.filter((kpi) => kpi.category !== 'TOTAL');
-  const kpiY = yesterday.filter((kpi) => kpi.category !== 'TOTAL');
-  const kpiLW = lastWeek.filter((kpi) => kpi.category !== 'TOTAL');
+  const kpiT = today.filter(
+    (kpi) => kpi.category !== 'TOTAL' && kpi.category !== 'Poa',
+  );
+
+  const kpiY = yesterday.filter(
+    (kpi) => kpi.category !== 'TOTAL' && kpi.category !== 'Poa',
+  );
+  const kpiLW = lastWeek.filter(
+    (kpi) => kpi.category !== 'TOTAL' && kpi.category !== 'Poa',
+  );
 
   const aux = {};
 
@@ -29,6 +36,7 @@ export const processStoreKpis = (today, yesterday, lastWeek) => {
     kpiT.forEach((kpi) => {
       let units;
       let value;
+
       if (name === 'Contribución') {
         units = '$';
         value = kpi.contribution;
@@ -113,6 +121,8 @@ export const processMainKpis = (kpiT, kpiY, kpiLW) => {
     return [];
   }
 
+  const poaT = kpiT.filter((kpi) => kpi.category === 'Poa')[0];
+
   let totalY;
   let totalLW;
   let averageTicketY;
@@ -146,32 +156,38 @@ export const processMainKpis = (kpiT, kpiY, kpiLW) => {
     let valueT;
     let valueY;
     let valueLW;
+    let poa;
 
     if (name === 'Contribución') {
       units = '$';
       valueT = totalT ? totalT.contribution : -1;
       valueY = totalY ? totalY.contribution : -1;
       valueLW = totalLW ? totalLW.contribution : -1;
+      poa = '-';
     } else if (name === 'Venta Bruta') {
       units = '$';
       valueT = totalT ? totalT.grossSale : -1;
       valueY = totalY ? totalY.grossSale : -1;
       valueLW = totalLW ? totalLW.grossSale : -1;
+      poa = '-';
     } else if (name === 'Venta Neta') {
       units = '$';
       valueT = totalT ? totalT.netSale : -1;
       valueY = totalY ? totalY.netSale : -1;
       valueLW = totalLW ? totalLW.netSale : -1;
+      poa = poaT.netSale ? poaT.netSale : '-';
     } else if (name === 'Ticket promedio') {
       units = '';
       valueT = totalT ? averageTicketT : -1;
       valueY = totalY ? averageTicketY : -1;
       valueLW = totalLW ? averageTicketLW : -1;
+      poa = '-';
     } else if (name === 'Transacciones') {
       units = 'unidades';
       valueT = totalT ? totalT.transactions : -1;
       valueY = totalY ? totalY.transactions : -1;
       valueLW = totalLW ? totalLW.transactions : -1;
+      poa = '-';
     }
 
     const obj = {
@@ -180,6 +196,7 @@ export const processMainKpis = (kpiT, kpiY, kpiLW) => {
       store: totalT.store,
       units,
       value: valueT,
+      poa,
       variationYNumber: valueY === -1 || valueT === -1 ? '-' : valueY - valueT,
       variationLWNumber:
         valueLW === -1 || valueT === -1 ? '-' : valueLW - valueT,

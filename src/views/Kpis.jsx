@@ -7,12 +7,16 @@ import { useSelector } from 'react-redux';
 import { WhiteSpace } from '@ant-design/react-native';
 import styles from '@/assets/styles/index';
 import kpiStyles from '@/assets/styles/kpis';
+import round from '@/utils/round';
 
+import MainKPIValue from '@/components/MainKPIValue.jsx';
 import KpiCategory from '@/components/KpiCategory.jsx';
 import KpiCategoryTopText from '@/components/KpiCategoryTopText.jsx';
 
 export default function Kpis({ route }) {
   let kpis;
+  let poaText;
+
   const { mainKpi } = route.params;
 
   const allKpis = useSelector((state) => state.kpi.storeKpis);
@@ -25,6 +29,12 @@ export default function Kpis({ route }) {
     ));
   }
 
+  if (mainKpi.poa !== '-') {
+    poaText = (
+      <Text style={kpiStyles.poa}>{`Poa: $${round(mainKpi.poa, 1)}`}</Text>
+    );
+  }
+
   return (
     <ScrollView style={styles.generalScreensContainer}>
       <StatusBar backgroundColor="#052D4C" />
@@ -32,6 +42,11 @@ export default function Kpis({ route }) {
       <View style={kpiStyles.kpiCategoryTop}>
         <Text style={kpiStyles.kpiName}>{mainKpi.name}</Text>
         <WhiteSpace size="lg" />
+        <View>
+          <MainKPIValue value={mainKpi.value} unit={mainKpi.units} />
+          <WhiteSpace size="lg" />
+          {poaText || null}
+        </View>
 
         <KpiCategoryTopText
           variationN={mainKpi.variationYNumber ? mainKpi.variationYNumber : '-'}
@@ -69,6 +84,8 @@ Kpis.propTypes = {
     params: PropTypes.shape({
       mainKpi: PropTypes.shape({
         name: PropTypes.string.isRequired,
+        value: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+          .isRequired,
         variationYNumber: PropTypes.oneOfType([
           PropTypes.number,
           PropTypes.string,
@@ -86,6 +103,8 @@ Kpis.propTypes = {
           PropTypes.string,
         ]).isRequired,
         units: PropTypes.string,
+        poa: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+          .isRequired,
       }).isRequired,
     }).isRequired,
   }).isRequired,

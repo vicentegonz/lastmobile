@@ -66,6 +66,12 @@ const kpiStyles = StyleSheet.create({
   icon: {
     alignSelf: 'center',
   },
+  poa: {
+    color: 'black',
+    fontFamily: 'robotoBold',
+    fontSize: 20,
+    marginBottom: 10,
+  },
 });
 
 export default kpiStyles;

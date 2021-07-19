@@ -82,24 +82,26 @@ export default function KpiCategoryTopText({
   }
 
   return (
-    <View style={kpiStyles.topView}>
-      {text}
-      <View style={kpiStyles.textView}>
-        {icon}
-        <Text style={kpiStyles.text}>{middle}</Text>
-      </View>
+    <View>
+      <View style={kpiStyles.topView}>
+        {text}
+        <View style={kpiStyles.textView}>
+          {icon}
+          <Text style={kpiStyles.text}>{middle}</Text>
+        </View>
 
-      <Text
-        style={{
-          color,
-          fontFamily: 'robotoBold',
-          fontSize: 20,
-        }}
-      >
-        {round(variationP, 1) === '-'
-          ? round(variationP, 1)
-          : `${round(variationP, 1)}%`}
-      </Text>
+        <Text
+          style={{
+            color,
+            fontFamily: 'robotoBold',
+            fontSize: 20,
+          }}
+        >
+          {round(variationP, 1) === '-'
+            ? round(variationP, 1)
+            : `${round(variationP, 1)}%`}
+        </Text>
+      </View>
     </View>
   );
 }
