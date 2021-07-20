@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import Login from '@/views/Login.jsx';
 import Loading from '@/views/Loading.jsx';
 import api from '@/api';
 import { removeCredentials } from '@/utils/credentials';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchEvents } from '@/store/eventSlice';
+import { fetchAlerts } from '@/store/alertSlice';
 import { fetchServices } from '@/store/servicesSlice';
 import { fetchKPIs } from '@/store/kpiSlice';
 import { setValidSession, setLoginValue } from '@/store/session';
@@ -33,12 +33,13 @@ export default function MainNavigator() {
   }, [applicationReady]);
 
   const session = useSelector((state) => state.session.status);
-  const eventStatus = useSelector((state) => state.event.status);
+  const alertStatus = useSelector((state) => state.alert.status);
   const dispatch = useDispatch();
 
   const currentStore = useSelector((state) => state.profile.currentStore);
   const kpiStatus = useSelector((state) => state.kpi.status);
   const serviceStatus = useSelector((state) => state.services.status);
+  const [loadingSession, setLoadingSession] = useState(true);
 
   useEffect(() => {
     async function validateSession() {
@@ -47,6 +48,7 @@ export default function MainNavigator() {
         dispatch(fetchUser());
         dispatch(setValidSession(true));
       }
+      setLoadingSession(false);
     }
     validateSession();
   }, [dispatch]);
@@ -56,7 +58,7 @@ export default function MainNavigator() {
       if (currentStore !== 'empty' && currentStore !== undefined) {
         await dispatch(fetchKPIs(currentStore));
         await dispatch(fetchServices(currentStore));
-        await dispatch(fetchEvents(currentStore));
+        await dispatch(fetchAlerts(currentStore));
       }
       if (currentStore === 'empty') {
         await removeCredentials();
@@ -76,11 +78,11 @@ export default function MainNavigator() {
 
   // Use this navigator to render different navigators
   // based on the user being logged in or not
-  if (session && kpiStatus && serviceStatus && eventStatus) {
+  if (session && !loadingSession && kpiStatus && serviceStatus && alertStatus) {
     return <AdministratorNavigator />;
   }
   // Using the same navigator, just as a placeholder
-  if (!session) {
+  if (!session && !loadingSession) {
     return <Login />;
   }
 

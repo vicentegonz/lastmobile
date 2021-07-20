@@ -63,11 +63,11 @@ export const kpiSlice = createSlice({
       const kpiLW = [];
 
       data.forEach((kpi) => {
-        if (today === kpi.date) {
+        if (kpi.date === today) {
           kpiT.push(kpi);
-        } else if (yesterday === kpi.date) {
+        } else if (kpi.date === yesterday) {
           kpiY.push(kpi);
-        } else if (lastWeek === kpi.date) {
+        } else if (kpi.date === lastWeek) {
           kpiLW.push(kpi);
         }
       });

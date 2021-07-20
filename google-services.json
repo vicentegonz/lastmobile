@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "124827084027",
+    "project_id": "arcoprime-319704",
+    "storage_bucket": "arcoprime-319704.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:124827084027:android:1bf0be7a3a3a51945cfc5e",
+        "android_client_info": {
+          "package_name": "com.proyectoespecialidad.arcoprime"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "124827084027-ieukhvohkbnkrpgp3mlai2orhn1sdg2b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAStJiEU9eDnX_dAhUmVhApNFV8FBzjfi8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "124827084027-ieukhvohkbnkrpgp3mlai2orhn1sdg2b.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "124827084027-nqdudkvslnreek7uuoj2el0l95ofiivq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.proyectoespecialidad.arcoprime"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

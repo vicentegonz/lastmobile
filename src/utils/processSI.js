@@ -15,10 +15,6 @@ import getDates from '@/utils/getDates';
 import round from '@/utils/round';
 
 function makeIndicator(obj) {
-  // ASK CLIENTS:
-  // WHAT IF ONE IS MISSING? (0)
-  // Chart working with zeros -> should it not be displayed?
-
   const experience = experienceGrade(obj);
   const waitingTime = waitingTimeGrade(obj);
   const speed = speedGrade(obj);
@@ -53,10 +49,6 @@ function makeIndicator(obj) {
 }
 
 function makeIndicatorEmpty() {
-  // ASK CLIENTS:
-  // WHAT IF ONE IS MISSING? (0)
-  // Chart working with zeros -> should it not be displayed?
-
   const experience = 0;
   const waitingTime = 0;
   const speed = 0;
@@ -91,7 +83,14 @@ function getValues(key, indicators) {
   const v7 = indicators[6] ? indicators[6][key] : 0;
   const v8 = indicators[7][key];
   return {
-    v1, v2, v3, v4, v5, v6, v7, v8,
+    v1,
+    v2,
+    v3,
+    v4,
+    v5,
+    v6,
+    v7,
+    v8,
   };
 }
 
