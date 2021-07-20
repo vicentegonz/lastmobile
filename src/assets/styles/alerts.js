@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
 
-const eventsStyles = StyleSheet.create({
-// Event Card (landing and events screen)
-  eventPagination: {
+const alertsStyles = StyleSheet.create({
+  // alert Card (landing and alerts screen)
+  alertPagination: {
     position: 'absolute',
     width: '100%',
     paddingTop: 20,
@@ -10,32 +10,32 @@ const eventsStyles = StyleSheet.create({
     paddingRight: 20,
     bottom: 0,
   },
-  eventsView: {
+  alertsView: {
     flex: 1,
   },
-  eventCard: {
+  alertCard: {
     marginHorizontal: 18,
     backgroundColor: '#FFFFFF',
   },
-  eventThumbIcon: {
+  alertThumbIcon: {
     width: 30,
     height: 30,
   },
-  eventContent: {
+  alertContent: {
     justifyContent: 'center',
   },
-  eventCardText: {
+  alertCardText: {
     marginHorizontal: 16,
     fontFamily: 'roboto',
   },
-  eventWarning: {
+  alertWarning: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  eventWarningText: {
+  alertWarningText: {
     fontSize: 20,
   },
 });
 
-export default eventsStyles;
+export default alertsStyles;

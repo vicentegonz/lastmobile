@@ -13,7 +13,7 @@ import LogoutButton from '@/components/LogoutButton.jsx';
 import DrawerButton from '@/components/DrawerButton.jsx';
 
 import Landing from '@/views/Landing.jsx';
-import Events from '@/views/Events.jsx';
+import Alerts from '@/views/Alerts.jsx';
 import Services from '@/views/Services.jsx';
 import Kpis from '@/views/Kpis.jsx';
 
@@ -34,7 +34,7 @@ function AdministratorDrawerNavigator() {
       )}
     >
       <Drawer.Screen name="Inicio" component={Landing} />
-      <Drawer.Screen name="Eventos" component={Events} />
+      <Drawer.Screen name="Alertas" component={Alerts} />
     </Drawer.Navigator>
   );
 }

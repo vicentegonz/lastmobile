@@ -4,8 +4,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import CLIENT from '@/api/client';
 
-export const fetchEvents = createAsyncThunk(
-  'event/fetchEvents',
+export const fetchAlerts = createAsyncThunk(
+  'alert/fetchAlerts',
   async (idStore) => {
     try {
       const sizePag = 4;
@@ -17,19 +17,19 @@ export const fetchEvents = createAsyncThunk(
 
       paginationResponse[1] = response.data.results;
 
-      let tengo = response.data.results.length;
+      let current = response.data.results.length;
       const total = response.data.count;
 
       let page = 2;
 
-      while (tengo !== total) {
+      while (current !== total) {
         const nextResponse = await CLIENT.get(
           `/v1/operations/stores/${idStore}/events/?page=${page}`,
           { params: { size: sizePag } },
         );
 
         paginationResponse[page] = nextResponse.data.results;
-        tengo += nextResponse.data.results.length;
+        current += nextResponse.data.results.length;
         page += 1;
       }
 
@@ -45,8 +45,8 @@ export const fetchEvents = createAsyncThunk(
   },
 );
 
-export const fetchNextEvents = createAsyncThunk(
-  'event/fetchNextEvents',
+export const fetchNextAlerts = createAsyncThunk(
+  'alert/fetchNextAlerts',
   async (input) => {
     try {
       const sizePag = 4;
@@ -60,18 +60,18 @@ export const fetchNextEvents = createAsyncThunk(
 
       paginationResponse[1] = response.data.results;
 
-      let tengo = response.data.results.length;
+      let current = response.data.results.length;
       const total = response.data.count;
       let auxPage = 2;
 
-      while (tengo !== total) {
+      while (current !== total) {
         const nextResponse = await CLIENT.get(
           `/v1/operations/stores/${idStore}/events/?page=${auxPage}`,
           { params: { size: sizePag } },
         );
 
         paginationResponse[auxPage] = nextResponse.data.results;
-        tengo += nextResponse.data.results.length;
+        current += nextResponse.data.results.length;
         auxPage += 1;
       }
 
@@ -84,13 +84,13 @@ export const fetchNextEvents = createAsyncThunk(
   },
 );
 
-export const eventSlice = createSlice({
-  name: 'event',
+export const alertSlice = createSlice({
+  name: 'alert',
   initialState: {
-    storeEvents: [],
-    lastNEvents: [],
+    storeAlerts: [],
+    lastNAlerts: [],
     status: false,
-    pageEvents: [],
+    pageAlerts: [],
     page: 1,
     totalPages: undefined,
     store: undefined,
@@ -102,43 +102,43 @@ export const eventSlice = createSlice({
     },
     incrementByAmount: (state, action) => {
       state.page = action.payload;
-      state.pageEvents = state.storeEvents[action.payload];
+      state.pageAlerts = state.storeAlerts[action.payload];
     },
     clear: (state) => {
-      state.storeEvents = [];
-      state.lastNEvents = [];
+      state.storeAlerts = [];
+      state.lastNAlerts = [];
       state.status = false;
-      state.pageEvents = [];
+      state.pageAlerts = [];
       state.page = 1;
       state.totalPages = undefined;
       state.store = undefined;
     },
   },
   extraReducers: {
-    [fetchNextEvents.fulfilled]: (state, action) => {
+    [fetchNextAlerts.fulfilled]: (state, action) => {
       const data = action.payload;
-      state.storeEvents = data.pagination;
-      state.pageEvents = data.pagination[1];
+      state.storeAlerts = data.pagination;
+      state.pageAlerts = data.pagination[1];
       state.totalPages = Math.ceil(data.count / data.sizePag);
       state.page = 1;
     },
-    [fetchEvents.pending]: (state) => {
+    [fetchAlerts.pending]: (state) => {
       state.picker = true;
     },
-    [fetchEvents.fulfilled]: (state, action) => {
+    [fetchAlerts.fulfilled]: (state, action) => {
       const data = action.payload;
-      if (state.pageEvents.length === 0) {
+      if (state.pageAlerts.length === 0) {
         state.totalPages = Math.ceil(data.count / data.sizePag);
-        state.storeEvents = data.pagination;
-        state.pageEvents = data.pagination[1];
+        state.storeAlerts = data.pagination;
+        state.pageAlerts = data.pagination[1];
         state.store = action.meta.arg;
       }
-      state.lastNEvents = data.results;
+      state.lastNAlerts = data.results;
       state.status = true;
       state.picker = false;
     },
   },
 });
 
-export const { incrementByAmount, clear, setStore } = eventSlice.actions;
-export default eventSlice.reducer;
+export const { incrementByAmount, clear, setStore } = alertSlice.actions;
+export default alertSlice.reducer;

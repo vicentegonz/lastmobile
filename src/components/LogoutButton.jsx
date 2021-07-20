@@ -9,7 +9,7 @@ import {
 import { removeCredentials } from '@/utils/credentials';
 import { useDispatch } from 'react-redux';
 import { setValidSession, clear as clearSession } from '@/store/session';
-import { clear as clearEvent } from '@/store/eventSlice';
+import { clear as clearAlert } from '@/store/alertSlice';
 import { clear as clearStore } from '@/store/storeSlice';
 import { clear as clearServices } from '@/store/servicesSlice';
 import { clear as clearProfile } from '@/store/profileSlice';
@@ -22,7 +22,7 @@ export default function LogoutButton({ state, navigation, descriptors }) {
     await removeCredentials();
     await dispatch(setValidSession(false));
     await dispatch(clearSession());
-    await dispatch(clearEvent());
+    await dispatch(clearAlert());
     await dispatch(clearStore());
     await dispatch(clearServices());
     await dispatch(clearProfile());

@@ -3,7 +3,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import styles from '@/assets/styles/index';
 import { useSelector, useDispatch } from 'react-redux';
 import { setPickerStore } from '@/store/profileSlice';
-import { fetchEvents, setStore, fetchNextEvents } from '@/store/eventSlice';
+import { fetchAlerts, setStore, fetchNextAlerts } from '@/store/alertSlice';
 import { fetchServices } from '@/store/servicesSlice';
 import { fetchKPIs } from '@/store/kpiSlice';
 
@@ -32,9 +32,9 @@ export default function DropPicker() {
     if (loading) {
       dispatch(fetchKPIs(pickerStore));
       dispatch(fetchServices(pickerStore));
-      dispatch(fetchEvents(pickerStore));
+      dispatch(fetchAlerts(pickerStore));
       dispatch(setStore(pickerStore));
-      dispatch(fetchNextEvents([pickerStore, 1]));
+      dispatch(fetchNextAlerts([pickerStore, 1]));
       setLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

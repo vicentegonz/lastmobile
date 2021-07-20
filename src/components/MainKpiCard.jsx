@@ -59,7 +59,7 @@ MainKpiCard.propTypes = {
   }).isRequired,
   kpi: PropTypes.shape({
     name: PropTypes.string,
-    value: PropTypes.number,
+    value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     units: PropTypes.string,
     variationYNumber: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     variationYpercentage: PropTypes.oneOfType([
