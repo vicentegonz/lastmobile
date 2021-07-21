@@ -5,7 +5,6 @@ import { Card, WhiteSpace } from '@ant-design/react-native';
 import servicesStyles from '@/assets/styles/services';
 import MoreInformation from '@/components/MoreInformation.jsx';
 import LinearChart from '@/components/LinearChart.jsx';
-
 import ServiceCardText from '@/components/ServiceCardText.jsx';
 
 export default function ServiceCard({ navigation, service }) {

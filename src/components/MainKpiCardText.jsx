@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Text, View } from 'react-native';
@@ -7,6 +6,8 @@ import round from '@/utils/round';
 import kpiStyles from '@/assets/styles/kpis';
 
 export default function MainKpiCardText({ variationN, variationP }) {
+  let varP = variationP;
+
   let color;
   let icon;
 
@@ -18,11 +19,10 @@ export default function MainKpiCardText({ variationN, variationP }) {
     icon = <Icon name="arrow-up" size="md" color={color} />;
   } else if (variationN === '-') {
     color = 'grey';
-    variationP = '-';
+    varP = '-';
   } else {
     color = 'black';
-    variationN = 'Sin variación';
-    variationP = '';
+    varP = 'Sin variación';
   }
 
   return (
@@ -36,9 +36,9 @@ export default function MainKpiCardText({ variationN, variationP }) {
           fontSize: 20,
         }}
       >
-        {round(variationP, 1) === '-'
-          ? round(variationP, 1)
-          : `${round(variationP, 1)}%`}
+        {round(varP, 1) === '-' || round(varP, 1) === 'Sin variación'
+          ? round(varP, 1)
+          : `${round(varP, 1)}%`}
       </Text>
     </View>
   );

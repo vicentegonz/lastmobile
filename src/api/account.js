@@ -9,12 +9,12 @@ const account = {
       });
 
       const aux = {};
-
       if (response === 'failed') {
         aux.access = '';
         aux.refresh = '';
         return aux;
       }
+
       await setCredentials(response.data.access, response.data.refresh);
       return response.data;
     } catch (error) {

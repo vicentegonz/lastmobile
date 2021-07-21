@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
 import styles from '@/assets/styles/index';
@@ -37,7 +38,6 @@ export default function DropPicker() {
       dispatch(fetchNextAlerts([pickerStore, 1]));
       setLoading(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pickerStore, dispatch]);
 
   useEffect(() => {

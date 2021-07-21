@@ -3,7 +3,6 @@ import { PropTypes } from 'prop-types';
 import { View, Text } from 'react-native';
 import { Card, WhiteSpace } from '@ant-design/react-native';
 import kpiStyles from '@/assets/styles/kpis';
-
 import MainKPIValue from '@/components/MainKPIValue.jsx';
 import KpiCategoryCardText from '@/components/KpiCategoryCardText.jsx';
 

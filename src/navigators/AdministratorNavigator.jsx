@@ -3,15 +3,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Image } from 'react-native';
-
 import useDeviceRegistration from '@/hooks/useDeviceRegistration';
-
 import navStyles from '@/assets/styles/navigation';
 import Logo from '@/assets/ArcoprimeLogo.png';
-
 import LogoutButton from '@/components/LogoutButton.jsx';
 import DrawerButton from '@/components/DrawerButton.jsx';
-
 import Landing from '@/views/Landing.jsx';
 import Alerts from '@/views/Alerts.jsx';
 import Services from '@/views/Services.jsx';
@@ -57,7 +53,6 @@ const options2 = () => ({
 
 export default function AdministratorNavigator() {
   useDeviceRegistration();
-
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="ArcoPrime">

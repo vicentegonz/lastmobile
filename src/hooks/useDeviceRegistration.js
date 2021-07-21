@@ -3,7 +3,6 @@ import { Platform, AppState } from 'react-native';
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
 import * as Application from 'expo-application';
-
 import api from '@/api';
 
 export default function useDeviceRegistration() {
@@ -46,15 +45,11 @@ export default function useDeviceRegistration() {
     }
   }
 
-  const register = useCallback(
-    () => {
-      getPermissionsAsync();
-      getDeviceId();
-    },
-    [],
-  );
+  const register = useCallback(() => {
+    getPermissionsAsync();
+    getDeviceId();
+  }, []);
 
-  // Add listener for app state change
   useEffect(() => {
     function registerOnAppStateChange(nextAppState) {
       if (nextAppState === 'active') {
@@ -68,7 +63,6 @@ export default function useDeviceRegistration() {
     };
   }, [register]);
 
-  // Run on effect mount
   useEffect(() => {
     register();
   }, [register]);
