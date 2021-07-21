@@ -175,6 +175,7 @@ export const processMainKpis = (today, yesterday, lastWeek) => {
     let valueY;
     let valueLW;
     let poa;
+    let poaDiff;
 
     if (name === 'Contribución') {
       units = '$';
@@ -182,30 +183,35 @@ export const processMainKpis = (today, yesterday, lastWeek) => {
       valueY = totalY ? totalY.contribution : '-';
       valueLW = totalLW ? totalLW.contribution : '-';
       poa = '-';
+      poaDiff = '-';
     } else if (name === 'Venta Bruta') {
       units = '$';
       valueT = totalT ? totalT.grossSale : '-';
       valueY = totalY ? totalY.grossSale : '-';
       valueLW = totalLW ? totalLW.grossSale : '-';
       poa = '-';
+      poaDiff = '-';
     } else if (name === 'Venta Neta') {
       units = '$';
       valueT = totalT ? totalT.netSale : '-';
       valueY = totalY ? totalY.netSale : '-';
       valueLW = totalLW ? totalLW.netSale : '-';
       poa = poaT.netSale ? poaT.netSale : '-';
+      poaDiff = poaT.netSale ? (valueT * 100) / poaT.netSale : '-';
     } else if (name === 'Ticket promedio') {
       units = '';
       valueT = totalT ? averageTicketT : '-';
       valueY = totalY ? averageTicketY : '-';
       valueLW = totalLW ? averageTicketLW : '-';
       poa = '-';
+      poaDiff = '-';
     } else if (name === 'Transacciones') {
       units = 'unidades';
       valueT = totalT ? totalT.transactions : '-';
       valueY = totalY ? totalY.transactions : '-';
       valueLW = totalLW ? totalLW.transactions : '-';
       poa = '-';
+      poaDiff = '-';
     }
 
     const obj = {
@@ -215,6 +221,7 @@ export const processMainKpis = (today, yesterday, lastWeek) => {
       units,
       value: valueT,
       poa,
+      poaDiff,
       variationYNumber:
         valueY === '-' || valueT === '-' ? '-' : valueY - valueT,
       variationLWNumber:

@@ -64,7 +64,7 @@ export default function MainNavigator() {
         await removeCredentials();
         await dispatch(setValidSession(false));
         await dispatch(clearProfile());
-        await dispatch(setLoginValue('sinTienda'));
+        await dispatch(setLoginValue('notFound'));
       }
       return null;
     }

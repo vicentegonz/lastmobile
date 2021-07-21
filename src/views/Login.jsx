@@ -18,7 +18,7 @@ export default function Login() {
 
   const showAlert = async () => {
     await dispatch(setLoginValue(''));
-    const alert = alertMessages.noStore;
+    const alert = alertMessages.notFound;
 
     Alert.alert(
       alert.title,
@@ -47,7 +47,7 @@ export default function Login() {
       >
         <Text>Iniciar sesión</Text>
       </Button>
-      {loginValue === 'sinTienda' ? showAlert() : null}
+      {loginValue === 'notFound' ? showAlert() : null}
     </ScreenContainer>
   );
 }

@@ -23,6 +23,9 @@ export const profileSlice = createSlice({
     currentStore: undefined,
   },
   reducers: {
+    setCurrentStore: (state, action) => {
+      state.currentStore = action.payload;
+    },
     setPickerStore: (state, action) => {
       state.pickerStore = action.payload;
     },
@@ -54,5 +57,7 @@ export const profileSlice = createSlice({
   },
 });
 
-export const { clear, clearCurrentStore, setPickerStore } = profileSlice.actions;
+export const {
+  clear, clearCurrentStore, setPickerStore, setCurrentStore,
+} = profileSlice.actions;
 export default profileSlice.reducer;

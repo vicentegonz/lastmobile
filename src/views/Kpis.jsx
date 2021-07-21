@@ -31,7 +31,15 @@ export default function Kpis({ route }) {
 
   if (mainKpi.poa !== '-') {
     poaText = (
-      <Text style={kpiStyles.poa}>{`Poa: $${round(mainKpi.poa, 1)}`}</Text>
+      <View>
+        <View style={kpiStyles.poaView}>
+          <Text style={kpiStyles.poa}>{`POA: $${round(mainKpi.poa, 1)}`}</Text>
+          <Text style={kpiStyles.poa}>
+            {`Progreso: ${round(mainKpi.poaDiff, 1)}%`}
+          </Text>
+        </View>
+        <WhiteSpace size="md" />
+      </View>
     );
   }
 
@@ -103,6 +111,8 @@ Kpis.propTypes = {
           PropTypes.string,
         ]).isRequired,
         units: PropTypes.string,
+        poaDiff: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+          .isRequired,
         poa: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
           .isRequired,
       }).isRequired,

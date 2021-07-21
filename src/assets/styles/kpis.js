@@ -66,6 +66,10 @@ const kpiStyles = StyleSheet.create({
   icon: {
     alignSelf: 'center',
   },
+  poaView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   poa: {
     color: 'black',
     fontFamily: 'robotoBold',

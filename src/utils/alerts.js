@@ -1,13 +1,8 @@
 const alertMessages = {
-  noStore: {
+  notFound: {
     title: 'Usuario inválido',
     message:
-      'El usuario ingresado no tiene tiendas asociadas. Por favor ingresar con correo institucional de administrador o jefe de zona.\n\nSi cree que es un error, por favor contactarse con soporte.',
-  },
-  // Manage login error code 403 from backend.
-  notAllowed: {
-    title: '',
-    message: '',
+      'Este usuario no pertenece a la organización. Por favor ingresar con correo institucional válido. \n\nSi cree que es un error, por favor contactarse con soporte.',
   },
 };
 
