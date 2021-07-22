@@ -2,10 +2,8 @@ import axios from 'axios';
 import { camelizeKeys, decamelizeKeys } from 'humps';
 import Constants from 'expo-constants';
 import * as SecureStore from 'expo-secure-store';
-import { useDispatch } from 'react-redux';
 import getAuthHeaders from '@/utils/auth';
 import { setCredentials, removeCredentials } from '@/utils/credentials';
-import { setValidSession } from '@/store/session';
 
 import {
   STAGING_BASE_URL,
@@ -80,8 +78,7 @@ CLIENT.interceptors.response.use(null, async (error) => {
       });
     } catch (err) {
       await removeCredentials();
-      const dispatch = useDispatch();
-      dispatch(setValidSession(false));
+      return 'failed';
     }
   }
 

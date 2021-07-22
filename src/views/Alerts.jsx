@@ -11,6 +11,7 @@ export default function Alerts() {
   const Currentpage = useSelector((state) => state.alert.page);
   const totalPages = useSelector((state) => state.alert.totalPages);
   const pageAlerts = useSelector((state) => state.alert.pageAlerts);
+  const sizePage = useSelector((state) => state.alert.sizePage);
 
   const locale = {
     prevText: '<',
@@ -18,7 +19,7 @@ export default function Alerts() {
   };
 
   const alerts = pageAlerts.map((alert) => (
-    <AlertCard key={alert.id} alert={alert} />
+    <AlertCard key={alert.id + alert.store} alert={alert} />
   ));
 
   return (
@@ -27,7 +28,7 @@ export default function Alerts() {
 
       <WhiteSpace size="md" />
       {alerts.length > 0 ? (
-        <View>{alerts}</View>
+        <View>{alerts.slice(sizePage * (Currentpage - 1), sizePage * (Currentpage))}</View>
       ) : (
         <View style={alertsStyles.alertWarning}>
           <Text style={alertsStyles.alertWarningText}>

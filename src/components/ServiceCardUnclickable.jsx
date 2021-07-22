@@ -4,7 +4,6 @@ import { View, Text } from 'react-native';
 import { Card, WhiteSpace } from '@ant-design/react-native';
 import servicesStyles from '@/assets/styles/services';
 import LinearChart from '@/components/LinearChart.jsx';
-
 import ServiceCardText from '@/components/ServiceCardText.jsx';
 
 export default function ServiceCardUnclickable({ service }) {

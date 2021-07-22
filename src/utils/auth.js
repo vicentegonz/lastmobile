@@ -1,5 +1,4 @@
 import * as SecureStore from 'expo-secure-store';
-
 import { ACCESS_SECURE_STORE_KEY } from '@/utils/constants';
 
 const getAuthHeaders = async () => {

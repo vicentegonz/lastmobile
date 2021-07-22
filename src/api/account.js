@@ -7,6 +7,14 @@ const account = {
       const response = await CLIENT.post('/v1/authentication/google/', {
         idToken,
       });
+
+      const aux = {};
+      if (response === 'failed') {
+        aux.access = '';
+        aux.refresh = '';
+        return aux;
+      }
+
       await setCredentials(response.data.access, response.data.refresh);
       return response.data;
     } catch (error) {
