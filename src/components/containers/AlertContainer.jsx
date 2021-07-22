@@ -9,7 +9,7 @@ export default function AlertContainer() {
   const lastNAlerts = useSelector((state) => state.alert.lastNAlerts);
 
   const alerts = lastNAlerts.map((alert) => (
-    <AlertCard key={alert.id} alert={alert} />
+    <AlertCard key={alert.id + alert.store} alert={alert} />
   ));
 
   return (
